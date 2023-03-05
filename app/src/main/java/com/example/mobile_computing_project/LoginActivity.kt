@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun goToHomeActivity(){
-        Log.i(TAG, "goPostsActivity")
+        Log.i(TAG, "goToHomeActivity")
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
