@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712800391769",
+    "project_id": "mobile-computing-project-fffa9",
+    "storage_bucket": "mobile-computing-project-fffa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712800391769:android:5f74ef6f8091abdc9f9748",
+        "android_client_info": {
+          "package_name": "com.example.mobile_computing_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712800391769-kv7576aivfkmuo3g7t9mcv5i5ov3dgh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmb5jVL33qCIjPjh8w1MViHyGY__KLx5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712800391769-kv7576aivfkmuo3g7t9mcv5i5ov3dgh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
