@@ -1,4 +1,4 @@
-gitpackage com.example.mobile_computing_project
+package com.example.mobile_computing_project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
