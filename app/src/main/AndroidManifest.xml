@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MobileComputingProject"
         tools:targetApi="31">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
