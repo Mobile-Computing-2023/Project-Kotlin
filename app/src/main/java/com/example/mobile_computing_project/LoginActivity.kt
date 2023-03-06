@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.example.mobile_computing_project.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 private const val TAG = "LoginActivity"
@@ -22,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         auth = Firebase.auth
-        // code for when user is signed in, he is taken directly to the home page
+
 //        if (auth.currentUser != null) {
 //            goToHomeActivity()
 //        }
@@ -41,20 +40,25 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill the details!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    binding.btnLogin.isEnabled = true
-                    Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
-                    goToHomeActivity()
-                }
-                else {
-                    binding.btnLogin.isEnabled = true
-                    Log.i(TAG, "Sign In Failed", task.exception)
-                    Toast.makeText(this, "Authentication Failed!", Toast.LENGTH_SHORT).show()
-                }
+            loginCallback(email, password)
+        }
+    }
+
+    private fun loginCallback(email: String, password: String){
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                binding.btnLogin.isEnabled = true
+                Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
+                goToHomeActivity()
+            }
+            else {
+                binding.btnLogin.isEnabled = true
+                Log.i(TAG, "Sign In Failed", task.exception)
+                Toast.makeText(this, "Authentication Failed!", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun goToHomeActivity(){
         Log.i(TAG, "goToHomeActivity")
         val intent = Intent(this, HomeActivity::class.java)
