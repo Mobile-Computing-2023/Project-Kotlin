@@ -5,24 +5,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.mobile_computing_project.databinding.ActivityMainBinding
+import com.example.mobile_computing_project.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 private const val TAG = "LoginActivity"
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         auth = Firebase.auth
-        if (auth.currentUser != null) {
-            goToHomeActivity()
+        // code for when user is signed in, he is taken directly to the home page
+//        if (auth.currentUser != null) {
+//            goToHomeActivity()
+//        }
+
+        binding.btnSignup.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnLogin.setOnClickListener {

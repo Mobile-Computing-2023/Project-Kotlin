@@ -6,10 +6,8 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.databinding.ActivityHomeBinding
-import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 private const val TAG = "HomeActivity"
