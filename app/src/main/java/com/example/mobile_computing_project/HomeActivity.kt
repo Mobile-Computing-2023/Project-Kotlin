@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
         binding.rvItems.layoutManager = LinearLayoutManager(this)
 
         val db = Firebase.firestore
-        var menuReference = db.collection("Menu")
+        val menuReference = db.collection("Menu")
         menuReference.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
