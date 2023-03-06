@@ -22,9 +22,8 @@ class SignUpActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val db = Firebase.firestore
-
         auth = Firebase.auth
+
 //        if (auth.currentUser != null) {
 //            goToHomeActivity()
 //        }
@@ -39,27 +38,33 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill the details!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        var uid = "";
-                        user.let {
-                            uid = it?.uid.toString()
-                        }
-                        val userModel  = User(uid, name, email)
-                        db.collection("Users").document(uid).set(userModel)
-                        goToProfileActivity()
-                    } else {
-                        binding.btnSignup.isEnabled = true
-                        Log.i(TAG, "Sign Up Failed", task.exception)
-                        Toast.makeText(this, "Authentication Failed!", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
+            signUpCallback(name,email,password)
         }
     }
+
+    private fun signUpCallback(name:String, email: String, password: String){
+        val db = Firebase.firestore
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                    var uid = "";
+                    user.let {
+                        uid = it?.uid.toString()
+                    }
+                    val userModel  = User(uid, name, email)
+                    db.collection("Users").document(uid).set(userModel)
+                    goToProfileActivity()
+                }
+                else {
+                    binding.btnSignup.isEnabled = true
+                    Log.i(TAG, "Sign Up Failed", task.exception)
+                    Toast.makeText(this, "Authentication Failed!", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
     private fun goToProfileActivity(){
 //        Log.i(TAG, "goToHomeActivity")
         val intent = Intent(this, ProfileActivity::class.java)
