@@ -19,7 +19,7 @@ class MenuItemAdapter (private val context: Context, private val menuItems: List
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             fun bind(menuItem: MenuItem){
                 tvName.text = menuItem.name
-                tvPrice.text = menuItem.price.toString()
+//                tvPrice.text = menuItem.price.toString()
             }
         }
 
