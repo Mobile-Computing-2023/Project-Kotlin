@@ -66,7 +66,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun goToProfileActivity(){
-//        Log.i(TAG, "goToHomeActivity")
+        Log.i(TAG, "goToProfileActivity")
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
         finish()

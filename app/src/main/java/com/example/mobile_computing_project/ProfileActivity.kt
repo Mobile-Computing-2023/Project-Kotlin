@@ -34,6 +34,5 @@ class ProfileActivity : AppCompatActivity() {
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)
         }
-
     }
 }
