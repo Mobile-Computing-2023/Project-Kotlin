@@ -3,4 +3,8 @@
     <color name="theme">#004581</color>
     <color name="black">#222222</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="light_grey">#E0E0E0</color>
+    <color name="veg">#049D4E</color>
+    <color name="non_veg">#8B262A</color>
 </resources>
