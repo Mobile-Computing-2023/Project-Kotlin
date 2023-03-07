@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:padding="10dp"
+        android:paddingBottom="5dp"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:padding="5dp"
+        android:paddingBottom="5dp"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -98,22 +98,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="login"
-        android:textStyle="bold"
         android:backgroundTint="@color/theme"
+        android:text="login"
         android:textColor="@color/white"
-        />
+        android:textStyle="bold"
+        app:cornerRadius="5dp" />
 
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="sign up"
-        android:textStyle="bold"
         android:backgroundTint="@color/theme"
+        android:text="sign up"
         android:textColor="@color/white"
-        />
+        android:textStyle="bold"
+        app:cornerRadius="5dp" />
 
 
 </LinearLayout>
