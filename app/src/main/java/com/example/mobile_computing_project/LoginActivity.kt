@@ -26,6 +26,11 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val isCanteen = intent.getBooleanExtra("isCanteen", false)
+        if(isCanteen){
+            Toast.makeText(this, "Welcome Canteen Vendor!", Toast.LENGTH_SHORT).show()
+        }
+
         auth = Firebase.auth
 
         if (auth.currentUser != null) {

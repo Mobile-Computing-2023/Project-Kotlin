@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.Window
 import android.widget.LinearLayout
 import com.example.mobile_computing_project.databinding.ActivityLandingBinding
-import com.example.mobile_computing_project.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -37,6 +36,8 @@ class LandingActivity : AppCompatActivity() {
 
         binding.btnLandingSigninUser.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            val isCanteen = false
+            intent.putExtra("isCanteen", isCanteen)
             startActivity(intent)
         }
 
@@ -44,6 +45,14 @@ class LandingActivity : AppCompatActivity() {
 
         binding.btnLandingSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
+//        This needs to change for canteen thing
+        binding.btnLandingSigninCanteen.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            val isCanteen = true
+            intent.putExtra("isCanteen", isCanteen)
             startActivity(intent)
         }
     }
