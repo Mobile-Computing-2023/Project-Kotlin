@@ -27,7 +27,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_toEndOf="@+id/iv_nonveg_symbol"
         android:text="$10, Qty : 1"
@@ -39,7 +39,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/bt_removeButton"
+        android:id="@+id/btn_removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
@@ -55,10 +55,8 @@
     <View
         android:id="@+id/view_border"
         android:layout_width="match_parent"
-        android:layout_below="@+id/bt_removeButton"
+        android:layout_below="@+id/btn_removeButton"
         android:layout_height="1dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="13dp"
         android:layout_marginTop="5dp"
         android:background="@color/light_grey"/>
 

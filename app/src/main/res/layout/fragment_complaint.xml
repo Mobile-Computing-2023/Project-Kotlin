@@ -29,7 +29,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_complaint"
+        android:id="@+id/cv_complaint"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/tv_complaint_text"
@@ -56,12 +56,12 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/bt_send_complaint"
+        android:id="@+id/btn_send_complaint"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="50dp"
         android:backgroundTint="@color/theme"
-        android:layout_below="@id/card_complaint"
+        android:layout_below="@id/cv_complaint"
         android:layout_height="wrap_content"
         android:text="Send Complaint"
         android:textColor="@color/white"
@@ -73,19 +73,18 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/bt_clear_complaint"
+        android:id="@+id/btn_clear_complaint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:layout_below="@id/bt_send_complaint"
+        android:layout_below="@id/btn_send_complaint"
         android:shadowColor="@color/grey"
         android:elevation="20dp"
         android:text="Clear Complaint"
         android:textSize="18sp"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
-
 
 </RelativeLayout>
