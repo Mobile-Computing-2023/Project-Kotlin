@@ -16,6 +16,7 @@
         android:src="@drawable/chicken_tikka_img" />
 
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -32,7 +33,7 @@
             android:src="@drawable/non_veg_symbol" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/menu_item_canteen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -44,7 +45,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/menu_item_price"
+            android:id="@+id/menu_item_canteen_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -54,7 +55,7 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/menu_item_qty"
+            android:id="@+id/menu_item_canteen_qty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -66,6 +67,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/menu_item_canteen_remove_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
