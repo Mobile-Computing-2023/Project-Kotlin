@@ -7,7 +7,6 @@
     android:layout_width="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_order_summary"
         android:layout_width="380dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
@@ -17,19 +16,17 @@
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true">
 
-
         <TextView
-            android:id="@+id/tv_order_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/theme"
             android:textStyle="bold"
             android:shadowColor="@android:color/holo_blue_bright"
             android:backgroundTint="@color/white"
             android:textSize="14sp"
             android:layout_marginStart="5dp"
-            android:text="Order Summary #12345"
+            android:text="Order #12345"
             tools:ignore="HardcodedText"/>
 
         <TextView
@@ -37,8 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@android:color/darker_gray"
-            android:shadowColor="@android:color/holo_green_dark"
+            android:textColor="@color/grey"
             android:backgroundTint="@color/white"
             android:textSize="14sp"
             android:layout_marginStart="250dp"
@@ -56,7 +52,7 @@
             tools:ignore="ContentDescription,HardcodedText"/>
 
         <TextView
-            android:id="@+id/tv_chicken_tikka"
+            android:id="@+id/tv_items"
             android:layout_width="wrap_content"
             android:text="Chicken Tikka, Qty 2"
             android:textColor="@color/black"
@@ -66,9 +62,8 @@
             android:layout_height="wrap_content"
             tools:ignore="HardcodedText"/>
 
-
         <TextView
-            android:id="@+id/tv_ordered_on"
+            android:id="@+id/tv_createdAt"
             android:layout_width="wrap_content"
             android:text="Ordered On: 05/03/2023 at 10:00pm"
             android:textSize="12sp"
@@ -79,7 +74,7 @@
             tools:ignore="HardcodedText"/>
 
         <TextView
-            android:id="@+id/tv_order_total"
+            android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:text="Order total: $500"
             android:textSize="12sp"
