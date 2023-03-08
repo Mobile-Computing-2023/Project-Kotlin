@@ -21,9 +21,9 @@ class MenuItemAdapter (private val context: Context, private val menuItems: List
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             fun bind(menuItem: MenuItem){
                 tvName.text = menuItem.name
-                tvPrice.text = "Rs "+menuItem.price.toString()
+                tvPrice.text = "Rs "+ menuItem.price.toString()
                 tvQty.text = "5 pcs"
-                if (menuItem.veg){
+                if (menuItem.isVeg){
                     val color = Color.parseColor("#049D4E")
                     ivVeg.setColorFilter(color)
                 }

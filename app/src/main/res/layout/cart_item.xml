@@ -16,7 +16,7 @@
         android:layout_marginTop="5dp" />
 
     <TextView
-        android:id="@+id/tv_chicken_tikka"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_toEndOf="@+id/iv_nonveg_symbol"
         android:text="Chicken Tikka"
@@ -27,11 +27,23 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_toEndOf="@+id/iv_nonveg_symbol"
-        android:text="$10, Qty : 1"
-        android:layout_below="@+id/tv_chicken_tikka"
+        android:text="$10"
+        android:layout_below="@+id/tv_name"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tv_qty"
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@+id/tv_price"
+        android:text="Qty : 1"
+        android:layout_below="@+id/tv_name"
         android:textColor="@color/grey"
         android:textSize="14sp"
         android:layout_marginStart="10dp"
@@ -43,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
-        android:layout_toEndOf="@id/tv_chicken_tikka"
+        android:layout_toEndOf="@id/tv_name"
         android:shadowColor="@android:color/holo_blue_bright"
         android:backgroundTint="@color/white"
         android:text="Remove"
@@ -53,7 +65,6 @@
         tools:ignore="HardcodedText" />
 
     <View
-        android:id="@+id/view_border"
         android:layout_width="match_parent"
         android:layout_below="@+id/btn_removeButton"
         android:layout_height="1dp"
