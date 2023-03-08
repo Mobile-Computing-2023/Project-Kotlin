@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".fragments.Complaint">
+    tools:context=".fragments.ComplaintFragment">
 
     <TextView
         android:id="@+id/tv_heading"

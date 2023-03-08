@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MobileComputingProject" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/theme</item>
         <item name="colorPrimaryVariant">@color/theme</item>
         <item name="colorOnPrimary">@color/theme</item>
         <!-- Secondary brand color. -->
