@@ -60,16 +60,14 @@
         android:id="@+id/btn_send_complaint"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
-        android:paddingHorizontal="50dp"
         android:backgroundTint="@color/theme"
         android:layout_below="@id/cv_complaint"
         android:layout_height="wrap_content"
         android:text="Send Complaint"
         android:textColor="@color/white"
-        android:paddingVertical="10dp"
         android:shadowColor="@color/grey"
-        android:elevation="20dp"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
@@ -78,14 +76,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="50dp"
-        android:paddingVertical="10dp"
         android:layout_below="@id/btn_send_complaint"
         android:shadowColor="@color/grey"
-        android:elevation="20dp"
         android:text="Clear Complaint"
         android:textSize="18sp"
         android:textAllCaps="false"
+        android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
