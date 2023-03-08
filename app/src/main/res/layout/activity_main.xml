@@ -19,7 +19,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
-        app:menu="@menu/bottom_nav_bar"
+        app:menu="@menu/bottom_nav_bar_user"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
