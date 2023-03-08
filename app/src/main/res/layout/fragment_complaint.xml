@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Complaint">
+
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="File a Complaint"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tv_complaint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_heading"
+        android:text="Your complaint will reach the canteen owner and necessary action will be taken. Thank you for your cooperation!"
+        android:textColor="@color/grey"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        tools:ignore="HardcodedText" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_complaint"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tv_complaint_text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:shadowColor="@android:color/holo_green_dark"
+        app:cardCornerRadius="10dp">
+
+        <EditText
+            android:id="@+id/et_complaint_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:hint="Write your complaint here"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_send_complaint"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="50dp"
+        android:backgroundTint="@color/theme"
+        android:layout_below="@id/cv_complaint"
+        android:layout_height="wrap_content"
+        android:text="Send Complaint"
+        android:textColor="@color/white"
+        android:paddingVertical="10dp"
+        android:shadowColor="@color/grey"
+        android:elevation="20dp"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_clear_complaint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"
+        android:layout_below="@id/btn_send_complaint"
+        android:shadowColor="@color/grey"
+        android:elevation="20dp"
+        android:text="Clear Complaint"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
