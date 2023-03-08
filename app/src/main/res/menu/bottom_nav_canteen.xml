@@ -9,7 +9,7 @@
         android:icon="@drawable/baseline_menu_book_24"
         />
     <item android:title="Specials"
-        android:id="@+id/cart"
+        android:id="@+id/specials"
         android:icon="@drawable/baseline_add_shopping_cart_24"
         />
     <item android:title="Complaints"
