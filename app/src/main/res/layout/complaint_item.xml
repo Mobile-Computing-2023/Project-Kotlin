@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_complainent"
+                android:id="@+id/tv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Complainent: Aryan Teng"
@@ -34,7 +34,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/tv_complaint_time"
+                android:id="@+id/tv_createdAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10:00 PM, 05/03/2023"/>
@@ -50,7 +50,7 @@
             android:fontFamily="@font/bold"/>
 
         <TextView
-            android:id="@+id/tv_complaint_desc"
+            android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -58,7 +58,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/btn_mark_resolved"
+            android:id="@+id/btn_resolve"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
