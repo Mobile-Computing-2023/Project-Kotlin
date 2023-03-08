@@ -7,7 +7,7 @@
     android:layout_width="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/my_card_view"
+        android:id="@+id/order_summary_card"
         android:layout_width="380dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
@@ -19,7 +19,7 @@
 
 
         <TextView
-            android:id="@+id/ordersummary"
+            android:id="@+id/order_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -56,7 +56,7 @@
             tools:ignore="ContentDescription,HardcodedText"/>
 
         <TextView
-            android:id="@+id/chickentikka"
+            android:id="@+id/chicken_tikka"
             android:layout_width="wrap_content"
             android:text="Chicken Tikka, Qty 2"
             android:textColor="@color/black"
@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/orderedon"
+            android:id="@+id/ordered_on"
             android:layout_width="wrap_content"
             android:text="Ordered On: 05/03/2023 at 10:00pm"
             android:textSize="12sp"
@@ -79,7 +79,7 @@
             tools:ignore="HardcodedText"/>
 
         <TextView
-            android:id="@+id/ordertotal"
+            android:id="@+id/order_total"
             android:layout_width="wrap_content"
             android:text="Order total: $500"
             android:textSize="12sp"
