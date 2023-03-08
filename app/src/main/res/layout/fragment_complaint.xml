@@ -7,7 +7,7 @@
     tools:context=".fragments.Complaint">
 
     <TextView
-        android:id="@+id/heading"
+        android:id="@+id/tv_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="File a Complaint"
@@ -17,10 +17,10 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/complaint_text"
+        android:id="@+id/tv_complaint_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/heading"
+        android:layout_below="@id/tv_heading"
         android:text="Your complaint will reach the canteen owner and necessary action will be taken. Thank you for your cooperation!"
         android:textColor="@color/grey"
         android:layout_marginTop="10dp"
@@ -29,10 +29,10 @@
         tools:ignore="HardcodedText" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/complaint_card"
+        android:id="@+id/card_complaint"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/complaint_text"
+        android:layout_below="@+id/tv_complaint_text"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/white"
@@ -43,7 +43,7 @@
         app:cardCornerRadius="10dp">
 
         <EditText
-            android:id="@+id/complaint_hint"
+            android:id="@+id/et_complaint_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -56,28 +56,32 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/send_complaint"
+        android:id="@+id/bt_send_complaint"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="50dp"
         android:backgroundTint="@color/theme"
-        android:layout_below="@id/complaint_card"
+        android:layout_below="@id/card_complaint"
         android:layout_height="wrap_content"
         android:text="Send Complaint"
         android:textColor="@color/white"
         android:paddingVertical="10dp"
+        android:shadowColor="@color/grey"
+        android:elevation="20dp"
         android:textSize="18sp"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/clear_complaint"
+        android:id="@+id/bt_clear_complaint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:layout_below="@id/send_complaint"
+        android:layout_below="@id/bt_send_complaint"
+        android:shadowColor="@color/grey"
+        android:elevation="20dp"
         android:text="Clear Complaint"
         android:textSize="18sp"
         android:textAllCaps="false"
