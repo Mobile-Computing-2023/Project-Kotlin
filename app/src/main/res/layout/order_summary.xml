@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
@@ -28,7 +29,8 @@
             android:backgroundTint="@color/white"
             android:textSize="14sp"
             android:layout_marginStart="5dp"
-            android:text="Order Summary #12345" />
+            android:text="Order Summary #12345"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:id="@+id/status"
@@ -40,7 +42,52 @@
             android:backgroundTint="@color/white"
             android:textSize="14sp"
             android:layout_marginStart="250dp"
-            android:text="Status: Complete" />
+            android:text="Status: Complete"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/veg_nonveg_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/non_veg_symbol"
+            android:layout_below="@+id/ordersummary"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="33dp"
+            tools:ignore="ContentDescription,HardcodedText"/>
+
+        <TextView
+            android:id="@+id/chickentikka"
+            android:layout_width="wrap_content"
+            android:text="Chicken Tikka, Qty 2"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
+
+
+        <TextView
+            android:id="@+id/orderedon"
+            android:layout_width="wrap_content"
+            android:text="Ordered On: 05/03/2023 at 10:00pm"
+            android:textSize="12sp"
+            android:layout_marginTop="53dp"
+            android:textColor="@color/grey"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
+
+        <TextView
+            android:id="@+id/ordertotal"
+            android:layout_width="wrap_content"
+            android:text="Order total: $500"
+            android:textSize="12sp"
+            android:layout_marginTop="53dp"
+            android:textColor="@color/grey"
+            android:layout_marginStart="265dp"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
 
 
     </androidx.cardview.widget.CardView>
