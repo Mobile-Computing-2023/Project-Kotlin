@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/my_card_view"
+        android:layout_width="380dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:shadowColor="@android:color/holo_blue_bright"
+        android:backgroundTint="@color/white"
+        android:elevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true">
+
+
+        <TextView
+            android:id="@+id/ordersummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            android:shadowColor="@android:color/holo_blue_bright"
+            android:backgroundTint="@color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            android:text="Order Summary #12345" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/darker_gray"
+            android:shadowColor="@android:color/holo_green_dark"
+            android:backgroundTint="@color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="250dp"
+            android:text="Status: Complete" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
