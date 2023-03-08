@@ -33,7 +33,7 @@
             android:src="@drawable/non_veg_symbol" />
 
         <TextView
-            android:id="@+id/menu_item_canteen_name"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -45,7 +45,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/menu_item_canteen_price"
+            android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -55,7 +55,7 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/menu_item_canteen_qty"
+            android:id="@+id/tv_qty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/menu_item_canteen_remove_btn"
+        android:id="@+id/btn_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

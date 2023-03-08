@@ -6,6 +6,7 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/tv_add_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Item To Menu"
@@ -14,6 +15,7 @@
         android:textColor="@color/black" />
 
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -23,7 +25,7 @@
         android:textSize="18sp"/>
 
     <EditText
-        android:id="@+id/add_item_name"
+        android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,7 +38,7 @@
         android:inputType="text"/>
 
     <TextView
-
+        android:id="@+id/tv_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -46,7 +48,7 @@
         android:textSize="18sp"/>
 
     <EditText
-        android:id="@+id/add_item_price"
+        android:id="@+id/et_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -57,6 +59,7 @@
         android:inputType="numberDecimal"/>
 
     <TextView
+        android:id="@+id/tv_serving_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -66,7 +69,7 @@
         android:textSize="18sp"/>
 
     <EditText
-        android:id="@+id/add_item_serving_size"
+        android:id="@+id/et_serving_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -83,14 +86,14 @@
         android:layout_marginTop="16dp">
 
         <RadioButton
-            android:id="@+id/add_item_non_veg"
+            android:id="@+id/rb_non_veg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/semi_bold"
             android:text="Non-veg"/>
 
         <RadioButton
-            android:id="@+id/add_item_veg"
+            android:id="@+id/rb_veg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Veg"
@@ -100,7 +103,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/add_item_choose_file_btn"
+        android:id="@+id/btn_choose_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -115,7 +118,7 @@
         android:layout_marginTop="16dp">
 
         <Button
-            android:id="@+id/add_item_btn"
+            android:id="@+id/btn_add_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
@@ -123,7 +126,7 @@
             android:text="Add Item"/>
 
         <Button
-            android:id="@+id/add_item_dismiss_btn"
+            android:id="@+id/btn_dismiss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
