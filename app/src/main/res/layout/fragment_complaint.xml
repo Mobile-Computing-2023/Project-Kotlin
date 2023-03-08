@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="File a Complaint"
         android:textColor="@color/black"
-        android:textSize="27sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
@@ -57,9 +57,8 @@
 
     <Button
         android:id="@+id/send_complaint"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="80dp"
         android:paddingHorizontal="50dp"
         android:backgroundTint="@color/theme"
         android:layout_below="@id/complaint_card"
@@ -67,21 +66,20 @@
         android:text="Send Complaint"
         android:textColor="@color/white"
         android:paddingVertical="10dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/clear_complaint"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
         android:layout_below="@id/send_complaint"
         android:text="Clear Complaint"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
