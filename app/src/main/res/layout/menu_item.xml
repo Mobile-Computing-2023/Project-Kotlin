@@ -44,6 +44,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:layout_marginLeft="10dp"
+        android:fontFamily="@font/semi_bold"
         android:layout_height="wrap_content"/>
 
     <TextView
@@ -75,6 +76,8 @@
         android:text="+Add"
         android:shadowColor="@android:color/holo_blue_bright"
         android:backgroundTint="@color/white"
+        android:fontFamily="@font/semi_bold"
+        android:textAllCaps="false"
         android:paddingHorizontal="30dp"/>
 
 </RelativeLayout>
