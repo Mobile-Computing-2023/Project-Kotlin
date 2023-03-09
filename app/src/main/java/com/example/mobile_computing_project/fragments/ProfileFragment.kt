@@ -1,11 +1,24 @@
 package com.example.mobile_computing_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ProfileCardBinding
+import com.example.mobile_computing_project.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlin.math.sign
+
+private const val TAG = "ProfileFragment"
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +35,8 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var auth: FirebaseAuth = Firebase.auth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +50,29 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val db = Firebase.firestore
+        val binding = inflater.inflate(R.layout.fragment_profile, container, false)
+        var userId = "USER ID"
+
+        db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
+            val signedInUser = it.toObject(User::class.java)!!
+            binding.findViewById<TextView>(R.id.tv_my_name).text = signedInUser?.name
+            binding.findViewById<TextView>(R.id.tv_email).text = signedInUser?.email
+            userId = signedInUser?.uid.toString()
+            Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
+
+
+
+            Log.i(TAG, "Signed In User: $signedInUser")
+        }.addOnFailureListener {error ->
+            Log.i(TAG, "Failure in fetching current user", error)
+        }
+
+//        Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
+
+        return binding
+//        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     companion object {

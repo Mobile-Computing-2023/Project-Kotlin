@@ -6,9 +6,28 @@
     tools:context=".fragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="PROFILE" />
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/frag_profile_card"
+            layout="@layout/profile_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_below="@+id/frag_profile_card"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:text="Order History"/>
+
+    </RelativeLayout>
 
 </FrameLayout>
