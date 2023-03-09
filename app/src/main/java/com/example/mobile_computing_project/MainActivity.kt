@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener { it ->
             signedInUser = it.toObject(User::class.java)!!
             Log.i(TAG, "Signed In User: $signedInUser")
-            if(signedInUser?.isCanteen == true){
+            if(signedInUser?.canteen == true){
                 binding.bottomNavCanteen.visibility = View.VISIBLE
             }
             else{
@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bottomNavUser.setOnItemSelectedListener {
-            binding.bottomNavUser.visibility = View.VISIBLE
             when(it.itemId){
                 R.id.menu -> replaceFragment(MenuFragment())
                 R.id.cart -> replaceFragment(CartFragment())
