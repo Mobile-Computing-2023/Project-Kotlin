@@ -1,5 +1,7 @@
 package com.example.mobile_computing_project
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val colorDrawable = ColorDrawable(Color.parseColor("#FFFFFF"))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
