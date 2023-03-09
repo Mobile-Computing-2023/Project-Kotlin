@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import com.example.mobile_computing_project.MainActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.databinding.ProfileCardBinding
+import com.example.mobile_computing_project.adapters.OrderItemUserAdapter
+import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlin.math.sign
 
 private const val TAG = "ProfileFragment"
 
@@ -60,10 +60,28 @@ class ProfileFragment : Fragment() {
             binding.findViewById<TextView>(R.id.tv_my_name).text = signedInUser?.name
             binding.findViewById<TextView>(R.id.tv_email).text = signedInUser?.email
             userId = signedInUser?.uid.toString()
-            Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
 
-
-
+            var orderHistoryItems: MutableList<OrderItem> = mutableListOf()
+//            val orderHistoryItemAdapter =
+//                context?.let { it1 -> OrderItemUserAdapter(it1, orderHistoryItems) }
+//            val ordersRef = db.collection("Orders").whereEqualTo("user.uid", userId)
+//                .addSnapshotListener { value, error ->
+//                    if(error != null || value == null){
+//                        Log.i(TAG, "Error when querying items", error)
+//                    }
+//                    if (value != null){
+//                        val orderList = value.toObjects(OrderItem::class.java)
+//                        orderHistoryItems.clear()
+//                        orderHistoryItems.addAll(orderList)
+//                        if (orderHistoryItemAdapter != null) {
+//                            orderHistoryItemAdapter.notifyDataSetChanged()
+//                        }
+//                        else{
+//                            Toast.makeText(context, "Problem Here", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
             Log.i(TAG, "Signed In User: $signedInUser")
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)

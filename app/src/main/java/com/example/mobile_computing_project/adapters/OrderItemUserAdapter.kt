@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.OrderItem
 
-class OrderItemUserAdapter (private val context: Context, private val orderItems: List<OrderItem>):
+class OrderItemUserAdapter(private val context: Context, private val orderItems: List<OrderItem>):
     RecyclerView.Adapter<OrderItemUserAdapter.ViewHolder>() {
     private lateinit var tvAmount: TextView
     private lateinit var tvItems: TextView
@@ -17,8 +17,8 @@ class OrderItemUserAdapter (private val context: Context, private val orderItems
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(orderItem: OrderItem){
-            tvAmount.text = orderItem.amount.toString()
-            tvStatus.text = orderItem.status
+            tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
+            tvStatus.text = "Status: " + orderItem.status.toString()
         }
     }
 
