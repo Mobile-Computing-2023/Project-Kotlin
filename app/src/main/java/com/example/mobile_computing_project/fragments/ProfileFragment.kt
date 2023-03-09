@@ -1,5 +1,6 @@
 package com.example.mobile_computing_project.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.OrderItemUserAdapter
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
@@ -17,6 +21,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 private const val TAG = "ProfileFragment"
 
@@ -36,6 +44,12 @@ class ProfileFragment : Fragment() {
     private var param2: String? = null
 
     private var auth: FirebaseAuth = Firebase.auth
+    private var signedInUser: User? = null
+    private val db = Firebase.firestore
+    private lateinit var tvUserName: TextView
+    private lateinit var tvUserEmail: TextView
+    private lateinit var currUid: String
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,47 +64,59 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        tvUserName = view.findViewById(R.id.tv_my_name)
+        tvUserEmail = view.findViewById(R.id.tv_email)
+        recyclerView = view.findViewById(R.id.rv_order_history_items)
 
-        val db = Firebase.firestore
-        val binding = inflater.inflate(R.layout.fragment_profile, container, false)
-        var userId = "USER ID"
+        currUid = auth.currentUser?.uid.toString()
 
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
-            val signedInUser = it.toObject(User::class.java)!!
-            binding.findViewById<TextView>(R.id.tv_my_name).text = signedInUser?.name
-            binding.findViewById<TextView>(R.id.tv_email).text = signedInUser?.email
-            userId = signedInUser?.uid.toString()
-//            Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
-
-            var orderHistoryItems: MutableList<OrderItem> = mutableListOf()
-//            val orderHistoryItemAdapter =
-//                context?.let { it1 -> OrderItemUserAdapter(it1, orderHistoryItems) }
-//            val ordersRef = db.collection("Orders").whereEqualTo("user.uid", userId)
-//                .addSnapshotListener { value, error ->
-//                    if(error != null || value == null){
-//                        Log.i(TAG, "Error when querying items", error)
-//                    }
-//                    if (value != null){
-//                        val orderList = value.toObjects(OrderItem::class.java)
-//                        orderHistoryItems.clear()
-//                        orderHistoryItems.addAll(orderList)
-//                        if (orderHistoryItemAdapter != null) {
-//                            orderHistoryItemAdapter.notifyDataSetChanged()
-//                        }
-//                        else{
-//                            Toast.makeText(context, "Problem Here", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
+            signedInUser = it.toObject(User::class.java)!!
+            tvUserName.text = signedInUser!!.name
+            tvUserEmail.text = signedInUser!!.email
+            currUid = signedInUser!!.uid
             Log.i(TAG, "Signed In User: $signedInUser")
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)
         }
+        return view
+    }
 
-//        Toast.makeText(context, "User ID: $userId", Toast.LENGTH_SHORT).show()
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Toast.makeText(context, "User ID in onViewCreated: $currUid", Toast.LENGTH_SHORT).show()
 
-        return binding
-//        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
+        var orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
+        recyclerView.adapter = orderHistoryItemsAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "completed")
+        orderHistoryRef.addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i(TAG, "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                for(i in snapshot){
+                    println(i.get("createdAt"))
+                    val t = i.get("createdAt") as Timestamp
+                    val instant = Instant.ofEpochSecond(t.seconds.toLong(), t.nanos.toLong())
+                    val zonedDateTime = instant.atZone(ZoneId.systemDefault())
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS")
+                    val dateTimeString = zonedDateTime.format(formatter)
+                    Log.i(TAG, dateTimeString)
+                }
+                val orderHistoryList = snapshot.toObjects(OrderItem::class.java)
+                orderHistoryItems.clear()
+                orderHistoryItems.addAll(orderHistoryList)
+                orderHistoryItemsAdapter.notifyDataSetChanged()
+                for (item in orderHistoryList){
+                    Log.i("MenuFragment", "Item $item")
+                }
+            }
+        }
     }
 
     companion object {

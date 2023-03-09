@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.OrderItem
 
-class OrderItemUserAdapter(private val context: Context, private val orderItems: List<OrderItem>):
+class OrderItemUserAdapter(private val orderItems: List<OrderItem>):
     RecyclerView.Adapter<OrderItemUserAdapter.ViewHolder>() {
     private lateinit var tvAmount: TextView
     private lateinit var tvItems: TextView
@@ -23,7 +23,7 @@ class OrderItemUserAdapter(private val context: Context, private val orderItems:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.order_item_user, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.order_item_user, parent, false)
         tvAmount = view.findViewById(R.id.tv_amount)
         tvStatus = view.findViewById(R.id.tv_status)
         tvItems = view.findViewById(R.id.tv_items)
