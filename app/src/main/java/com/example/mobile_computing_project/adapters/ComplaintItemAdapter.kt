@@ -19,7 +19,8 @@ class ComplaintItemAdapter (private val context: Context, private val complaints
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(complaintItem: ComplaintItem){
             tvDescription.text = complaintItem.description
-            tvUser.text = complaintItem.user?.name
+            // Get username from here
+            tvUser.text = complaintItem.userid
             tvCreatedAt.text = complaintItem.createdAt.toString()
         }
     }

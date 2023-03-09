@@ -1,11 +1,22 @@
 package com.example.mobile_computing_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.models.ComplaintItem
+import com.example.mobile_computing_project.models.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
+private const val TAG = "ComplaintFragment"
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +33,10 @@ class ComplaintFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var btnSendComplaint: Button
+    private lateinit var btnClear: Button
+    private lateinit var etComplaintContent: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +50,35 @@ class ComplaintFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_complaint, container, false)
+        val view = inflater.inflate(R.layout.fragment_complaint, container, false)
+        btnSendComplaint = view.findViewById(R.id.btn_send_complaint)
+        btnClear = view.findViewById(R.id.btn_clear_complaint)
+        etComplaintContent = view.findViewById(R.id.et_complaint_hint)
+
+        val db = Firebase.firestore
+        val auth = Firebase.auth
+        val currUid = auth.currentUser?.uid.toString()
+
+
+        btnSendComplaint.setOnClickListener {
+            val complaint = ComplaintItem(userid = currUid, createdAt = System.currentTimeMillis(),
+                description = etComplaintContent.text.toString())
+            db.collection("Complaints").add(complaint)
+                .addOnSuccessListener {
+                Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
+            }
+                .addOnFailureListener { Toast.makeText(context, "Failed to Submit Complaint", Toast.LENGTH_SHORT).show() }
+
+            etComplaintContent.text.clear()
+            btnSendComplaint.hint = btnSendComplaint.hint
+        }
+
+        btnClear.setOnClickListener {
+            etComplaintContent.text.clear()
+            btnSendComplaint.hint = btnSendComplaint.hint
+        }
+
+        return view
     }
 
     companion object {
