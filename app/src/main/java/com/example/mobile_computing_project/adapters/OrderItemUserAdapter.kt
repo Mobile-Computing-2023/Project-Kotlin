@@ -1,6 +1,7 @@
 package com.example.mobile_computing_project.adapters
 
 import android.content.Context
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,13 @@ class OrderItemUserAdapter(private val orderItems: List<OrderItem>):
     private lateinit var tvAmount: TextView
     private lateinit var tvItems: TextView
     private lateinit var tvStatus: TextView
+    private lateinit var tvCreatedAt: TextView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(orderItem: OrderItem){
             tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
-            tvStatus.text = "Status: " + orderItem.status.toString()
+            tvStatus.text = "Status: " + orderItem.status
+            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
         }
     }
 
@@ -27,6 +30,7 @@ class OrderItemUserAdapter(private val orderItems: List<OrderItem>):
         tvAmount = view.findViewById(R.id.tv_amount)
         tvStatus = view.findViewById(R.id.tv_status)
         tvItems = view.findViewById(R.id.tv_items)
+        tvCreatedAt = view.findViewById(R.id.tv_createdAt)
         return ViewHolder(view)
     }
 

@@ -1,6 +1,5 @@
 package com.example.mobile_computing_project.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.OrderItemUserAdapter
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
@@ -21,10 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.sql.Timestamp
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 private const val TAG = "ProfileFragment"
 
@@ -83,7 +76,6 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, "User ID in onViewCreated: $currUid", Toast.LENGTH_SHORT).show()
@@ -99,15 +91,6 @@ class ProfileFragment : Fragment() {
                 Log.i(TAG, "Error when querying items", error)
             }
             if (snapshot != null) {
-                for(i in snapshot){
-                    println(i.get("createdAt"))
-                    val t = i.get("createdAt") as Timestamp
-                    val instant = Instant.ofEpochSecond(t.seconds.toLong(), t.nanos.toLong())
-                    val zonedDateTime = instant.atZone(ZoneId.systemDefault())
-                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS")
-                    val dateTimeString = zonedDateTime.format(formatter)
-                    Log.i(TAG, dateTimeString)
-                }
                 val orderHistoryList = snapshot.toObjects(OrderItem::class.java)
                 orderHistoryItems.clear()
                 orderHistoryItems.addAll(orderHistoryList)
