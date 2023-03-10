@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
@@ -54,6 +55,13 @@ class CanteenComplaintFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val complaintItems: MutableList<ComplaintItem> = mutableListOf()
         var complaintItemAdapter = ComplaintItemAdapter(complaintItems)
+        complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemAdapter.OnBtnClickListener{
+            override fun onBtnClick(complaintItem: ComplaintItem) {
+                Toast.makeText(context, "Clicked Button", Toast.LENGTH_SHORT).show()
+                println(complaintItem)
+            }
+
+        })
         recyclerView.adapter = complaintItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

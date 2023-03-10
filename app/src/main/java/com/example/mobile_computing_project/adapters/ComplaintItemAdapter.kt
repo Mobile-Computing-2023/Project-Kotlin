@@ -5,6 +5,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
@@ -17,12 +18,23 @@ import com.google.firebase.ktx.Firebase
 
 class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
     RecyclerView.Adapter<ComplaintItemAdapter.ViewHolder>() {
+
+    interface OnBtnClickListener {
+        fun onBtnClick(item: ComplaintItem)
+    }
+    private var listener: OnBtnClickListener? = null
+
+    fun setOnBtnClickListener(listener: OnBtnClickListener){
+        this.listener = listener
+    }
+
     private lateinit var tvDescription: TextView
     private lateinit var tvUser: TextView
     private lateinit var tvCreatedAt: TextView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(complaintItem: ComplaintItem){
+        val btnResolve: Button = itemView.findViewById(R.id.btn_resolve)
+        fun bind(complaintItem: ComplaintItem, listener: OnBtnClickListener?){
             tvDescription.text = complaintItem.description
             // Get username from here
             tvUser.text = "Complainant: " + complaintItem.userid
@@ -37,6 +49,9 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
                     }
                 }
             tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
+            btnResolve.setOnClickListener {
+                listener?.onBtnClick(complaintItem)
+            }
         }
     }
 
@@ -51,7 +66,7 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
     override fun getItemCount() = complaints.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(complaints[position])
+        holder.bind(complaints[position], listener)
     }
 
 }
