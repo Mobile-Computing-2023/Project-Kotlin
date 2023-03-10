@@ -32,6 +32,7 @@ class CanteenComplaintFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
+    private var complaintItems: MutableList<ComplaintItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,6 @@ class CanteenComplaintFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val complaintItems: MutableList<ComplaintItem> = mutableListOf()
         val complaintItemAdapter = ComplaintItemAdapter(complaintItems)
         complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemAdapter.OnBtnClickListener{
             override fun onBtnClick(complaintItem: ComplaintItem) {
