@@ -54,7 +54,7 @@ class CanteenComplaintFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val complaintItems: MutableList<ComplaintItem> = mutableListOf()
-        var complaintItemAdapter = ComplaintItemAdapter(complaintItems)
+        val complaintItemAdapter = ComplaintItemAdapter(complaintItems)
         complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemAdapter.OnBtnClickListener{
             override fun onBtnClick(complaintItem: ComplaintItem) {
                 Toast.makeText(context, "Clicked Button", Toast.LENGTH_SHORT).show()
@@ -66,8 +66,8 @@ class CanteenComplaintFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val db = Firebase.firestore
-        val menuReference = db.collection("Complaints").whereEqualTo("resolved", false).orderBy("createdAt", Query.Direction.DESCENDING)
-        menuReference.addSnapshotListener { snapshot, error ->
+        val complaintsReference = db.collection("Complaints").whereEqualTo("resolved", false).orderBy("createdAt", Query.Direction.DESCENDING)
+        complaintsReference.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
             }

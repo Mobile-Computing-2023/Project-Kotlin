@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.OrderItemCanteenAdapter
+import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.OrderItem
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -32,6 +33,7 @@ class OrdersFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
+    private var orderItems: MutableList<OrderItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,33 +50,21 @@ class OrdersFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_orders, container, false)
         recyclerView = view.findViewById(R.id.rv_canteen_orders)
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val canteenOrderItems: MutableList<OrderItem> = mutableListOf()
-        var canteenOrderItemAdapter = OrderItemCanteenAdapter(canteenOrderItems)
+        val canteenOrderItemAdapter = OrderItemCanteenAdapter(orderItems)
         recyclerView.adapter = canteenOrderItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val db = Firebase.firestore
-        val menuReference = db.collection("Orders").whereEqualTo("status", "pending")
-        menuReference.addSnapshotListener { snapshot, error ->
-            if(error != null || snapshot == null){
-                Log.i("MenuFragment", "Error when querying items", error)
-            }
-            if (snapshot != null) {
-                val ordersList = snapshot.toObjects(OrderItem::class.java)
-                canteenOrderItems.clear()
-                canteenOrderItems.addAll(ordersList)
-                canteenOrderItemAdapter.notifyDataSetChanged()
-                for (item in ordersList){
-                    Log.i(TAG, "Item $item")
-                }
-            }
-        }
+       val db = Firebase.firestore
+
+        println(db.collection("Orders").get())
+
+
     }
 
     companion object {

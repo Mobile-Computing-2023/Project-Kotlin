@@ -26,6 +26,8 @@ private const val ARG_PARAM2 = "param2"
 class MenuFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var splRecyclerView: RecyclerView
+    private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
+    private var specialItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +50,12 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
         var menuItemAdapter = MenuItemAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // For SPECIALS:
-        val splMenuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
-        var splMenuItemAdapter = MenuItemAdapter(splMenuItems)
+        var splMenuItemAdapter = MenuItemAdapter(specialItems)
         splRecyclerView.adapter = splMenuItemAdapter
         splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -70,14 +70,6 @@ class MenuFragment : Fragment() {
                 menuItems.clear()
                 menuItems.addAll(menuList)
                 menuItemAdapter.notifyDataSetChanged()
-                for (item in menuList){
-                    Log.i("MenuFragment", "Item $item")
-                }
-
-                // For SPECIALS
-                splMenuItems.clear()
-                splMenuItems.addAll(menuList)
-                splMenuItemAdapter.notifyDataSetChanged()
             }
         }
     }

@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        replaceFragment(MenuFragment())
 
         auth = Firebase.auth
         val db = Firebase.firestore
@@ -40,9 +39,11 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "Signed In User: $signedInUser")
             if(signedInUser?.canteen == true){
                 binding.bottomNavCanteen.visibility = View.VISIBLE
+                replaceFragment(OrdersFragment())
             }
             else{
                 binding.bottomNavUser.visibility = View.VISIBLE
+                replaceFragment(MenuFragment())
             }
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)

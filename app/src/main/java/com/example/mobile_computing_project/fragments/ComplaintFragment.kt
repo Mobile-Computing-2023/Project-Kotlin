@@ -37,7 +37,6 @@ class ComplaintFragment : Fragment() {
     private lateinit var btnClear: Button
     private lateinit var etComplaintDesc: EditText
     private var signedInUser: User? = null
-    private var userObj : HashMap<String, String> = hashMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
