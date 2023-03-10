@@ -35,8 +35,6 @@ class LandingActivity : AppCompatActivity() {
 
         binding.btnLandingSigninUser.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
-            val isCanteen = false
-            intent.putExtra("isCanteen", isCanteen)
             startActivity(intent)
         }
 
@@ -47,8 +45,6 @@ class LandingActivity : AppCompatActivity() {
 
         binding.btnLandingSigninCanteen.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
-            val isCanteen = true
-            intent.putExtra("isCanteen", isCanteen)
             startActivity(intent)
         }
     }

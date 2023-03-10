@@ -34,10 +34,9 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-//        if (auth.currentUser != null) {
-////            goToHomeActivity()
-//            goToMainActivity()
-//        }
+        if (auth.currentUser != null) {
+            goToMainActivity()
+        }
 
         binding.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -62,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 binding.btnLogin.isEnabled = true
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
-//                goToHomeActivity()
                 goToMainActivity()
             }
             else {
@@ -73,15 +71,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToHomeActivity(){
-        Log.i(TAG, "goToHomeActivity")
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     private fun goToMainActivity(){
-        Log.i(TAG, "goToHomeActivity")
+        Log.i(TAG, "goToMainActivity")
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

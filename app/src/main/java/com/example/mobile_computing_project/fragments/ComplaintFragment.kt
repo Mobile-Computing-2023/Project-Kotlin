@@ -35,7 +35,9 @@ class ComplaintFragment : Fragment() {
 
     private lateinit var btnSendComplaint: Button
     private lateinit var btnClear: Button
-    private lateinit var etComplaintContent: EditText
+    private lateinit var etComplaintDesc: EditText
+    private var signedInUser: User? = null
+    private var userObj : HashMap<String, String> = hashMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,29 +55,35 @@ class ComplaintFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_complaint, container, false)
         btnSendComplaint = view.findViewById(R.id.btn_send_complaint)
         btnClear = view.findViewById(R.id.btn_clear_complaint)
-        etComplaintContent = view.findViewById(R.id.et_complaint_hint)
+        etComplaintDesc = view.findViewById(R.id.et_complaint_desc)
 
         val db = Firebase.firestore
         val auth = Firebase.auth
-        val currUid = auth.currentUser?.uid.toString()
 
+        db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
+            signedInUser = it.toObject(User::class.java)
+        }.addOnFailureListener {error ->
+            Log.i(TAG, "Failure in fetching current user", error)
+        }
 
         btnSendComplaint.setOnClickListener {
-            val complaint = ComplaintItem(userid = currUid, createdat = System.currentTimeMillis(),
-                description = etComplaintContent.text.toString())
-            db.collection("Complaints2").add(complaint)
-                .addOnSuccessListener {
-                Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
+            if(signedInUser != null){
+                val complaint = ComplaintItem(user = signedInUser, createdAt = System.currentTimeMillis(),
+                    description = etComplaintDesc.text.toString())
+                db.collection("Complaints").add(complaint)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
+                        etComplaintDesc.text.clear()
+                        btnSendComplaint.hint = btnSendComplaint.hint
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, "Failed to Submit Complaint", Toast.LENGTH_SHORT).show()
+                    }
             }
-                .addOnFailureListener { Toast.makeText(context, "Failed to Submit Complaint", Toast.LENGTH_SHORT).show() }
-
-            etComplaintContent.text.clear()
-            btnSendComplaint.hint = btnSendComplaint.hint
         }
 
         btnClear.setOnClickListener {
-            etComplaintContent.text.clear()
-            btnSendComplaint.hint = btnSendComplaint.hint
+            etComplaintDesc.text.clear()
         }
 
         return view

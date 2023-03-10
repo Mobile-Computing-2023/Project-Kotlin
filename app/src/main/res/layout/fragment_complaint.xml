@@ -43,7 +43,7 @@
         app:cardCornerRadius="10dp">
 
         <EditText
-            android:id="@+id/et_complaint_hint"
+            android:id="@+id/et_complaint_desc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"

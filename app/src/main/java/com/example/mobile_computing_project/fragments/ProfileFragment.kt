@@ -41,7 +41,6 @@ class ProfileFragment : Fragment() {
     private val db = Firebase.firestore
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
-    private lateinit var currUid: String
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,13 +61,10 @@ class ProfileFragment : Fragment() {
         tvUserEmail = view.findViewById(R.id.tv_email)
         recyclerView = view.findViewById(R.id.rv_order_history_items)
 
-        currUid = auth.currentUser?.uid.toString()
-
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
             signedInUser = it.toObject(User::class.java)!!
             tvUserName.text = signedInUser!!.name
             tvUserEmail.text = signedInUser!!.email
-            currUid = signedInUser!!.uid
             Log.i(TAG, "Signed In User: $signedInUser")
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)
@@ -78,7 +74,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(context, "User ID in onViewCreated: $currUid", Toast.LENGTH_SHORT).show()
 
         val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
         var orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
