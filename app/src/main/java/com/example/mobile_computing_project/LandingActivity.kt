@@ -16,7 +16,6 @@ private const val TAG = "LandingActivity"
 class LandingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLandingBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var logoLinearLayout: LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,7 +26,7 @@ class LandingActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         if (auth.currentUser != null) {
-            goToHomeActivity()
+            goToLandingActivity()
         }
 
         binding = ActivityLandingBinding.inflate(layoutInflater)
@@ -41,14 +40,11 @@ class LandingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        binding.btnLandingSigninCanteen.setOnClickListener {  }
-
         binding.btnLandingSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
-//        This needs to change for canteen thing
         binding.btnLandingSigninCanteen.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             val isCanteen = true
@@ -56,9 +52,9 @@ class LandingActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun goToHomeActivity(){
+    private fun goToLandingActivity(){
         Log.i(TAG, "goToHomeActivity")
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, LandingActivity::class.java)
         startActivity(intent)
         finish()
     }
