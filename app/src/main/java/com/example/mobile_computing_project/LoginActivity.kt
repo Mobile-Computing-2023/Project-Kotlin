@@ -15,6 +15,7 @@ private const val TAG = "LoginActivity"
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private var isCanteen: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,16 +27,17 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val isCanteen = intent.getBooleanExtra("isCanteen", false)
+        isCanteen = intent.getBooleanExtra("isCanteen", false)
         if(isCanteen){
             Toast.makeText(this, "Welcome Canteen Vendor!", Toast.LENGTH_SHORT).show()
         }
 
         auth = Firebase.auth
 
-        if (auth.currentUser != null) {
-            goToHomeActivity()
-        }
+//        if (auth.currentUser != null) {
+////            goToHomeActivity()
+//            goToMainActivity()
+//        }
 
         binding.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -60,7 +62,8 @@ class LoginActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 binding.btnLogin.isEnabled = true
                 Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
-                goToHomeActivity()
+//                goToHomeActivity()
+                goToMainActivity()
             }
             else {
                 binding.btnLogin.isEnabled = true
@@ -73,6 +76,13 @@ class LoginActivity : AppCompatActivity() {
     private fun goToHomeActivity(){
         Log.i(TAG, "goToHomeActivity")
         val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToMainActivity(){
+        Log.i(TAG, "goToHomeActivity")
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        menuItemAdapter = MenuItemAdapter(this, menuItems)
+        menuItemAdapter = MenuItemAdapter(menuItems)
         binding.rvItems.adapter = menuItemAdapter
         binding.rvItems.layoutManager = LinearLayoutManager(this)
 

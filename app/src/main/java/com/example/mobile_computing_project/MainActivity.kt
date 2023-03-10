@@ -1,8 +1,11 @@
 package com.example.mobile_computing_project
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.fragments.*
@@ -20,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val colorDrawable = ColorDrawable(Color.parseColor("#FFFFFF"))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -28,40 +35,31 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         val db = Firebase.firestore
 
-        db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
+        db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener { it ->
             signedInUser = it.toObject(User::class.java)!!
             Log.i(TAG, "Signed In User: $signedInUser")
+            if(signedInUser?.canteen == true){
+                binding.bottomNavCanteen.visibility = View.VISIBLE
+            }
+            else{
+                binding.bottomNavUser.visibility = View.VISIBLE
+            }
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)
         }
 
-        // for future use
-//        if(signedInUser?.isCanteen == true){
-//            binding.bottomNavView.setOnItemSelectedListener {
-//                when(it.itemId){
-//                    R.id.menu -> replaceFragment(CanteenMenuFragment())
-//                    R.id.orders -> replaceFragment(OrdersFragment())
-//                    R.id.complaint -> replaceFragment(CanteenComplaintFragment())
-//                    R.id.specials -> replaceFragment(SpecialsFragment())
-//                    else -> {}
-//                }
-//                true
-//            }
-//        }
-//        else{
-//            binding.bottomNavView.setOnItemSelectedListener {
-//                when(it.itemId){
-//                    R.id.menu -> replaceFragment(MenuFragment())
-//                    R.id.cart -> replaceFragment(CartFragment())
-//                    R.id.complaint -> replaceFragment(ComplaintFragment())
-//                    R.id.profile -> replaceFragment(ProfileFragment())
-//                    else -> {}
-//                }
-//                true
-//            }
-//        }
+        binding.bottomNavCanteen.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.menu -> replaceFragment(CanteenMenuFragment())
+                R.id.orders -> replaceFragment(OrdersFragment())
+                R.id.complaint -> replaceFragment(CanteenComplaintFragment())
+                R.id.specials -> replaceFragment(SpecialsFragment())
+                else -> {}
+            }
+            true
+        }
 
-        binding.bottomNavView.setOnItemSelectedListener {
+        binding.bottomNavUser.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.menu -> replaceFragment(MenuFragment())
                 R.id.cart -> replaceFragment(CartFragment())
@@ -71,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     private fun replaceFragment(fragment: Fragment){
