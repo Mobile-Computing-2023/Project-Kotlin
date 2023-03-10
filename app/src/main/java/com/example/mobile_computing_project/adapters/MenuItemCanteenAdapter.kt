@@ -1,6 +1,5 @@
 package com.example.mobile_computing_project.adapters
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.MenuItem
 
-class MenuItemCanteenAdapter (private val context: Context, private val menuItems: List<MenuItem>):
+class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
     RecyclerView.Adapter<MenuItemCanteenAdapter.ViewHolder>() {
     private lateinit var tvName: TextView
     private lateinit var tvPrice: TextView
@@ -31,7 +30,7 @@ class MenuItemCanteenAdapter (private val context: Context, private val menuItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.menu_item_canteen, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item_canteen, parent, false)
         tvName = view.findViewById(R.id.tv_name)
         tvPrice = view.findViewById(R.id.tv_price)
         ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)

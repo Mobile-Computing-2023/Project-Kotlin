@@ -1,11 +1,17 @@
 package com.example.mobile_computing_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.adapters.MenuItemCanteenAdapter
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,8 @@ class CanteenMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+    private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +43,31 @@ class CanteenMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_canteen_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_canteen_menu, container, false)
+        recyclerView = view.findViewById(R.id.rv_menu_items)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val menuItemAdapter = MenuItemCanteenAdapter(menuItems)
+        recyclerView.adapter = menuItemAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val db = Firebase.firestore
+
+        db.collection("Menu").addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i("MenuFragment", "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
+                menuItems.clear()
+                menuItems.addAll(menuList)
+                menuItemAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     companion object {

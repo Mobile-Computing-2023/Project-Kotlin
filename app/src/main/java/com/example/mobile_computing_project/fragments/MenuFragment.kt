@@ -50,12 +50,12 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var menuItemAdapter = MenuItemAdapter(menuItems)
+        val menuItemAdapter = MenuItemAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // For SPECIALS:
-        var splMenuItemAdapter = MenuItemAdapter(specialItems)
+        val splMenuItemAdapter = MenuItemAdapter(specialItems)
         splRecyclerView.adapter = splMenuItemAdapter
         splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
