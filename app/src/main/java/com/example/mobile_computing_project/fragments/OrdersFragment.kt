@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.OrderItemCanteenAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
+import com.example.mobile_computing_project.models.MenuItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -21,19 +23,21 @@ import com.google.firebase.ktx.Firebase
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-private const val TAG = "OrdersFragment"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [OrdersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+private const val TAG = "OrderFragment"
 class OrdersFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
+    private lateinit var orderItemsAdapter: OrderItemCanteenAdapter
     private var orderItems: MutableList<OrderItem> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,22 +53,30 @@ class OrdersFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_orders, container, false)
+        orderItemsAdapter = OrderItemCanteenAdapter(orderItems)
         recyclerView = view.findViewById(R.id.rv_canteen_orders)
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val canteenOrderItemAdapter = OrderItemCanteenAdapter(orderItems)
-        recyclerView.adapter = canteenOrderItemAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-       val db = Firebase.firestore
+        recyclerView.adapter = orderItemsAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
-        println(db.collection("Orders").get())
+        val db = Firebase.firestore
 
-
+        db.collection("Orders").whereEqualTo("status", "pending").orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i(TAG, "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val orderList = snapshot.toObjects(OrderItem::class.java)
+                orderItems.clear()
+                orderItems.addAll(orderList)
+                orderItemsAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     companion object {

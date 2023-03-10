@@ -40,31 +40,6 @@
 
         </LinearLayout>
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp">-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/non_veg_image_order"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/non_veg_symbol"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv_items"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_toEndOf="@+id/non_veg_image_order"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginLeft="8dp"-->
-<!--                android:text="Chicken Tikka, Qty:1"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:fontFamily="@font/medium"/>-->
-
-<!--        </RelativeLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_canteen_orders_items"
@@ -101,6 +76,7 @@
             android:text="Mark as Complete"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:backgroundTint="@color/theme"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/semi_bold"
             android:textAllCaps="false"
