@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
@@ -17,7 +16,6 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
     RecyclerView.Adapter<OrderItemCanteenAdapter.ViewHolder>() {
     private lateinit var tvName: TextView
     private lateinit var tvAmount: TextView
-//    private lateinit var tvItems: TextView
     private lateinit var tvStatus: TextView
     private lateinit var tvCreatedAt: TextView
     private lateinit var rvItems: RecyclerView
@@ -33,7 +31,6 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
             val canteenOrderItems: MutableList<CartItem> = mutableListOf()
             val itemsList = orderItem.items?.toMutableList<CartItem>()
             println(itemsList)
-//            canteenOrderItems.addAll(itemsList)
             if (itemsList != null) {
                 for (i in itemsList){
                     canteenOrderItems.add(i)
@@ -50,7 +47,6 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
         tvName = view.findViewById(R.id.tv_name)
         tvAmount = view.findViewById(R.id.tv_amount)
         tvStatus = view.findViewById(R.id.tv_status)
-//        tvItems = view.findViewById(R.id.tv_items)
         tvCreatedAt = view.findViewById(R.id.tv_createdAt)
         rvItems = view.findViewById(R.id.rv_canteen_orders_items)
         return ViewHolder(view)
