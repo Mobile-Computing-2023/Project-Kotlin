@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var signedInUser: User? = null
     private lateinit var auth: FirebaseAuth
-    public var listInMainActivity: MutableList<CartItem> = mutableListOf()
+    var listInMainActivity: MutableList<CartItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

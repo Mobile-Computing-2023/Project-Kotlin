@@ -62,12 +62,34 @@ class MenuFragment : Fragment() {
         val listOfItems = activity.listInMainActivity
         menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                listOfItems.add(CartItem(
-                    name = item.name,
-                    qty = 1,
-                    isVeg = item.isVeg,
-                    price = item.price
-                ))
+                if (listOfItems.size == 0){
+                    listOfItems.add(CartItem(
+                        name = item.name,
+                        qty = 1,
+                        isVeg = item.isVeg,
+                        price = item.price
+                    ))
+                }
+
+                else{
+                    var added = false
+                    for (i in listOfItems){
+                        if (!added && i.name == item.name){
+                            i.qty+=1
+                            i.price+=item.price
+                            added = true
+                        }
+                    }
+
+                    if (!added){
+                        listOfItems.add(CartItem(
+                            name = item.name,
+                            qty = 1,
+                            isVeg = item.isVeg,
+                            price = item.price
+                        ))
+                    }
+                }
 
                 println("Main List: " + listOfItems)
                 Toast.makeText(context, "Clicked Button: " + item.name, Toast.LENGTH_SHORT).show()
