@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Orders"
         android:id="@+id/orders"
-        android:icon="@drawable/baseline_menu_book_24"
+        android:icon="@drawable/orders_icon"
         />
     <item android:title="Menu"
         android:id="@+id/menu"
-        android:icon="@drawable/baseline_menu_book_24"
+        android:icon="@drawable/menu_icon"
         />
     <item android:title="Specials"
         android:id="@+id/specials"
-        android:icon="@drawable/baseline_add_shopping_cart_24"
+        android:icon="@drawable/specials_icon"
         />
     <item android:title="Complaints"
         android:id="@+id/complaint"
-        android:icon="@drawable/baseline_back_hand_24"
+        android:icon="@drawable/complaints_icon"
         />
 </menu>
