@@ -1,6 +1,5 @@
 package com.example.mobile_computing_project.adapters
 
-import android.content.Context
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -31,12 +30,11 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
     private lateinit var tvDescription: TextView
     private lateinit var tvUser: TextView
     private lateinit var tvCreatedAt: TextView
+    private lateinit var btnResolve: Button
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val btnResolve: Button = itemView.findViewById(R.id.btn_resolve)
         fun bind(complaintItem: ComplaintItem, listener: OnBtnClickListener?){
             tvDescription.text = complaintItem.description
-            // Get username from here
             tvUser.text = "Complainant: " + complaintItem.userid
             val db = Firebase.firestore
             db.collection("Users")
@@ -61,6 +59,7 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
         tvDescription = view.findViewById(R.id.tv_description)
         tvUser = view.findViewById(R.id.tv_user)
         tvCreatedAt = view.findViewById(R.id.tv_createdAt)
+        btnResolve = view.findViewById(R.id.btn_resolve)
         return ViewHolder(view)
     }
 
