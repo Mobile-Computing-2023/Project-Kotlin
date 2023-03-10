@@ -24,8 +24,8 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(orderItem: OrderItem){
             tvName.text = orderItem.user?.name
-            tvAmount.text = "Order Total:\nRs " + orderItem.amount.toString()
-            tvStatus.text = "status: " + orderItem.status
+            tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
+            tvStatus.text = "Status: " + orderItem.status
             tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
             canteenOrderItems = orderItem.items as MutableList<CartItem>
             rvItems.adapter = CanteenOrderItemsAdapter(canteenOrderItems)
