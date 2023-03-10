@@ -9,6 +9,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.fragments.*
+import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var signedInUser: User? = null
     private lateinit var auth: FirebaseAuth
+    public var listInMainActivity: MutableList<CartItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

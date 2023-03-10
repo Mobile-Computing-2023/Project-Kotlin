@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
+import com.example.mobile_computing_project.models.CartItem
+import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -53,6 +57,23 @@ class MenuFragment : Fragment() {
         val menuItemAdapter = MenuItemAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val activity = requireActivity() as MainActivity
+        val listOfItems = activity.listInMainActivity
+        menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: MenuItem) {
+                listOfItems.add(CartItem(
+                    name = item.name,
+                    qty = 1,
+                    isVeg = item.isVeg,
+                    price = item.price
+                ))
+
+                println("Main List: " + listOfItems)
+                Toast.makeText(context, "Clicked Button: " + item.name, Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
         // For SPECIALS:
         val splMenuItemAdapter = MenuItemAdapter(specialItems)
