@@ -57,7 +57,7 @@ class CanteenMenuFragment : Fragment() {
 
         val db = Firebase.firestore
 
-        db.collection("Menu").addSnapshotListener { snapshot, error ->
+        db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i("MenuFragment", "Error when querying items", error)
             }
