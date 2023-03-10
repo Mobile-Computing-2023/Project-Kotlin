@@ -45,10 +45,11 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
                 .addOnSuccessListener {docs ->
                     for (d in docs){
                         val complainant = d.toObject<User>()
+                        println(complainant)
                         tvUser.text = "Complainant: " + complainant.name
                     }
                 }
-            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
+            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdat)
             btnResolve.setOnClickListener {
                 listener?.onBtnClick(complaintItem)
             }

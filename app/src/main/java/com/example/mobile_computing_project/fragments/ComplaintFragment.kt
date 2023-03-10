@@ -61,9 +61,9 @@ class ComplaintFragment : Fragment() {
 
 
         btnSendComplaint.setOnClickListener {
-            val complaint = ComplaintItem(userid = currUid, createdAt = System.currentTimeMillis(),
+            val complaint = ComplaintItem(userid = currUid, createdat = System.currentTimeMillis(),
                 description = etComplaintContent.text.toString())
-            db.collection("Complaints").add(complaint)
+            db.collection("Complaints2").add(complaint)
                 .addOnSuccessListener {
                 Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
             }

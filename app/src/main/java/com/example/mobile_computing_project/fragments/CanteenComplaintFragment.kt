@@ -66,7 +66,7 @@ class CanteenComplaintFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val db = Firebase.firestore
-        val menuReference = db.collection("Complaints").whereEqualTo("resolved", false)
+        val menuReference = db.collection("Complaints2").whereEqualTo("resolved", false)
         menuReference.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
