@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.ComplaintItemAdapter
-import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -66,7 +66,7 @@ class CanteenComplaintFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val db = Firebase.firestore
-        val menuReference = db.collection("Complaints2").whereEqualTo("resolved", false)
+        val menuReference = db.collection("Complaints").whereEqualTo("resolved", false).orderBy("createdAt", Query.Direction.DESCENDING)
         menuReference.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
@@ -76,9 +76,6 @@ class CanteenComplaintFragment : Fragment() {
                 complaintItems.clear()
                 complaintItems.addAll(complaintList)
                 complaintItemAdapter.notifyDataSetChanged()
-                for (item in complaintList){
-                    Log.i(TAG, "Complaint: $item")
-                }
             }
         }
     }
