@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,19 +13,34 @@ import com.example.mobile_computing_project.models.MenuItem
 
 class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
     RecyclerView.Adapter<MenuItemCanteenAdapter.ViewHolder>() {
+
+    interface OnBtnClickListener {
+        fun onBtnClick(item: MenuItem)
+    }
+    private var listener: OnBtnClickListener? = null
+
+    fun setOnBtnClickListener(listener: OnBtnClickListener) {
+        this.listener = listener
+    }
+
     private lateinit var tvName: TextView
     private lateinit var tvPrice: TextView
     private lateinit var ivVeg: ImageView
     private lateinit var tvQty: TextView
+    private lateinit var btnRemoveMenuItem: Button
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(menuItem: MenuItem){
+        fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
             tvName.text = menuItem.name
             tvPrice.text = "Rs "+ menuItem.price.toString()
             tvQty.text = "5 pcs"
             if (menuItem.isVeg){
                 val color = Color.parseColor("#049D4E")
                 ivVeg.setColorFilter(color)
+            }
+
+            btnRemoveMenuItem.setOnClickListener {
+                listener?.onBtnClick((menuItem))
             }
         }
     }
@@ -35,12 +51,13 @@ class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
         tvPrice = view.findViewById(R.id.tv_price)
         ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)
         tvQty = view.findViewById(R.id.tv_qty)
+        btnRemoveMenuItem = view.findViewById(R.id.btn_remove)
         return ViewHolder(view)
     }
 
     override fun getItemCount() = menuItems.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(menuItems[position])
+        holder.bind(menuItems[position], listener)
     }
 }
