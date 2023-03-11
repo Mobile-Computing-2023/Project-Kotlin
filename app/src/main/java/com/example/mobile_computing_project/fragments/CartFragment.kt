@@ -81,7 +81,7 @@ class CartFragment : Fragment() {
         listOfItems.forEach {
             total += it.price
         }
-        orderTotal.text = total.toString()
+        orderTotal.text = "Total Amount:     Rs " + total.toString()
 
         adaptor.setOnBtnClickListener(object: CartItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: CartItem) {
@@ -92,7 +92,7 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += it.price
                 }
-                orderTotal.text = total.toString()
+                orderTotal.text = "Total Amount:     Rs " + total.toString()
                 Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()
             }
         })
