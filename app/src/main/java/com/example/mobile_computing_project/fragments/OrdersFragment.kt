@@ -66,7 +66,7 @@ class OrdersFragment : Fragment() {
 
         val db = Firebase.firestore
 
-        db.collection("Orders").whereEqualTo("status", "pending").orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener { snapshot, error ->
+        db.collection("Orders").whereEqualTo("status", "Pending").orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
             }
