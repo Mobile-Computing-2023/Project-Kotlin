@@ -30,6 +30,45 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"/>
         </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_order_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginVertical="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+
+
+        <Button
+            android:id="@+id/btn_place_order"
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/theme"
+            android:layout_height="wrap_content"
+            android:text="Place an Order"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btn_clear_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Clear Cart"
+            android:textColor="@color/theme"
+            android:backgroundTint="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+
     </LinearLayout>
 
 </FrameLayout>

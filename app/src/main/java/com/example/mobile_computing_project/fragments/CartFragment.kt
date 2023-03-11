@@ -1,16 +1,27 @@
 package com.example.mobile_computing_project.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.CartItemAdapter
 import com.example.mobile_computing_project.models.CartItem
+import com.example.mobile_computing_project.models.OrderItem
+import com.example.mobile_computing_project.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +41,11 @@ class CartFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var orderTotal: TextView
+    private lateinit var btnPlaceOrder: Button
+    private lateinit var btnClearCart: Button
+    private var auth: FirebaseAuth = Firebase.auth
+    private var signedInUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +62,9 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cart, container, false)
         recyclerView = view.findViewById(R.id.rv_cart_items)
+        orderTotal = view.findViewById(R.id.tv_order_total)
+        btnPlaceOrder = view.findViewById(R.id.btn_place_order)
+        btnClearCart = view.findViewById(R.id.btn_clear_cart)
         return view
     }
 
@@ -57,6 +76,33 @@ class CartFragment : Fragment() {
         val adaptor = CartItemAdapter(listOfItems)
         recyclerView.adapter = adaptor
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        var total = 0
+        listOfItems.forEach {
+            total += it.price
+        }
+        orderTotal.text = total.toString()
+
+        val db = Firebase.firestore
+
+        db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
+            signedInUser = it.toObject(User::class.java)!!
+        }.addOnFailureListener {error ->
+            Log.i(TAG, "Failure in fetching current user", error)
+        }
+
+        btnPlaceOrder.setOnClickListener {
+            if(signedInUser != null && listOfItems.isNotEmpty()){
+                val order = OrderItem(items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
+                db.collection("Orders").add(order).addOnSuccessListener {
+                    Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
+                    listOfItems.clear()
+                }.addOnFailureListener {
+                    Toast.makeText(context, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
     }
 
     companion object {
