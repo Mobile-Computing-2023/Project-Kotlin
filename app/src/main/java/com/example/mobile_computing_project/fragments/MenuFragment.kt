@@ -66,21 +66,19 @@ class MenuFragment : Fragment() {
         val cartList = activity.listInMainActivity
         menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                val cartItem = CartItem(
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
+                    cartList[i].price += item.price
+                }
+                else{
+                    cartList.add(CartItem(
                         name = item.name,
                         qty = 1,
                         isVeg = item.isVeg,
                         price = item.price
-                )
-                val i = cartList.indexOfFirst { it.name == item.name }
-                if(i != -1){
-                    cartList[i].qty += 1
-                    cartList[i].price += cartItem.price
+                    ))
                 }
-                else{
-                    cartList.add(cartItem)
-                }
-
                 Toast.makeText(context, "Added " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
             }
 
