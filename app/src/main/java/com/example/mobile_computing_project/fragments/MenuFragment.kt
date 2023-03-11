@@ -84,6 +84,25 @@ class MenuFragment : Fragment() {
 
         })
 
+        splMenuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
+                    cartList[i].price += item.price
+                }
+                else{
+                    cartList.add(CartItem(
+                        name = item.name,
+                        qty = 1,
+                        isVeg = item.isVeg,
+                        price = item.price
+                    ))
+                }
+                Toast.makeText(context, "Added Spl " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         val db = Firebase.firestore
         db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
