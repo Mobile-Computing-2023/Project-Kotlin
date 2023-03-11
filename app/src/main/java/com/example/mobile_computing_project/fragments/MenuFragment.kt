@@ -54,6 +54,10 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val splMenuItemAdapter = MenuItemAdapter(specialItems)
+        splRecyclerView.adapter = splMenuItemAdapter
+        splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         val menuItemAdapter = MenuItemAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -97,14 +101,8 @@ class MenuFragment : Fragment() {
 
         })
 
-        // For SPECIALS:
-        val splMenuItemAdapter = MenuItemAdapter(specialItems)
-        splRecyclerView.adapter = splMenuItemAdapter
-        splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         val db = Firebase.firestore
-        val menuReference = db.collection("Menu")
-        menuReference.addSnapshotListener { snapshot, error ->
+        db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i("MenuFragment", "Error when querying items", error)
             }
@@ -113,6 +111,18 @@ class MenuFragment : Fragment() {
                 menuItems.clear()
                 menuItems.addAll(menuList)
                 menuItemAdapter.notifyDataSetChanged()
+            }
+        }
+
+        db.collection("Menu").whereEqualTo("special", true).addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i("MenuFragment", "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val specialList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
+                specialItems.clear()
+                specialItems.addAll(specialList)
+                splMenuItemAdapter.notifyDataSetChanged()
             }
         }
     }
