@@ -15,6 +15,7 @@ import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.UUID
 
 private const val TAG = "ComplaintFragment"
 
@@ -67,9 +68,9 @@ class ComplaintFragment : Fragment() {
 
         btnSendComplaint.setOnClickListener {
             if(signedInUser != null){
-                val complaint = ComplaintItem(user = signedInUser, createdAt = System.currentTimeMillis(),
+                val complaint = ComplaintItem(cid = UUID.randomUUID().toString(), user = signedInUser, createdAt = System.currentTimeMillis(),
                     description = etComplaintDesc.text.toString())
-                db.collection("Complaints").add(complaint)
+                db.collection("Complaints").document(complaint.cid).set(complaint)
                     .addOnSuccessListener {
                         Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
                         etComplaintDesc.text.clear()

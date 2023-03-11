@@ -75,6 +75,7 @@ class CanteenComplaintFragment : Fragment() {
                 complaintItems.clear()
                 complaintItems.addAll(complaintList)
                 complaintItemAdapter.notifyDataSetChanged()
+                println(complaintList)
             }
         }
     }
@@ -83,6 +84,9 @@ class CanteenComplaintFragment : Fragment() {
         val db = Firebase.firestore
         db.collection("Complaints").document(complaintItem.cid).update("resolved", true).addOnSuccessListener {
             Toast.makeText(context, "Complaint Resolved", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            println(it.message)
+            Toast.makeText(context, "Some error while resolving complaint", Toast.LENGTH_SHORT).show()
         }
     }
 
