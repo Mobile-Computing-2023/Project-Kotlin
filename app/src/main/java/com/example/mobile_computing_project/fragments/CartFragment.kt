@@ -108,6 +108,14 @@ class CartFragment : Fragment() {
             }
         }
 
+        btnClearCart.setOnClickListener {
+            listOfItems.clear()
+            orderTotal.text = null
+            val newAdapter = CartItemAdapter(listOfItems)
+            recyclerView.adapter = newAdapter
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
+
     }
 
     companion object {
