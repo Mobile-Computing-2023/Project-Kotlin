@@ -23,7 +23,7 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
         fun bind(cartItem: CartItem){
             tvName.text = cartItem.name
             tvPrice.text = "Rs "+ cartItem.price.toString()
-            tvQty.text = cartItem.qty.toString()
+            tvQty.text = "Qty: "+ cartItem.qty.toString()
             if (cartItem.isVeg){
                 val color = Color.parseColor("#049D4E")
                 ivVeg.setColorFilter(color)
