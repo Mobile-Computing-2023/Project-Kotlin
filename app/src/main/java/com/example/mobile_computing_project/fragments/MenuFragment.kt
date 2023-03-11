@@ -63,40 +63,24 @@ class MenuFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val activity = requireActivity() as MainActivity
-        val listOfItems = activity.listInMainActivity
+        val cartList = activity.listInMainActivity
         menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                if (listOfItems.size == 0){
-                    listOfItems.add(CartItem(
+                val cartItem = CartItem(
                         name = item.name,
                         qty = 1,
                         isVeg = item.isVeg,
                         price = item.price
-                    ))
+                )
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
                 }
-
                 else{
-                    var added = false
-                    for (i in listOfItems){
-                        if (!added && i.name == item.name){
-                            i.qty+=1
-                            i.price+=item.price
-                            added = true
-                        }
-                    }
-
-                    if (!added){
-                        listOfItems.add(CartItem(
-                            name = item.name,
-                            qty = 1,
-                            isVeg = item.isVeg,
-                            price = item.price
-                        ))
-                    }
+                    cartList.add(cartItem)
                 }
 
-                println("Main List: " + listOfItems)
-                Toast.makeText(context, "Clicked Button: " + item.name, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Added " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
             }
 
         })
