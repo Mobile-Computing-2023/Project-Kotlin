@@ -56,9 +56,8 @@ class CanteenComplaintFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val complaintItemAdapter = ComplaintItemAdapter(complaintItems)
         complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemAdapter.OnBtnClickListener{
-            override fun onBtnClick(complaintItem: ComplaintItem) {
-                Toast.makeText(context, "Clicked Button", Toast.LENGTH_SHORT).show()
-                println(complaintItem)
+            override fun onBtnClick(item: ComplaintItem) {
+                resolveComplaint(item)
             }
 
         })
@@ -77,6 +76,13 @@ class CanteenComplaintFragment : Fragment() {
                 complaintItems.addAll(complaintList)
                 complaintItemAdapter.notifyDataSetChanged()
             }
+        }
+    }
+
+    private fun resolveComplaint(complaintItem: ComplaintItem){
+        val db = Firebase.firestore
+        db.collection("Complaints").document(complaintItem.cid).update("resolved", true).addOnSuccessListener {
+            Toast.makeText(context, "Complaint Resolved", Toast.LENGTH_SHORT).show()
         }
     }
 
