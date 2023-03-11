@@ -75,6 +75,7 @@ class MenuFragment : Fragment() {
                 val i = cartList.indexOfFirst { it.name == item.name }
                 if(i != -1){
                     cartList[i].qty += 1
+                    cartList[i].price += cartItem.price
                 }
                 else{
                     cartList.add(cartItem)
