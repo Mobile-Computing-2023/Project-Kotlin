@@ -97,6 +97,11 @@ class CartFragment : Fragment() {
                 db.collection("Orders").add(order).addOnSuccessListener {
                     Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
                     listOfItems.clear()
+                    orderTotal.text = null
+                    val newAdapter = CartItemAdapter(listOfItems)
+                    recyclerView.adapter = newAdapter
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
                 }.addOnFailureListener {
                     Toast.makeText(context, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
                 }
