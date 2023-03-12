@@ -58,19 +58,18 @@ class CanteenMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val db = Firebase.firestore
+
         val menuItemAdapter = MenuItemCanteenAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         menuItemAdapter.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                // Add utility for removing item here
-                Toast.makeText(context, "Removing ${item.name} from menu", Toast.LENGTH_SHORT).show()
+                removeItemFromMenu(item)
             }
 
         })
-
-        val db = Firebase.firestore
 
         db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
@@ -80,7 +79,6 @@ class CanteenMenuFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
-                println(menuList)
                 menuItemAdapter.notifyDataSetChanged()
             }
         }
@@ -92,6 +90,15 @@ class CanteenMenuFragment : Fragment() {
             addItemFragment.arguments = args
             addItemFragment.show(childFragmentManager, "popup")
             Toast.makeText(context, "Add a new item to menu now", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun removeItemFromMenu(menuItem: MenuItem){
+        val db = Firebase.firestore
+        db.collection("Menu").document(menuItem.mid).delete().addOnSuccessListener {
+            Toast.makeText(context, "Removed ${menuItem.name} from Menu", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(context, "There was some error in removing ${menuItem.name} from Menu", Toast.LENGTH_SHORT).show()
         }
     }
 
