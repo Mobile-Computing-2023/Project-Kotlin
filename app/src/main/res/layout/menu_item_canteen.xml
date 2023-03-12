@@ -76,6 +76,6 @@
         android:layout_height="0.5dp"
         android:layout_below="@+id/menu_item_canteen_image"
         android:layout_marginTop="0dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/light_grey" />
 
 </RelativeLayout>
