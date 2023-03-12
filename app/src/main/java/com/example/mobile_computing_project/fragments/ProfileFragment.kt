@@ -77,7 +77,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
-        var orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
+        val orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
         recyclerView.adapter = orderHistoryItemsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

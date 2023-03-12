@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
@@ -14,6 +17,7 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
+import com.example.mobile_computing_project.models.OrderItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -32,6 +36,8 @@ class MenuFragment : Fragment() {
     private lateinit var splRecyclerView: RecyclerView
     private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
     private var specialItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
+    private lateinit var tvRushText: TextView
+    private lateinit var ivRushGraph: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +54,8 @@ class MenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
         recyclerView = view.findViewById(R.id.rv_menu_items)
         splRecyclerView = view.findViewById(R.id.rv_spl_menu_items)
+        tvRushText = view.findViewById(R.id.tv_rush_text)
+        ivRushGraph = view.findViewById(R.id.iv_rush_graph)
         return view
     }
 
@@ -84,6 +92,25 @@ class MenuFragment : Fragment() {
 
         })
 
+        splMenuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
+                    cartList[i].price += item.price
+                }
+                else{
+                    cartList.add(CartItem(
+                        name = item.name,
+                        qty = 1,
+                        isVeg = item.isVeg,
+                        price = item.price
+                    ))
+                }
+                Toast.makeText(context, "Added Spl " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         val db = Firebase.firestore
         db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
@@ -106,6 +133,25 @@ class MenuFragment : Fragment() {
                 specialItems.clear()
                 specialItems.addAll(specialList)
                 splMenuItemAdapter.notifyDataSetChanged()
+            }
+        }
+
+        db.collection("Orders").addSnapshotListener { value, error ->
+            if(error != null || value== null){
+                Log.i("MenuFragment", "Error when querying items", error)
+            }
+            if (value != null) {
+                val orderList = value.size()
+                if (orderList < 10){
+                    tvRushText.text = "Low"
+                    val drawable = context?.let { ContextCompat.getDrawable(it, R.drawable.rush_low) }
+                    ivRushGraph.setImageDrawable(drawable)
+                }
+                else{
+                    tvRushText.text = "High"
+                    val drawable = context?.let { ContextCompat.getDrawable(it, R.drawable.rush_high) }
+                    ivRushGraph.setImageDrawable(drawable)
+                }
             }
         }
     }

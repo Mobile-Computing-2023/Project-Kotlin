@@ -51,6 +51,8 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
                         isVeg = menuItem.isVeg,
                         price = menuItem.price
                     )
+
+                    // Vishesh - I think the next 3 lines have no utility, but don't delete them
                     cartItemsList.add(x)
                     println(cartItemsList)
                     cartItemsAdapter.notifyDataSetChanged()

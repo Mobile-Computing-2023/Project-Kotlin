@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
@@ -64,6 +65,13 @@ class OrdersFragment : Fragment() {
         recyclerView.adapter = orderItemsAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        orderItemsAdapter.setOnBtnClickListener(object: OrderItemCanteenAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: OrderItem) {
+                // Add utility for Marking Order Complete here
+                Toast.makeText(context, "Order Marked as complete", Toast.LENGTH_SHORT).show()
+            }
+
+        })
         val db = Firebase.firestore
 
         db.collection("Orders").whereEqualTo("status", "Pending").orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener { snapshot, error ->

@@ -81,7 +81,21 @@ class CartFragment : Fragment() {
         listOfItems.forEach {
             total += it.price
         }
-        orderTotal.text = total.toString()
+        orderTotal.text = "Total Amount:     Rs " + total.toString()
+
+        adaptor.setOnBtnClickListener(object: CartItemAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: CartItem) {
+                listOfItems.remove(item)
+                total -= (item.price*item.qty)
+                adaptor.notifyDataSetChanged()
+                total = 0
+                listOfItems.forEach {
+                    total += it.price
+                }
+                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()
+            }
+        })
 
         val db = Firebase.firestore
 

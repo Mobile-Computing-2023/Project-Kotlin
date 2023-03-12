@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemCanteenAdapter
+import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -29,6 +33,8 @@ class CanteenMenuFragment : Fragment() {
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
     private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
+    private lateinit var btnAddItemToMenu: Button
+    private val isSpl = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,7 @@ class CanteenMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_canteen_menu, container, false)
         recyclerView = view.findViewById(R.id.rv_menu_items)
+        btnAddItemToMenu = view.findViewById(R.id.btn_add_item_to_menu)
         return view
     }
 
@@ -54,6 +61,14 @@ class CanteenMenuFragment : Fragment() {
         val menuItemAdapter = MenuItemCanteenAdapter(menuItems)
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        menuItemAdapter.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
+            override fun onBtnClick(item: MenuItem) {
+                // Add utility for removing item here
+                Toast.makeText(context, "Removing ${item.name} from menu", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
         val db = Firebase.firestore
 
@@ -65,8 +80,18 @@ class CanteenMenuFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
+                println(menuList)
                 menuItemAdapter.notifyDataSetChanged()
             }
+        }
+
+        btnAddItemToMenu.setOnClickListener {
+            val addItemFragment = AddMenuItemFragment()
+            val args = Bundle()
+            args.putBoolean("isSpl", isSpl)
+            addItemFragment.arguments = args
+            addItemFragment.show(childFragmentManager, "popup")
+            Toast.makeText(context, "Add a new item to menu now", Toast.LENGTH_SHORT).show()
         }
     }
 

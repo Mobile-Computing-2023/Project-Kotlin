@@ -79,28 +79,39 @@
         android:textSize="16sp"
         android:inputType="numberDecimal"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="16dp">-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_non_veg"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/semi_bold"-->
+<!--            android:text="Non-veg"/>-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_veg"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Veg"-->
+<!--            android:fontFamily="@font/semi_bold"-->
+<!--            android:layout_marginStart="16dp"/>-->
+
+<!--    </LinearLayout>-->
+
+    <ToggleButton
+        android:id="@+id/tb_veg_nonveg"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
-
-        <RadioButton
-            android:id="@+id/rb_non_veg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/semi_bold"
-            android:text="Non-veg"/>
-
-        <RadioButton
-            android:id="@+id/rb_veg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Veg"
-            android:fontFamily="@font/semi_bold"
-            android:layout_marginStart="16dp"/>
-
-    </LinearLayout>
+        android:textOff="Veg"
+        android:background="@color/veg"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textOn="Non Veg"/>
 
     <Button
         android:id="@+id/btn_choose_file"
@@ -109,6 +120,7 @@
         android:layout_marginTop="16dp"
         android:textAllCaps="false"
         android:fontFamily="@font/semi_bold"
+        android:textColor="@color/white"
         android:text="Choose File"/>
 
     <LinearLayout
@@ -123,6 +135,7 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:fontFamily="@font/semi_bold"
+            android:textColor="@color/white"
             android:text="Add Item"/>
 
         <Button
@@ -132,6 +145,8 @@
             android:layout_marginTop="8dp"
             android:textAllCaps="false"
             android:fontFamily="@font/semi_bold"
+            android:textColor="@color/theme"
+            android:backgroundTint="@color/white"
             android:text="Dismiss"/>
 
     </LinearLayout>

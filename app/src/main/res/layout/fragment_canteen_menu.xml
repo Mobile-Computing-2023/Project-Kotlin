@@ -8,18 +8,33 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="Menu" />
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="Your Menu" />
+
+        <Button
+            android:id="@+id/btn_add_item_to_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Item"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
