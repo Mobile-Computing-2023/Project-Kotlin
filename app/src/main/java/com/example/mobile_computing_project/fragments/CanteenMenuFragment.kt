@@ -68,7 +68,6 @@ class CanteenMenuFragment : Fragment() {
             override fun onBtnClick(item: MenuItem) {
                 removeItemFromMenu(item)
             }
-
         })
 
         db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
@@ -79,6 +78,7 @@ class CanteenMenuFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
+                println(menuList)
                 menuItemAdapter.notifyDataSetChanged()
             }
         }

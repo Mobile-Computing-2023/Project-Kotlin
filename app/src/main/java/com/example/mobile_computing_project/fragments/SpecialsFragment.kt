@@ -64,10 +64,8 @@ class SpecialsFragment : Fragment() {
 
         menuItemAdapter.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                // Add utility for removing item here
-                Toast.makeText(context, "Removing SPL ${item.name} from menu", Toast.LENGTH_SHORT).show()
+                removeItemFromMenu(item)
             }
-
         })
 
         val db = Firebase.firestore
@@ -91,6 +89,15 @@ class SpecialsFragment : Fragment() {
             addItemFragment.arguments = args
             addItemFragment.show(childFragmentManager, "spl_popup")
             Toast.makeText(context, "Add a new spl item to menu now", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun removeItemFromMenu(menuItem: MenuItem){
+        val db = Firebase.firestore
+        db.collection("Menu").document(menuItem.mid).delete().addOnSuccessListener {
+            Toast.makeText(context, "Removed ${menuItem.name} from Specials", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(context, "There was some error in removing ${menuItem.name} from Specials", Toast.LENGTH_SHORT).show()
         }
     }
 
