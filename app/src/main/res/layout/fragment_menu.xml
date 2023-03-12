@@ -26,6 +26,7 @@
                 android:textStyle="bold"
                 android:text="Rush: " />
             <TextView
+                android:id="@+id/tv_rush_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -33,6 +34,7 @@
                 android:textStyle="bold"
                 android:text="High" />
             <ImageView
+                android:id="@+id/iv_rush_graph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
