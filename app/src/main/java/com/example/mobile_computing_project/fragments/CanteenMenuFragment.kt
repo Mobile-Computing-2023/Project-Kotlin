@@ -34,6 +34,7 @@ class CanteenMenuFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
     private lateinit var btnAddItemToMenu: Button
+    private val isSpl = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,12 +80,16 @@ class CanteenMenuFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
+                println(menuList)
                 menuItemAdapter.notifyDataSetChanged()
             }
         }
 
         btnAddItemToMenu.setOnClickListener {
             val addItemFragment = AddMenuItemFragment()
+            val args = Bundle()
+            args.putBoolean("isSpl", isSpl)
+            addItemFragment.arguments = args
             addItemFragment.show(childFragmentManager, "popup")
             Toast.makeText(context, "Add a new item to menu now", Toast.LENGTH_SHORT).show()
         }
