@@ -67,11 +67,10 @@ class OrdersFragment : Fragment() {
 
         orderItemsAdapter.setOnBtnClickListener(object: OrderItemCanteenAdapter.OnBtnClickListener {
             override fun onBtnClick(item: OrderItem) {
-                // Add utility for Marking Order Complete here
-                Toast.makeText(context, "Order Marked as complete", Toast.LENGTH_SHORT).show()
+                markOrderAsComplete(item)
             }
-
         })
+
         val db = Firebase.firestore
 
         db.collection("Orders").whereEqualTo("status", "Pending").orderBy("createdAt", Query.Direction.DESCENDING).addSnapshotListener { snapshot, error ->
@@ -85,6 +84,17 @@ class OrdersFragment : Fragment() {
                 orderItemsAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    private fun markOrderAsComplete(orderItem: OrderItem){
+        val db = Firebase.firestore
+        db.collection("Orders").document(orderItem.oid).update("status", "Completed")
+            .addOnSuccessListener {
+                Toast.makeText(context, "Order Completed", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "There was some error in completing order", Toast.LENGTH_SHORT).show()
+            }
     }
 
     companion object {
