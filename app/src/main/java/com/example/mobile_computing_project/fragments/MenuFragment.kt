@@ -114,6 +114,9 @@ class MenuFragment : Fragment() {
         })
 
         val db = Firebase.firestore
+
+        fetchRush()
+
         db.collection("Menu").whereEqualTo("special", false).addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i("MenuFragment", "Error when querying items", error)
@@ -137,7 +140,10 @@ class MenuFragment : Fragment() {
                 splMenuItemAdapter.notifyDataSetChanged()
             }
         }
+    }
 
+    private fun fetchRush(){
+        val db = Firebase.firestore
         db.collection("Orders").addSnapshotListener { value, error ->
             if(error != null || value== null){
                 Log.i("MenuFragment", "Error when querying items", error)
