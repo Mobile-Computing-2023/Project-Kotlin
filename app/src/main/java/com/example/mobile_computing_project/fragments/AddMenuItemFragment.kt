@@ -51,13 +51,11 @@ class AddMenuItemFragment: DialogFragment() {
 
         btnConfirmAddItem.setOnClickListener {
             val db  = Firebase.firestore
-//            val data = hashMapOf<String, Any>(
-//                "name" as
-//            )
             val mItem = MenuItem(
                 name = etItemName.text.toString(),
                 price = etItemPrice.text.toString().toInt(),
-                isVeg = tbVeg.isChecked.not()
+                isVeg = tbVeg.isChecked.not(),
+                special = isSpl
             )
             db.collection("Menu")
                 .add(mItem)
