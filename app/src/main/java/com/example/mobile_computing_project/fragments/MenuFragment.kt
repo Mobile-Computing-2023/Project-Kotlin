@@ -20,6 +20,7 @@ import com.example.mobile_computing_project.models.MenuItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.type.Color
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,6 +73,7 @@ class MenuFragment : Fragment() {
 
         val activity = requireActivity() as MainActivity
         val cartList = activity.listInMainActivity
+
         menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.name == item.name }
@@ -144,6 +146,7 @@ class MenuFragment : Fragment() {
                 val orderList = value.size()
                 if (orderList < 10){
                     tvRushText.text = "Low"
+                    tvRushText.setTextColor(android.graphics.Color.parseColor("#049D4E"))
                     val drawable = context?.let { ContextCompat.getDrawable(it, R.drawable.rush_low) }
                     ivRushGraph.setImageDrawable(drawable)
                 }
