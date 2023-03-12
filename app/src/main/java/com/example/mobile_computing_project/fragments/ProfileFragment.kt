@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = orderHistoryItemsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "completed")
+        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed")
         orderHistoryRef.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
@@ -91,9 +91,6 @@ class ProfileFragment : Fragment() {
                 orderHistoryItems.clear()
                 orderHistoryItems.addAll(orderHistoryList)
                 orderHistoryItemsAdapter.notifyDataSetChanged()
-                for (item in orderHistoryList){
-                    Log.i("MenuFragment", "Item $item")
-                }
             }
         }
     }
