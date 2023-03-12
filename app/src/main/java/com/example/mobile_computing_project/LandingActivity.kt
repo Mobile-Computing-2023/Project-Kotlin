@@ -25,9 +25,9 @@ class LandingActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        if (auth.currentUser != null) {
-            goToMainActivity()
-        }
+//        if (auth.currentUser != null) {
+//            goToMainActivity()
+//        }
 
         binding = ActivityLandingBinding.inflate(layoutInflater)
         val view = binding.root
