@@ -14,7 +14,7 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlin.properties.Delegates
+import java.util.UUID
 
 class AddMenuItemFragment: DialogFragment() {
     private lateinit var btnDismiss: Button
@@ -50,22 +50,14 @@ class AddMenuItemFragment: DialogFragment() {
         }
 
         btnConfirmAddItem.setOnClickListener {
-            val db  = Firebase.firestore
-            val mItem = MenuItem(
+            val menuItem = MenuItem(
+                mid = UUID.randomUUID().toString(),
                 name = etItemName.text.toString(),
                 price = etItemPrice.text.toString().toInt(),
                 isVeg = tbVeg.isChecked.not(),
                 special = isSpl
             )
-            db.collection("Menu")
-                .add(mItem)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Added new $isSpl special = $isSpl item to menu!", Toast.LENGTH_SHORT).show()
-                    dismiss()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Failed to add new $isSpl special = $isSpl item to menu!", Toast.LENGTH_SHORT).show()
-                }
+            addItemToMenu(menuItem)
         }
 
         tbVeg.setOnCheckedChangeListener { _, isChecked ->
@@ -75,6 +67,17 @@ class AddMenuItemFragment: DialogFragment() {
                 tbVeg.setBackgroundColor(resources.getColor(R.color.veg))
             }
         }
+    }
 
+    private fun addItemToMenu(menuItem: MenuItem){
+        val db  = Firebase.firestore
+        db.collection("Menu").document(menuItem.mid).set(menuItem)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Added Item", Toast.LENGTH_SHORT).show()
+                dismiss()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "There was some error while adding item", Toast.LENGTH_SHORT).show()
+            }
     }
 }
