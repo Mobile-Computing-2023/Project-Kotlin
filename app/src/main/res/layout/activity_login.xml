@@ -103,7 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/theme"
-        android:text="login"
+        android:text="Login"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="5dp" />
@@ -114,7 +115,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/theme"
-        android:text="sign up"
+        android:text="Sign Up"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="5dp" />

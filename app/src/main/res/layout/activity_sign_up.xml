@@ -122,10 +122,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/theme"
-        android:text="sign up"
+        android:text="Sign Up"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="5dp"
+        android:textAllCaps="false"
         />
 
 </LinearLayout>
