@@ -28,9 +28,6 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false">
         </activity>
