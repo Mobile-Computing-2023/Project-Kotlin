@@ -31,7 +31,7 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(complaintItem: ComplaintItem, listener: OnBtnClickListener?){
             tvDescription.text = complaintItem.description
-            tvUser.text = "Complainant: " + complaintItem.user?.name
+            tvUser.text = "Complainant: " + complaintItem.user?.name?.capitalize()
             tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
             btnResolve.setOnClickListener {
                 listener?.onBtnClick(complaintItem)

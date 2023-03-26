@@ -33,7 +33,7 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(cartItem: CartItem, listener: OnBtnClickListener?){
-            tvName.text = cartItem.name
+            tvName.text = cartItem.name.capitalize()
             tvPrice.text = "Rs "+ cartItem.price.toString()
             tvQty.text = "Qty: "+ cartItem.qty.toString()
             if (cartItem.isVeg){

@@ -18,7 +18,7 @@ class CanteenOrderItemsAdapter (private val cartItems: List<CartItem>):
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(cartItem: CartItem){
-            tvName.text = cartItem.name
+            tvName.text = cartItem.name.capitalize()
             tvQty.text = cartItem.qty.toString()
             if (cartItem.isVeg){
                 val color = Color.parseColor("#049D4E")

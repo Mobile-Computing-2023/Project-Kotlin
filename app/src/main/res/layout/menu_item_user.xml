@@ -8,10 +8,10 @@
     <ImageView
         android:id="@+id/menu_item_image"
         android:background="@drawable/edit_text_boundary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:src="@drawable/chicken_tikka_img"
-        android:layout_marginStart="10dp"/>
+        />
 
     <ImageView
         android:id="@+id/veg_nonveg_symbol"
@@ -20,7 +20,7 @@
         android:layout_toEndOf="@+id/menu_item_image"
         android:src="@drawable/non_veg_symbol"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="4dp"/>
 
     <TextView
         android:id="@+id/name"
@@ -28,8 +28,10 @@
         android:layout_toEndOf="@+id/menu_item_image"
         android:layout_below="@+id/veg_nonveg_symbol"
         android:text="ITEM"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/semi_bold"
         android:layout_height="wrap_content"/>
@@ -42,6 +44,7 @@
         android:layout_below="@+id/name"
         android:layout_marginStart="10dp"
         android:text="Rs 10"
+        android:fontFamily="@font/semi_bold"
         android:textSize="12sp"/>
 
     <TextView
@@ -52,6 +55,7 @@
         android:layout_below="@+id/menu_item_price"
         android:layout_marginLeft="10dp"
         android:text="5 pcs"
+        android:fontFamily="@font/semi_bold"
         android:textSize="12sp"/>
 
     <Button
@@ -60,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="20dp"
         android:text="+Add"
         android:shadowColor="@android:color/holo_blue_bright"
         android:backgroundTint="@color/white"

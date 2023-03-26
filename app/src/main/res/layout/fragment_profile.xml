@@ -10,12 +10,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <include
             android:id="@+id/frag_profile_card"
             layout="@layout/profile_card"
             android:layout_marginVertical="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -26,7 +27,7 @@
             android:textColor="@color/black"
             android:layout_below="@+id/frag_profile_card"
             android:layout_marginTop="15dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:text="Order History"/>
 
         <ScrollView

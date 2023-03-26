@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center_horizontal"
+    android:id="@+id/my_card_view"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_margin="16dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="10dp"
+    android:shadowColor="@android:color/holo_blue_bright"
+    >
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/my_card_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:shadowColor="@android:color/holo_blue_bright"
-        android:backgroundTint="@color/white"
-        android:elevation="8dp"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="10dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
             >
 
             <TextView
                 android:id="@+id/tv_my_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginBottom="20dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
                 android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="HardcodedText" />
+                android:paddingLeft="0dp"
+                android:paddingBottom="4dp"
+                android:fontFamily="@font/semi_bold"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText"
+                />
 
             <TextView
                 android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="35dp"
-                android:textStyle="bold"
+                android:textSize="16sp"
+                android:paddingLeft="0dp"
+                android:fontFamily="@font/regular"
                 android:textColor="@color/theme"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                tools:ignore="HardcodedText"
+                />
 
-            <ImageView
-                android:id="@+id/iv_profile_pic"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/default_profile_pic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginRight="10dp"/>
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/iv_profile_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/profile"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"/>
 
-</RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
