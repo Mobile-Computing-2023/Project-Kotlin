@@ -35,7 +35,7 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
-                tvName.text = menuItem.name
+                tvName.text = menuItem.name.capitalize()
                 tvPrice.text = "Rs "+ menuItem.price.toString()
                 tvQty.text = "5 pcs"
                 if (menuItem.isVeg){
