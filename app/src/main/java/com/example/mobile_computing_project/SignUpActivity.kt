@@ -61,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
                     }
                     val userModel  = User(uid, name, email)
                     db.collection("Users").document(uid).set(userModel)
-                    goToProfileActivity()
+                    goToMainActivity()
                 }
                 else {
                     binding.btnSignup.isEnabled = true
@@ -71,9 +71,9 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
-    private fun goToProfileActivity(){
-        Log.i(TAG, "goToProfileActivity")
-        val intent = Intent(this, ProfileActivity::class.java)
+    private fun goToMainActivity(){
+        Log.i(TAG, "goToMainActivity")
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
