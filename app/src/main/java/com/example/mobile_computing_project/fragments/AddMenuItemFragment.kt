@@ -37,7 +37,6 @@ class AddMenuItemFragment: DialogFragment() {
         btnConfirmAddItem = view.findViewById(R.id.btn_add_item)
         etItemName = view.findViewById(R.id.et_name)
         etItemPrice = view.findViewById(R.id.et_price)
-        etItemServingSize = view.findViewById(R.id.et_serving_size)
         tbVeg = view.findViewById(R.id.tb_veg_nonveg)
         isSpl = requireArguments().getBoolean("isSpl", false)
         return view

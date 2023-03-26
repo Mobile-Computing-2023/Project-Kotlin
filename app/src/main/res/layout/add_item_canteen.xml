@@ -58,26 +58,6 @@
         android:textSize="16sp"
         android:inputType="numberDecimal"/>
 
-    <TextView
-        android:id="@+id/tv_serving_size"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Serving Size / Qty of Item"
-        android:textColor="@color/black"
-        android:fontFamily="@font/semi_bold"
-        android:textSize="18sp"/>
-
-    <EditText
-        android:id="@+id/et_serving_size"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edit_text_boundary"
-        android:hint="Serving size"
-        android:padding="8dp"
-        android:textSize="16sp"
-        android:inputType="numberDecimal"/>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
