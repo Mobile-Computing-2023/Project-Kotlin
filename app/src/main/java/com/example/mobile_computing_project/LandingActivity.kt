@@ -48,10 +48,4 @@ class LandingActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun goToMainActivity(){
-        Log.i(TAG, "goToMainActivity")
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 }
