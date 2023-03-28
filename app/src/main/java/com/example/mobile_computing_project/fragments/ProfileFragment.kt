@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = orderHistoryItemsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed")
+        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
         orderHistoryRef.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
