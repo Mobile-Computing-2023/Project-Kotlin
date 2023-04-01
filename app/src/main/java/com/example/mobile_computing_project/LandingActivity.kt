@@ -25,9 +25,9 @@ class LandingActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-//        if (auth.currentUser != null) {
-//            goToMainActivity()
-//        }
+        if (auth.currentUser != null) {
+            goToMainActivity()
+        }
 
         binding = ActivityLandingBinding.inflate(layoutInflater)
         val view = binding.root
@@ -47,5 +47,12 @@ class LandingActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+    }
+    private fun goToMainActivity(){
+        Log.i(TAG, "goToMainActivity")
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

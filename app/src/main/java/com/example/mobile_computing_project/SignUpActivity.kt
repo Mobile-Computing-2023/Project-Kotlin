@@ -30,9 +30,9 @@ class SignUpActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-//        if (auth.currentUser != null) {
-//            goToProfileActivity()
-//        }
+        if (auth.currentUser != null) {
+            goToMainActivity()
+        }
 
         binding.btnSignup.setOnClickListener {
             binding.btnSignup.isEnabled = false

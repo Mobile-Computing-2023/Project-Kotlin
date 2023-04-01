@@ -34,9 +34,9 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-//        if (auth.currentUser != null) {
-//            goToMainActivity()
-//        }
+        if (auth.currentUser != null) {
+            goToMainActivity()
+        }
 
         binding.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
