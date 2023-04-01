@@ -60,11 +60,11 @@ class CanteenMenuFragment : Fragment() {
 
         val db = Firebase.firestore
 
-        val menuItemAdapter = MenuItemCanteenAdapter(menuItems)
+        val menuItemAdapter = context?.let { MenuItemCanteenAdapter(context = it, menuItems = menuItems) }
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        menuItemAdapter.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
+        menuItemAdapter?.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 removeItemFromMenu(item)
             }
@@ -79,7 +79,7 @@ class CanteenMenuFragment : Fragment() {
                 menuItems.clear()
                 menuItems.addAll(menuList)
                 println(menuList)
-                menuItemAdapter.notifyDataSetChanged()
+                menuItemAdapter?.notifyDataSetChanged()
             }
         }
 

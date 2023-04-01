@@ -6,7 +6,7 @@
     >
 
     <ImageView
-        android:id="@+id/menu_item_canteen_image"
+        android:id="@+id/iv_img_src"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/edit_text_boundary"

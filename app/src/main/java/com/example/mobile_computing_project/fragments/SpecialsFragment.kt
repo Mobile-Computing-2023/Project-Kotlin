@@ -58,11 +58,11 @@ class SpecialsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuItemAdapter = MenuItemCanteenAdapter(menuItems)
+        val menuItemAdapter = context?.let { MenuItemCanteenAdapter(context = it, menuItems = menuItems) }
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        menuItemAdapter.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
+        menuItemAdapter?.setOnBtnClickListener(object: MenuItemCanteenAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 removeItemFromMenu(item)
             }
@@ -78,7 +78,7 @@ class SpecialsFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
-                menuItemAdapter.notifyDataSetChanged()
+                menuItemAdapter?.notifyDataSetChanged()
             }
         }
 

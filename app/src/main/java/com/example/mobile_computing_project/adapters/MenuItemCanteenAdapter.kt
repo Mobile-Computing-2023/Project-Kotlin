@@ -1,5 +1,6 @@
 package com.example.mobile_computing_project.adapters
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.MenuItem
 
-class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
+class MenuItemCanteenAdapter(private val context: Context, private val menuItems: List<MenuItem>):
     RecyclerView.Adapter<MenuItemCanteenAdapter.ViewHolder>() {
 
     interface OnBtnClickListener {
@@ -28,6 +30,7 @@ class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
     private lateinit var ivVeg: ImageView
     private lateinit var tvQty: TextView
     private lateinit var btnRemoveMenuItem: Button
+    private lateinit var ivImgSrc: ImageView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
@@ -38,7 +41,7 @@ class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
                 val color = Color.parseColor("#049D4E")
                 ivVeg.setColorFilter(color)
             }
-
+            Glide.with(context).load(menuItem.imgSrc).into(ivImgSrc)
             btnRemoveMenuItem.setOnClickListener {
                 listener?.onBtnClick((menuItem))
             }
@@ -51,6 +54,7 @@ class MenuItemCanteenAdapter(private val menuItems: List<MenuItem>):
         tvPrice = view.findViewById(R.id.tv_price)
         ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)
         tvQty = view.findViewById(R.id.tv_qty)
+        ivImgSrc = view.findViewById(R.id.iv_img_src)
         btnRemoveMenuItem = view.findViewById(R.id.btn_remove)
         return ViewHolder(view)
     }
