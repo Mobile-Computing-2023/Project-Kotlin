@@ -93,6 +93,13 @@
         android:textStyle="bold"
         android:textOn="Non Veg"/>
 
+    <ImageView
+        android:id="@+id/iv_img_src"
+        android:maxWidth="250dp"
+        android:maxHeight="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btn_choose_file"
         android:layout_width="wrap_content"
