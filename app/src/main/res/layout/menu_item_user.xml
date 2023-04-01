@@ -6,7 +6,7 @@
     android:layout_marginVertical="10dp">
 
     <ImageView
-        android:id="@+id/menu_item_image"
+        android:id="@+id/iv_img_src"
         android:background="@drawable/edit_text_boundary"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -17,7 +17,7 @@
         android:id="@+id/veg_nonveg_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/menu_item_image"
+        android:layout_toEndOf="@+id/iv_img_src"
         android:src="@drawable/non_veg_symbol"
         android:layout_marginStart="10dp"
         android:layout_marginTop="4dp"/>
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:layout_toEndOf="@+id/menu_item_image"
+        android:layout_toEndOf="@+id/iv_img_src"
         android:layout_below="@+id/veg_nonveg_symbol"
         android:text="ITEM"
         android:paddingTop="2dp"
@@ -40,7 +40,7 @@
         android:id="@+id/menu_item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/menu_item_image"
+        android:layout_toEndOf="@id/iv_img_src"
         android:layout_below="@+id/name"
         android:layout_marginStart="10dp"
         android:text="Rs 10"
@@ -51,7 +51,7 @@
         android:id="@+id/menu_item_qty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/menu_item_image"
+        android:layout_toEndOf="@id/iv_img_src"
         android:layout_below="@+id/menu_item_price"
         android:layout_marginLeft="10dp"
         android:text="5 pcs"
