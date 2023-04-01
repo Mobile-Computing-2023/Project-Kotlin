@@ -1,5 +1,6 @@
 package com.example.mobile_computing_project.adapters
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 
 private var cartItemsList: MutableList<CartItem> = mutableListOf()
-class MenuItemAdapter(private val menuItems: List<MenuItem>):
+class MenuItemAdapter(private val context: Context, private val menuItems: List<MenuItem>):
     RecyclerView.Adapter<MenuItemAdapter.ViewHolder>() {
 
         interface OnBtnClickListener {
@@ -30,7 +32,7 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
         private lateinit var ivVeg: ImageView
         private lateinit var tvQty: TextView
         private lateinit var btnAddToCart: Button
-
+        private lateinit var ivImgSrc: ImageView
         private val cartItemsAdapter = CartItemAdapter(cartItemsList)
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -42,7 +44,6 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
                     val color = Color.parseColor("#049D4E")
                     ivVeg.setColorFilter(color)
                 }
-
                 btnAddToCart.setOnClickListener {
                     listener?.onBtnClick(menuItem)
                     val x = CartItem(
@@ -51,12 +52,11 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
                         isVeg = menuItem.isVeg,
                         price = menuItem.price
                     )
-
-                    // Vishesh - I think the next 3 lines have no utility, but don't delete them
                     cartItemsList.add(x)
                     println(cartItemsList)
                     cartItemsAdapter.notifyDataSetChanged()
                 }
+                Glide.with(context).load(menuItem.imgSrc).into(ivImgSrc)
             }
         }
 
@@ -67,6 +67,7 @@ class MenuItemAdapter(private val menuItems: List<MenuItem>):
             ivVeg = view.findViewById(R.id.veg_nonveg_symbol)
             tvQty = view.findViewById(R.id.menu_item_qty)
             btnAddToCart = view.findViewById(R.id.btn_add_to_cart)
+            ivImgSrc = view.findViewById(R.id.iv_img_src)
             return ViewHolder(view)
         }
 

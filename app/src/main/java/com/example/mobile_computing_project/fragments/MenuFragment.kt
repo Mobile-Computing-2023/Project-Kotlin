@@ -17,10 +17,8 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
-import com.example.mobile_computing_project.models.OrderItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.type.Color
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,18 +61,18 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val splMenuItemAdapter = MenuItemAdapter(specialItems)
+        val splMenuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = specialItems) }
         splRecyclerView.adapter = splMenuItemAdapter
         splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val menuItemAdapter = MenuItemAdapter(menuItems)
+        val menuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = menuItems) }
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val activity = requireActivity() as MainActivity
         val cartList = activity.listInMainActivity
 
-        menuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+        menuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.name == item.name }
                 if(i != -1){
@@ -94,7 +92,7 @@ class MenuFragment : Fragment() {
 
         })
 
-        splMenuItemAdapter.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+        splMenuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.name == item.name }
                 if(i != -1){
@@ -125,7 +123,7 @@ class MenuFragment : Fragment() {
                 val menuList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 menuItems.clear()
                 menuItems.addAll(menuList)
-                menuItemAdapter.notifyDataSetChanged()
+                menuItemAdapter?.notifyDataSetChanged()
             }
         }
 
@@ -137,7 +135,7 @@ class MenuFragment : Fragment() {
                 val specialList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
                 specialItems.clear()
                 specialItems.addAll(specialList)
-                splMenuItemAdapter.notifyDataSetChanged()
+                splMenuItemAdapter?.notifyDataSetChanged()
             }
         }
     }
