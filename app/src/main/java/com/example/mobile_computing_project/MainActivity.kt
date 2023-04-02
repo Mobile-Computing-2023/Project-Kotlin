@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private var signedInUser: User? = null
     private lateinit var auth: FirebaseAuth
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
-    private lateinit var menuItem: MenuItem
+    private var menuItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.logout, menu)
         menuItem = menu?.findItem(R.id.btn_logout)!!
-        menuItem.isVisible = false
+        menuItem?.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showButtonInActionBar(show: Boolean) {
-        menuItem.isVisible = show
+        menuItem?.isVisible = show
     }
     private fun goToLandingActivity(){
         Log.i(TAG, "goToLandingActivity")
