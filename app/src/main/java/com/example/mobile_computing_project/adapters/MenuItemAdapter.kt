@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
+import com.google.android.material.card.MaterialCardView
 
 //private var cartItemsList: MutableList<CartItem> = mutableListOf()
 class MenuItemAdapter(private val context: Context, private val menuItems: List<MenuItem>):
@@ -35,6 +36,7 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
         private lateinit var btnAddToCart: Button
         private lateinit var llIncDecHolder: LinearLayout
         private lateinit var ivImgSrc: ImageView
+        private lateinit var btnMenuIncDec: MaterialCardView
 //        private val cartItemsAdapter = CartItemAdapter(cartItemsList)
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -47,6 +49,8 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
                     ivVeg.setColorFilter(color)
                 }
                 btnAddToCart.setOnClickListener {
+//                    btnAddToCart.visibility = View.GONE
+//                    btnMenuIncDec.visibility = View.VISIBLE
                     listener?.onBtnClick(menuItem)
 //                    val x = CartItem(
 //                        name = menuItem.name,
@@ -73,6 +77,7 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
             tvQty = view.findViewById(R.id.menu_item_qty)
             btnAddToCart = view.findViewById(R.id.btn_add_to_cart)
             ivImgSrc = view.findViewById(R.id.iv_img_src)
+            btnMenuIncDec = view.findViewById(R.id.btn_menu_inc_dec)
             return ViewHolder(view)
         }
 
