@@ -127,7 +127,6 @@ class MenuFragment : Fragment() {
                 val i = cartList.indexOfFirst { it.name == item.name }
                 if(i != -1){
                     cartList[i].qty += 1
-                    cartList[i].price += item.price
                 }
                 else{
                     cartList.add(CartItem(
@@ -139,6 +138,33 @@ class MenuFragment : Fragment() {
                 }
                 Toast.makeText(context, "Added Spl " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
             }
+        })
+
+        splMenuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
+            override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
+                }
+                splMenuItemAdapter.notifyDataSetChanged()
+                Toast.makeText(context, "Incrementing ${item.name}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        splMenuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
+            override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty -= 1
+                }
+                if (cartList[i].qty == 0) {
+                    cartList.remove(cartList[i])
+                }
+                splMenuItemAdapter.notifyDataSetChanged()
+                Toast.makeText(context, "Decrementing ${item.name}", Toast.LENGTH_SHORT).show()
+            }
+
         })
 
         val db = Firebase.firestore
