@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -61,11 +63,11 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val splMenuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = specialItems) }
+        val splMenuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = specialItems, activity = requireActivity() as MainActivity) }
         splRecyclerView.adapter = splMenuItemAdapter
         splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val menuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = menuItems) }
+        val menuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = menuItems, activity = requireActivity() as MainActivity) }
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -87,7 +89,22 @@ class MenuFragment : Fragment() {
                         price = item.price
                     ))
                 }
+
                 Toast.makeText(context, "Added " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
+            override fun onBtnClick(item: MenuItem) {
+                Toast.makeText(context, "Incrementing ${item.name}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        menuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
+            override fun onBtnClick(item: MenuItem) {
+                Toast.makeText(context, "Decrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
         })
