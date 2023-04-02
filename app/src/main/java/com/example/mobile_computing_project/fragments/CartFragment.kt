@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -138,7 +139,7 @@ class CartFragment : Fragment() {
 
         btnPlaceOrder.setOnClickListener {
             if(signedInUser != null && listOfItems.isNotEmpty()){
-                val order = OrderItem(items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
+                val order = OrderItem(oid = UUID.randomUUID().toString() ,items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
                 db.collection("Orders").add(order).addOnSuccessListener {
                     Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
                     listOfItems.clear()
