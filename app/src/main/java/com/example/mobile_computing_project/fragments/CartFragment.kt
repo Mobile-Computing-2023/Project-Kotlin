@@ -140,7 +140,7 @@ class CartFragment : Fragment() {
         btnPlaceOrder.setOnClickListener {
             if(signedInUser != null && listOfItems.isNotEmpty()){
                 val order = OrderItem(oid = UUID.randomUUID().toString() ,items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
-                db.collection("Orders").add(order).addOnSuccessListener {
+                db.collection("Orders").document(order.oid).set(order).addOnSuccessListener {
                     Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
                     listOfItems.clear()
                     orderTotal.text = null
