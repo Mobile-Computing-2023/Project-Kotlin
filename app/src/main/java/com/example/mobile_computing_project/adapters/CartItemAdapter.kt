@@ -50,11 +50,14 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
     private lateinit var ivVeg: ImageView
     private lateinit var tvQty: TextView
     private lateinit var btnRemoveFromCart: Button
-    private lateinit var tvIncrement: TextView
-    private lateinit var tvDecrement: TextView
-    private lateinit var tvShowQty: TextView
+//    private lateinit var tvIncrement: TextView
+//    private lateinit var tvDecrement: TextView
+//    private lateinit var tvShowQty: TextView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        private val tvIncrement = itemView.findViewById<TextView>(R.id.tv_increment)
+        private val tvDecrement: TextView = itemView.findViewById(R.id.tv_decrement)
+        private val tvShowQty: TextView = itemView.findViewById(R.id.tv_show_qty)
         fun bind(cartItem: CartItem, listener: OnBtnClickListener?, listenerInc: OnIncBtnClickListener?, listenerDec: OnDecBtnClickListener?){
             tvName.text = cartItem.name.capitalize()
             tvPrice.text = "Rs "+ cartItem.price.toString()
@@ -86,9 +89,9 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
         ivVeg = view.findViewById(R.id.iv_nonveg_symbol)
         tvQty = view.findViewById(R.id.tv_qty)
         btnRemoveFromCart = view.findViewById(R.id.btn_removeButton)
-        tvIncrement = view.findViewById(R.id.tv_increment)
-        tvDecrement = view.findViewById(R.id.tv_decrement)
-        tvShowQty = view.findViewById(R.id.tv_show_qty)
+//        tvIncrement = view.findViewById(R.id.tv_increment)
+//        tvDecrement = view.findViewById(R.id.tv_decrement)
+//        tvShowQty = view.findViewById(R.id.tv_show_qty)
 
         return ViewHolder(view)
     }
