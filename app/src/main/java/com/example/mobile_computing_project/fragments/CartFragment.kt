@@ -147,7 +147,6 @@ class CartFragment : Fragment() {
                     val newAdapter = CartItemAdapter(listOfItems)
                     recyclerView.adapter = newAdapter
                     recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
                 }.addOnFailureListener {
                     Toast.makeText(context, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
                 }

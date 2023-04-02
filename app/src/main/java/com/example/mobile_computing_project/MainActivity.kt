@@ -1,5 +1,6 @@
 package com.example.mobile_computing_project
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
     private lateinit var menuItem: MenuItem
-//    private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.cart -> replaceFragment(CartFragment())
                 R.id.complaint -> replaceFragment(ComplaintFragment())
                 R.id.profile -> {
-//                    btnLogout.visibility = View.VISIBLE
                     replaceFragment(ProfileFragment())
                 }
                 else -> {}
@@ -87,14 +86,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.logout, menu)
         menuItem = menu?.findItem(R.id.btn_logout)!!
-        menuItem?.isVisible = false
+        menuItem.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == R.id.btn_logout) {
-            Toast.makeText(this, "CLicked Logout", Toast.LENGTH_SHORT).show()
+            auth.signOut()
+            goToLandingActivity()
+            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -108,5 +109,11 @@ class MainActivity : AppCompatActivity() {
 
     fun showButtonInActionBar(show: Boolean) {
         menuItem.isVisible = show
+    }
+    private fun goToLandingActivity(){
+        Log.i(TAG, "goToLandingActivity")
+        val intent = Intent(this, LandingActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
