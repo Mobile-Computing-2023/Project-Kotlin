@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,7 +15,7 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 
-private var cartItemsList: MutableList<CartItem> = mutableListOf()
+//private var cartItemsList: MutableList<CartItem> = mutableListOf()
 class MenuItemAdapter(private val context: Context, private val menuItems: List<MenuItem>):
     RecyclerView.Adapter<MenuItemAdapter.ViewHolder>() {
 
@@ -32,8 +33,9 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
         private lateinit var ivVeg: ImageView
         private lateinit var tvQty: TextView
         private lateinit var btnAddToCart: Button
+        private lateinit var llIncDecHolder: LinearLayout
         private lateinit var ivImgSrc: ImageView
-        private val cartItemsAdapter = CartItemAdapter(cartItemsList)
+//        private val cartItemsAdapter = CartItemAdapter(cartItemsList)
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
@@ -46,16 +48,19 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
                 }
                 btnAddToCart.setOnClickListener {
                     listener?.onBtnClick(menuItem)
-                    val x = CartItem(
-                        name = menuItem.name,
-                        qty = 1,
-                        isVeg = menuItem.isVeg,
-                        price = menuItem.price
-                    )
-                    cartItemsList.add(x)
-                    println(cartItemsList)
-                    cartItemsAdapter.notifyDataSetChanged()
+//                    val x = CartItem(
+//                        name = menuItem.name,
+//                        qty = 1,
+//                        isVeg = menuItem.isVeg,
+//                        price = menuItem.price
+//                    )
+//                    cartItemsList.add(x)
+//                    println(cartItemsList)
+//                    cartItemsAdapter.notifyDataSetChanged()
                 }
+//                btnIncrement.setOnClickListener{
+//                    listener?.onBtnClick(menuItem)
+//                }
                 Glide.with(context).load(menuItem.imgSrc).into(ivImgSrc)
             }
         }
