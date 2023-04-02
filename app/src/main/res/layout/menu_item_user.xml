@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/theme"
         android:shadowColor="@android:color/holo_blue_bright"
         android:background="@drawable/border_tv"
         android:layout_marginRight="5dp"
@@ -99,23 +99,29 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textAlignment="center"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
+                android:textColor="@color/white"
                 android:textSize="20sp"/>
             <TextView
                 android:id="@+id/tv_menu_show_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="5dp"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:text="1"/>
             <TextView
                 android:id="@+id/tv_menu_inc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:text="+"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

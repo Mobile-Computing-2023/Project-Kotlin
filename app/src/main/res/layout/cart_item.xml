@@ -76,6 +76,7 @@
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
         android:background="@drawable/border_tv"
+        android:backgroundTint="@color/theme"
         android:outlineAmbientShadowColor="@android:color/holo_blue_bright"
         android:visibility="visible">
 
@@ -86,7 +87,7 @@
             android:fontFamily="@font/semi_bold"
             android:textSize="20sp"
             android:gravity="center"
-            android:textColor="@color/theme"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:text="-"/>
         <TextView
@@ -94,6 +95,7 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/semi_bold"
+            android:textColor="@color/white"
             android:gravity="center"
             android:textSize="20sp"
             />
@@ -104,7 +106,7 @@
             android:fontFamily="@font/semi_bold"
             android:textSize="20sp"
             android:gravity="center"
-            android:textColor="@color/theme"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:text="+"/>
 
