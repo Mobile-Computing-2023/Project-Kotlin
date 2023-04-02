@@ -96,6 +96,11 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
 
                 tvMenuDec.setOnClickListener {
                     listenerDec?.onBtnClick(menuItem)
+                    val i = cartList.indexOfFirst { it.name == menuItem.name }
+                    if(i == -1) {
+                        btnAddToCart.visibility = View.VISIBLE
+                        btnMenuIncDec.visibility = View.GONE
+                    }
                 }
                 Glide.with(context).load(menuItem.imgSrc).into(ivImgSrc)
             }

@@ -79,7 +79,7 @@ class CartFragment : Fragment() {
 
         var total = 0
         listOfItems.forEach {
-            total += it.price
+            total += (it.price*it.qty)
         }
         orderTotal.text = "Total Amount:     Rs " + total.toString()
 
@@ -90,7 +90,7 @@ class CartFragment : Fragment() {
                 adaptor.notifyDataSetChanged()
                 total = 0
                 listOfItems.forEach {
-                    total += it.price
+                    total += (it.price*it.qty)
                 }
                 orderTotal.text = "Total Amount:     Rs " + total.toString()
                 Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()

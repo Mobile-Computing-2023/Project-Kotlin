@@ -97,6 +97,11 @@ class MenuFragment : Fragment() {
 
         menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty += 1
+                }
+                menuItemAdapter.notifyDataSetChanged()
                 Toast.makeText(context, "Incrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
@@ -104,6 +109,14 @@ class MenuFragment : Fragment() {
 
         menuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
+                val i = cartList.indexOfFirst { it.name == item.name }
+                if(i != -1){
+                    cartList[i].qty -= 1
+                }
+                if (cartList[i].qty == 0) {
+                    cartList.remove(cartList[i])
+                }
+                menuItemAdapter.notifyDataSetChanged()
                 Toast.makeText(context, "Decrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
