@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.MenuItemCanteenAdapter
@@ -99,6 +100,16 @@ class SpecialsFragment : Fragment() {
         }.addOnFailureListener {
             Toast.makeText(context, "There was some error in removing ${menuItem.name} from Specials", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).showButtonInActionBar(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).showButtonInActionBar(false)
     }
 
     companion object {

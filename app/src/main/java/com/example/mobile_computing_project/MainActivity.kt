@@ -5,7 +5,11 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.fragments.*
@@ -22,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private var signedInUser: User? = null
     private lateinit var auth: FirebaseAuth
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
+    private lateinit var menuItem: MenuItem
+//    private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +73,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu -> replaceFragment(MenuFragment())
                 R.id.cart -> replaceFragment(CartFragment())
                 R.id.complaint -> replaceFragment(ComplaintFragment())
-                R.id.profile -> replaceFragment(ProfileFragment())
+                R.id.profile -> {
+//                    btnLogout.visibility = View.VISIBLE
+                    replaceFragment(ProfileFragment())
+                }
                 else -> {}
             }
             true
@@ -75,10 +84,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.logout, menu)
+        menuItem = menu?.findItem(R.id.btn_logout)!!
+        menuItem?.isVisible = false
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.btn_logout) {
+            Toast.makeText(this, "CLicked Logout", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun showButtonInActionBar(show: Boolean) {
+        menuItem.isVisible = show
     }
 }

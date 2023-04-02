@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.ComplaintItemAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
@@ -88,6 +89,16 @@ class CanteenComplaintFragment : Fragment() {
             println(it.message)
             Toast.makeText(context, "Some error while resolving complaint", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).showButtonInActionBar(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).showButtonInActionBar(false)
     }
 
     companion object {

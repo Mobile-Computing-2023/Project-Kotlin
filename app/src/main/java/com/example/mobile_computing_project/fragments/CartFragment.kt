@@ -79,7 +79,7 @@ class CartFragment : Fragment() {
 
         var total = 0
         listOfItems.forEach {
-            total += it.price
+            total += (it.price*it.qty)
         }
         orderTotal.text = "Total Amount:     Rs " + total.toString()
 
@@ -90,10 +90,41 @@ class CartFragment : Fragment() {
                 adaptor.notifyDataSetChanged()
                 total = 0
                 listOfItems.forEach {
-                    total += it.price
+                    total += (it.price*it.qty)
                 }
                 orderTotal.text = "Total Amount:     Rs " + total.toString()
                 Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        adaptor.setOnIncBtnClickListener(object: CartItemAdapter.OnIncBtnClickListener{
+            override fun onBtnClick(item: CartItem) {
+                val i = listOfItems.indexOfFirst { it.name == item.name }
+                item.qty++
+                adaptor.notifyDataSetChanged()
+                total = 0
+                listOfItems.forEach {
+                    total += (it.price*it.qty)
+                }
+                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                Toast.makeText(context, "Increment ${item.name}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        adaptor.setOnDecBtnClickListener(object: CartItemAdapter.OnDecBtnClickListener{
+            override fun onBtnClick(item: CartItem) {
+                val i = listOfItems.indexOfFirst { it.name == item.name }
+                item.qty--
+                if (item.qty == 0) {
+                    listOfItems.remove(item)
+                }
+                adaptor.notifyDataSetChanged()
+                total = 0
+                listOfItems.forEach {
+                    total += (it.price*it.qty)
+                }
+                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                Toast.makeText(context, "Decrement ${item.name}", Toast.LENGTH_SHORT).show()
             }
         })
 
