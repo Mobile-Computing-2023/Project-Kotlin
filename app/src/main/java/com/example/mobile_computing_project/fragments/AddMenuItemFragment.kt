@@ -13,7 +13,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
-import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.example.mobile_computing_project.R
@@ -53,7 +52,7 @@ class AddMenuItemFragment: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.add_item_canteen, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_item, container, false)
         btnDismiss = view.findViewById(R.id.btn_dismiss)
         btnConfirmAddItem = view.findViewById(R.id.btn_add_item)
         btnChooseFile = view.findViewById(R.id.btn_choose_file)

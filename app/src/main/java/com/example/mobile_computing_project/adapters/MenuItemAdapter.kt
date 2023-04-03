@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.android.material.card.MaterialCardView
 
@@ -96,7 +95,7 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item_user, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu_user, parent, false)
             tvName = view.findViewById(R.id.name)
             tvPrice = view.findViewById(R.id.menu_item_price)
             ivVeg = view.findViewById(R.id.veg_nonveg_symbol)

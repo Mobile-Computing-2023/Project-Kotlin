@@ -49,7 +49,7 @@ class MenuItemCanteenAdapter(private val context: Context, private val menuItems
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item_canteen, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu_canteen, parent, false)
         tvName = view.findViewById(R.id.tv_name)
         tvPrice = view.findViewById(R.id.tv_price)
         ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)

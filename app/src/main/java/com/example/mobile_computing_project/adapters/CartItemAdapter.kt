@@ -77,7 +77,7 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cart_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
         tvName = view.findViewById(R.id.tv_name)
         tvPrice = view.findViewById(R.id.tv_price)
         ivVeg = view.findViewById(R.id.iv_nonveg_symbol)

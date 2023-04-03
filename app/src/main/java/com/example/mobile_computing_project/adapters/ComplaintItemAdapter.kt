@@ -40,7 +40,7 @@ class ComplaintItemAdapter (private val complaints: List<ComplaintItem>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.complaint_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_complaint_canteen, parent, false)
         tvDescription = view.findViewById(R.id.tv_description)
         tvUser = view.findViewById(R.id.tv_user)
         tvCreatedAt = view.findViewById(R.id.tv_createdAt)
