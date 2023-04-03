@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.ComplaintItemAdapter
+import com.example.mobile_computing_project.adapters.ComplaintItemUserAdapter
 import com.example.mobile_computing_project.adapters.OrderItemUserAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.OrderItem
@@ -66,7 +63,7 @@ class ProfileFragment : Fragment() {
         tvUserName = view.findViewById(R.id.tv_my_name)
         tvUserEmail = view.findViewById(R.id.tv_email)
         recyclerView = view.findViewById(R.id.rv_order_history_items)
-       complaintRecyclerView = view.findViewById(R.id.rv_complaint_history_items)
+        complaintRecyclerView = view.findViewById(R.id.rv_complaint_history_items)
 
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
             signedInUser = it.toObject(User::class.java)!!
@@ -89,7 +86,7 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val complaintHistoryItems: MutableList<ComplaintItem> = mutableListOf()
-        val complaintHistoryItemsAdapter = ComplaintItemAdapter(complaintHistoryItems)
+        val complaintHistoryItemsAdapter = ComplaintItemUserAdapter(complaintHistoryItems)
         complaintRecyclerView.adapter = complaintHistoryItemsAdapter
         complaintRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
