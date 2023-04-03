@@ -82,7 +82,7 @@ class CartFragment : Fragment() {
         listOfItems.forEach {
             total += (it.price*it.qty)
         }
-        orderTotal.text = "Total Amount:     Rs " + total.toString()
+        orderTotal.text = "Rs " + total.toString()
 
         adaptor.setOnBtnClickListener(object: CartItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: CartItem) {
@@ -93,21 +93,21 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                orderTotal.text = "Rs " + total.toString()
                 Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()
             }
         })
 
         adaptor.setOnIncBtnClickListener(object: CartItemAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: CartItem) {
-                val i = listOfItems.indexOfFirst { it.name == item.name }
+                listOfItems.indexOfFirst { it.name == item.name }
                 item.qty++
                 adaptor.notifyDataSetChanged()
                 total = 0
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                orderTotal.text = "Rs " + total.toString()
                 Toast.makeText(context, "Increment ${item.name}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -124,7 +124,7 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Total Amount:     Rs " + total.toString()
+                orderTotal.text = "Rs " + total.toString()
                 Toast.makeText(context, "Decrement ${item.name}", Toast.LENGTH_SHORT).show()
             }
         })

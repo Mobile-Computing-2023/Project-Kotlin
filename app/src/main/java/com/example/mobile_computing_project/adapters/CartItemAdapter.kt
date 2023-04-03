@@ -1,6 +1,5 @@
 package com.example.mobile_computing_project.adapters
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.models.CartItem
-import com.example.mobile_computing_project.models.OrderItem
 
 class CartItemAdapter (private val cartItems: List<CartItem>):
     RecyclerView.Adapter<CartItemAdapter.ViewHolder>() {
@@ -50,9 +47,6 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
     private lateinit var ivVeg: ImageView
     private lateinit var tvQty: TextView
     private lateinit var btnRemoveFromCart: Button
-//    private lateinit var tvIncrement: TextView
-//    private lateinit var tvDecrement: TextView
-//    private lateinit var tvShowQty: TextView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val tvIncrement = itemView.findViewById<TextView>(R.id.tv_increment)
@@ -89,9 +83,6 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
         ivVeg = view.findViewById(R.id.iv_nonveg_symbol)
         tvQty = view.findViewById(R.id.tv_qty)
         btnRemoveFromCart = view.findViewById(R.id.btn_removeButton)
-//        tvIncrement = view.findViewById(R.id.tv_increment)
-//        tvDecrement = view.findViewById(R.id.tv_decrement)
-//        tvShowQty = view.findViewById(R.id.tv_show_qty)
 
         return ViewHolder(view)
     }
