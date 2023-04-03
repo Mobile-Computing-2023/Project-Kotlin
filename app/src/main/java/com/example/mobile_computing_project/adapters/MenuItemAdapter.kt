@@ -14,7 +14,6 @@ import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.android.material.card.MaterialCardView
 
-//private var cartItemsList: MutableList<CartItem> = mutableListOf()
 
 class MenuItemAdapter(private val context: Context, private val menuItems: List<MenuItem>, private val activity: MainActivity):
     RecyclerView.Adapter<MenuItemAdapter.ViewHolder>() {
@@ -52,7 +51,6 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
         private lateinit var tvQty: TextView
         private lateinit var ivImgSrc: ImageView
         private val cartList = activity.listInMainActivity
-//        private val cartItemsAdapter = CartItemAdapter(cartItemsList)
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             private val btnAddToCart: Button = itemView.findViewById(R.id.btn_add_to_cart)
@@ -63,7 +61,6 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
             fun bind(menuItem: MenuItem, listener: OnBtnClickListener?, listenerInc: OnIncBtnClickListener?, listenerDec: OnDecBtnClickListener?){
                 tvName.text = menuItem.name.capitalize()
                 tvPrice.text = "Rs "+ menuItem.price.toString()
-                tvQty.text = "5 pcs"
                 tvMenuQty.text = "1".toString()
                 if (menuItem.isVeg){
                     val color = Color.parseColor("#049D4E")
@@ -75,19 +72,11 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
                     btnMenuIncDec.visibility = View.VISIBLE
                     tvMenuQty.text = cartList[i].qty.toString()
                 }
+
                 btnAddToCart.setOnClickListener {
                     listener?.onBtnClick(menuItem)
                     btnAddToCart.visibility = View.GONE
                     btnMenuIncDec.visibility = View.VISIBLE
-//                    val x = CartItem(
-//                        name = menuItem.name,
-//                        qty = 1,
-//                        isVeg = menuItem.isVeg,
-//                        price = menuItem.price
-//                    )
-//                    cartItemsList.add(x)
-//                    println(cartItemsList)
-//                    cartItemsAdapter.notifyDataSetChanged()
                 }
 
                 tvMenuInc.setOnClickListener {
@@ -111,10 +100,7 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
             tvName = view.findViewById(R.id.name)
             tvPrice = view.findViewById(R.id.menu_item_price)
             ivVeg = view.findViewById(R.id.veg_nonveg_symbol)
-            tvQty = view.findViewById(R.id.menu_item_qty)
-//            btnAddToCart = view.findViewById(R.id.btn_add_to_cart)
             ivImgSrc = view.findViewById(R.id.iv_img_src)
-//            btnMenuIncDec = view.findViewById(R.id.btn_menu_inc_dec)
             return ViewHolder(view)
         }
 
