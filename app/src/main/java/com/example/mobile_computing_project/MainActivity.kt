@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
     fun showButtonInActionBar(show: Boolean) {
         menuItem?.isVisible = show
     }
+
     private fun goToLandingActivity(){
         Log.i(TAG, "goToLandingActivity")
         val intent = Intent(this, LandingActivity::class.java)

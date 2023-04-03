@@ -89,10 +89,7 @@ class MenuFragment : Fragment() {
                         price = item.price
                     ))
                 }
-
-                Toast.makeText(context, "Added " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
             }
-
         })
 
         menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
@@ -102,7 +99,6 @@ class MenuFragment : Fragment() {
                     cartList[i].qty += 1
                 }
                 menuItemAdapter.notifyDataSetChanged()
-                Toast.makeText(context, "Incrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -117,7 +113,6 @@ class MenuFragment : Fragment() {
                     cartList.remove(cartList[i])
                 }
                 menuItemAdapter.notifyDataSetChanged()
-                Toast.makeText(context, "Decrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -136,7 +131,6 @@ class MenuFragment : Fragment() {
                         price = item.price
                     ))
                 }
-                Toast.makeText(context, "Added Spl " + item.name + " to Cart", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -147,7 +141,6 @@ class MenuFragment : Fragment() {
                     cartList[i].qty += 1
                 }
                 splMenuItemAdapter.notifyDataSetChanged()
-                Toast.makeText(context, "Incrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -162,7 +155,6 @@ class MenuFragment : Fragment() {
                     cartList.remove(cartList[i])
                 }
                 splMenuItemAdapter.notifyDataSetChanged()
-                Toast.makeText(context, "Decrementing ${item.name}", Toast.LENGTH_SHORT).show()
             }
 
         })
