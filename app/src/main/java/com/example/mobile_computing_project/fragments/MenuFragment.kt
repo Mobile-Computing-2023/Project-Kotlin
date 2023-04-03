@@ -76,13 +76,14 @@ class MenuFragment : Fragment() {
 
         menuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty += 1
                     cartList[i].price += item.price
                 }
                 else{
                     cartList.add(CartItem(
+                        cid = item.mid,
                         name = item.name,
                         qty = 1,
                         isVeg = item.isVeg,
@@ -94,7 +95,7 @@ class MenuFragment : Fragment() {
 
         menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty += 1
                 }
@@ -105,7 +106,7 @@ class MenuFragment : Fragment() {
 
         menuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty -= 1
                 }
@@ -119,12 +120,13 @@ class MenuFragment : Fragment() {
 
         splMenuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty += 1
                 }
                 else{
                     cartList.add(CartItem(
+                        cid = item.mid,
                         name = item.name,
                         qty = 1,
                         isVeg = item.isVeg,
@@ -136,7 +138,7 @@ class MenuFragment : Fragment() {
 
         splMenuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty += 1
                 }
@@ -147,7 +149,7 @@ class MenuFragment : Fragment() {
 
         splMenuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
-                val i = cartList.indexOfFirst { it.name == item.name }
+                val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
                     cartList[i].qty -= 1
                 }

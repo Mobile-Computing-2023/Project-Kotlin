@@ -99,7 +99,6 @@ class CartFragment : Fragment() {
 
         adaptor.setOnIncBtnClickListener(object: CartItemAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: CartItem) {
-                listOfItems.indexOfFirst { it.name == item.name }
                 item.qty++
                 adaptor.notifyDataSetChanged()
                 total = 0
@@ -112,7 +111,6 @@ class CartFragment : Fragment() {
 
         adaptor.setOnDecBtnClickListener(object: CartItemAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: CartItem) {
-                listOfItems.indexOfFirst { it.name == item.name }
                 item.qty--
                 if (item.qty == 0) {
                     listOfItems.remove(item)
