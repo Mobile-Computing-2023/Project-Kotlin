@@ -18,11 +18,15 @@ class ComplaintItemUserAdapter(private val complaints: List<ComplaintItem>):
 
     private lateinit var tvDescription: TextView
     private lateinit var tvCreatedAt: TextView
+    private lateinit var tvStatus: TextView
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(complaintItem: ComplaintItem){
             tvDescription.text = complaintItem.description
             tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
+            if(complaintItem.resolved){
+                tvStatus.text = "Status: Resolved"
+            }
         }
     }
 
@@ -30,6 +34,7 @@ class ComplaintItemUserAdapter(private val complaints: List<ComplaintItem>):
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_complaint_user, parent, false)
         tvDescription = view.findViewById(R.id.tv_description)
         tvCreatedAt = view.findViewById(R.id.tv_createdAt)
+        tvStatus = view.findViewById(R.id.tv_status)
         return ViewHolder(view)
     }
 
