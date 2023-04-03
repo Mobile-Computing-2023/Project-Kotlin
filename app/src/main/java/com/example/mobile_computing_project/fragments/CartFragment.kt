@@ -94,7 +94,6 @@ class CartFragment : Fragment() {
                     total += (it.price*it.qty)
                 }
                 orderTotal.text = "Rs " + total.toString()
-                Toast.makeText(context, "Removing: " + item.name, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -108,13 +107,12 @@ class CartFragment : Fragment() {
                     total += (it.price*it.qty)
                 }
                 orderTotal.text = "Rs " + total.toString()
-                Toast.makeText(context, "Increment ${item.name}", Toast.LENGTH_SHORT).show()
             }
         })
 
         adaptor.setOnDecBtnClickListener(object: CartItemAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: CartItem) {
-                val i = listOfItems.indexOfFirst { it.name == item.name }
+                listOfItems.indexOfFirst { it.name == item.name }
                 item.qty--
                 if (item.qty == 0) {
                     listOfItems.remove(item)
@@ -125,7 +123,6 @@ class CartFragment : Fragment() {
                     total += (it.price*it.qty)
                 }
                 orderTotal.text = "Rs " + total.toString()
-                Toast.makeText(context, "Decrement ${item.name}", Toast.LENGTH_SHORT).show()
             }
         })
 
