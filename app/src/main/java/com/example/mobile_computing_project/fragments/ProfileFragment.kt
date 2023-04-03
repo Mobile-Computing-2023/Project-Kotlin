@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.adapters.ComplaintItemAdapter
 import com.example.mobile_computing_project.adapters.OrderItemUserAdapter
+import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -45,7 +47,7 @@ class ProfileFragment : Fragment() {
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
     private lateinit var recyclerView: RecyclerView
-//    private lateinit var btnLogout: MenuItem
+    private lateinit var complaintRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +66,7 @@ class ProfileFragment : Fragment() {
         tvUserName = view.findViewById(R.id.tv_my_name)
         tvUserEmail = view.findViewById(R.id.tv_email)
         recyclerView = view.findViewById(R.id.rv_order_history_items)
+       complaintRecyclerView = view.findViewById(R.id.rv_complaint_history_items)
 
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
             signedInUser = it.toObject(User::class.java)!!
@@ -85,6 +88,11 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = orderHistoryItemsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        val complaintHistoryItems: MutableList<ComplaintItem> = mutableListOf()
+        val complaintHistoryItemsAdapter = ComplaintItemAdapter(complaintHistoryItems)
+        complaintRecyclerView.adapter = complaintHistoryItemsAdapter
+        complaintRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
         orderHistoryRef.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
@@ -95,6 +103,19 @@ class ProfileFragment : Fragment() {
                 orderHistoryItems.clear()
                 orderHistoryItems.addAll(orderHistoryList)
                 orderHistoryItemsAdapter.notifyDataSetChanged()
+            }
+        }
+
+        val complaintHistoryRef = db.collection("Complaints").whereEqualTo("user.uid", auth.currentUser?.uid)
+        complaintHistoryRef.addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i(TAG, "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val complaintHistoryList = snapshot.toObjects(ComplaintItem::class.java)
+                complaintHistoryItems.clear()
+                complaintHistoryItems.addAll(complaintHistoryList)
+                complaintHistoryItemsAdapter.notifyDataSetChanged()
             }
         }
     }
