@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.adapters.MenuItemCanteenAdapter
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore

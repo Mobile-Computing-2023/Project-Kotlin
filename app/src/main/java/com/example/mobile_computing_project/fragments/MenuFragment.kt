@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +16,6 @@ import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.MenuItemAdapter
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
-import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
