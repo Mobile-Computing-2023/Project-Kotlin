@@ -2,41 +2,31 @@ package com.example.mobile_computing_project.adapters
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ItemOrderUserBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.OrderItem
 
 class OrderItemUserAdapter(private val orderItems: List<OrderItem>):
     RecyclerView.Adapter<OrderItemUserAdapter.ViewHolder>() {
-    private lateinit var tvAmount: TextView
-    private lateinit var tvStatus: TextView
-    private lateinit var tvCreatedAt: TextView
-    private lateinit var rvItems: RecyclerView
-    private var userOrderItems: MutableList<CartItem> = mutableListOf()
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(private val binding: ItemOrderUserBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(orderItem: OrderItem){
-            tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
-            tvStatus.text = "Status: " + orderItem.status
-            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
-            userOrderItems = orderItem.items as MutableList<CartItem>
-            rvItems.adapter = CanteenOrderItemsAdapter(userOrderItems)
+            binding.tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
+            binding.tvStatus.text = "Status: " + orderItem.status
+            binding.tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
+            binding.tvOrderId.text = "Order #${orderItem.oid.subSequence(0,5)}"
+            binding.rvUserOrdersItems.adapter = CanteenOrderItemsAdapter(orderItem.items as MutableList<CartItem>)
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_order_user, parent, false)
-        tvAmount = view.findViewById(R.id.tv_amount)
-        tvStatus = view.findViewById(R.id.tv_status)
-        tvCreatedAt = view.findViewById(R.id.tv_createdAt)
-        rvItems = view.findViewById(R.id.rv_user_orders_items)
-        rvItems.layoutManager = LinearLayoutManager(parent.context)
-        return ViewHolder(view)
+        val binding = ItemOrderUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.rvUserOrdersItems.layoutManager = LinearLayoutManager(parent.context)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = orderItems.size
