@@ -14,8 +14,8 @@ import com.example.mobile_computing_project.models.MenuItem
 import com.google.android.material.card.MaterialCardView
 
 
-class MenuItemAdapter(private val context: Context, private val menuItems: List<MenuItem>, private val activity: MainActivity):
-    RecyclerView.Adapter<MenuItemAdapter.ViewHolder>() {
+class MenuItemUserAdapter(private val context: Context, private val menuItems: List<MenuItem>, private val activity: MainActivity):
+    RecyclerView.Adapter<MenuItemUserAdapter.ViewHolder>() {
 
         interface OnBtnClickListener {
             fun onBtnClick(item: MenuItem)
@@ -47,7 +47,6 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
         private lateinit var tvName: TextView
         private lateinit var tvPrice: TextView
         private lateinit var ivVeg: ImageView
-        private lateinit var tvQty: TextView
         private lateinit var ivImgSrc: ImageView
         private val cartList = activity.listInMainActivity
 
@@ -84,8 +83,8 @@ class MenuItemAdapter(private val context: Context, private val menuItems: List<
 
                 tvMenuDec.setOnClickListener {
                     listenerDec?.onBtnClick(menuItem)
-                    val i = cartList.indexOfFirst { it.name == menuItem.name }
-                    if(i == -1) {
+                    val x = cartList.indexOfFirst { it.name == menuItem.name }
+                    if(x == -1) {
                         btnAddToCart.visibility = View.VISIBLE
                         btnMenuIncDec.visibility = View.GONE
                     }

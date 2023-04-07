@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.MenuItemAdapter
+import com.example.mobile_computing_project.adapters.MenuItemUserAdapter
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
@@ -60,18 +60,18 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val splMenuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = specialItems, activity = requireActivity() as MainActivity) }
+        val splMenuItemAdapter = context?.let { MenuItemUserAdapter(context = it, menuItems = specialItems, activity = requireActivity() as MainActivity) }
         splRecyclerView.adapter = splMenuItemAdapter
         splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val menuItemAdapter = context?.let { MenuItemAdapter(context = it, menuItems = menuItems, activity = requireActivity() as MainActivity) }
+        val menuItemAdapter = context?.let { MenuItemUserAdapter(context = it, menuItems = menuItems, activity = requireActivity() as MainActivity) }
         recyclerView.adapter = menuItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val activity = requireActivity() as MainActivity
         val cartList = activity.listInMainActivity
 
-        menuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+        menuItemAdapter?.setOnBtnClickListener(object: MenuItemUserAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
@@ -90,7 +90,7 @@ class MenuFragment : Fragment() {
             }
         })
 
-        menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
+        menuItemAdapter?.setOnIncBtnClickListener(object: MenuItemUserAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
@@ -101,7 +101,7 @@ class MenuFragment : Fragment() {
 
         })
 
-        menuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
+        menuItemAdapter?.setOnDecBtnClickListener(object: MenuItemUserAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
@@ -115,7 +115,7 @@ class MenuFragment : Fragment() {
 
         })
 
-        splMenuItemAdapter?.setOnBtnClickListener(object: MenuItemAdapter.OnBtnClickListener {
+        splMenuItemAdapter?.setOnBtnClickListener(object: MenuItemUserAdapter.OnBtnClickListener {
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
@@ -133,7 +133,7 @@ class MenuFragment : Fragment() {
             }
         })
 
-        splMenuItemAdapter?.setOnIncBtnClickListener(object: MenuItemAdapter.OnIncBtnClickListener{
+        splMenuItemAdapter?.setOnIncBtnClickListener(object: MenuItemUserAdapter.OnIncBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
@@ -144,7 +144,7 @@ class MenuFragment : Fragment() {
 
         })
 
-        splMenuItemAdapter?.setOnDecBtnClickListener(object: MenuItemAdapter.OnDecBtnClickListener{
+        splMenuItemAdapter?.setOnDecBtnClickListener(object: MenuItemUserAdapter.OnDecBtnClickListener{
             override fun onBtnClick(item: MenuItem) {
                 val i = cartList.indexOfFirst { it.cid == item.mid }
                 if(i != -1){
