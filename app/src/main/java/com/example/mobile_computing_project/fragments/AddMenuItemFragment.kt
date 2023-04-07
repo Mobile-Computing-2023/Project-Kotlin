@@ -28,7 +28,6 @@ class AddMenuItemFragment: DialogFragment() {
     private lateinit var etItemName: EditText
     private lateinit var etItemPrice: EditText
     private lateinit var btnChooseFile: Button
-//    private lateinit var tbVeg: ToggleButton
     private lateinit var rbVeg: RadioButton
     private lateinit var rbNonVeg: RadioButton
     private lateinit var ivImage: ImageView
@@ -58,11 +57,10 @@ class AddMenuItemFragment: DialogFragment() {
         btnChooseFile = view.findViewById(R.id.btn_choose_file)
         etItemName = view.findViewById(R.id.et_name)
         etItemPrice = view.findViewById(R.id.et_price)
-//        tbVeg = view.findViewById(R.id.tb_veg_nonveg)
         rbVeg = view.findViewById(R.id.rb_veg)
         rbNonVeg = view.findViewById(R.id.rb_non_veg)
         isSpl = requireArguments().getBoolean("isSpl", false)
-        ivImage= view.findViewById(R.id.iv_img_src)
+        ivImage = view.findViewById(R.id.iv_img_src)
         return view
     }
 
@@ -88,14 +86,6 @@ class AddMenuItemFragment: DialogFragment() {
             btnChooseFile.isEnabled = false
             addItemToMenu()
         }
-
-//        tbVeg.setOnCheckedChangeListener { _, isChecked ->
-//            if (isChecked) {
-//                tbVeg.setBackgroundColor(resources.getColor(R.color.non_veg))
-//            } else {
-//                tbVeg.setBackgroundColor(resources.getColor(R.color.veg))
-//            }
-//        }
 
         rbVeg.setOnCheckedChangeListener { _, isChecked ->
             rbNonVeg.isChecked = !isChecked
@@ -135,6 +125,5 @@ class AddMenuItemFragment: DialogFragment() {
                     Toast.makeText(context, "There was some error while adding item", Toast.LENGTH_SHORT).show()
                 }
         }
-
     }
 }
