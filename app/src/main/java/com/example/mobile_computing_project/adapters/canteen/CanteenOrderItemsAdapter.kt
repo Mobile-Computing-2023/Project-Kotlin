@@ -3,11 +3,7 @@ package com.example.mobile_computing_project.adapters.canteen
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.databinding.ItemOrderCanteenBinding
 import com.example.mobile_computing_project.databinding.ItemOrderItemBinding
 import com.example.mobile_computing_project.models.CartItem
 
