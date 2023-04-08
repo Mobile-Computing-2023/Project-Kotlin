@@ -102,13 +102,12 @@ class AddMenuItemFragment: DialogFragment() {
     }
 
     private fun addItemToMenu(){
-        val mid = UUID.randomUUID().toString()
         val storageRef = Firebase.storage.reference
-        val photoRef = storageRef.child("images/${mid}--photo.jpg")
+        val photoRef = storageRef.child("images/${UUID.randomUUID()}--photo.jpg")
         val photoTask = photoRef.putFile(photoURI!!)
         photoTask.continueWithTask { photoRef.downloadUrl }.continueWithTask {
             val menuItem = MenuItem(
-                mid = mid,
+                mid = UUID.randomUUID().toString(),
                 name = etItemName.text.toString(),
                 price = etItemPrice.text.toString().toInt(),
                 isVeg = rbVeg.isChecked,
