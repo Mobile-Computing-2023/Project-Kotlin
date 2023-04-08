@@ -2,11 +2,9 @@ package com.example.mobile_computing_project.adapters
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ItemComplaintUserBinding
 import com.example.mobile_computing_project.models.ComplaintItem
 
 class ComplaintItemUserAdapter(private val complaints: List<ComplaintItem>):
@@ -16,26 +14,19 @@ class ComplaintItemUserAdapter(private val complaints: List<ComplaintItem>):
         fun onBtnClick(item: ComplaintItem)
     }
 
-    private lateinit var tvDescription: TextView
-    private lateinit var tvCreatedAt: TextView
-    private lateinit var tvStatus: TextView
-
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(private val binding: ItemComplaintUserBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(complaintItem: ComplaintItem){
-            tvDescription.text = complaintItem.description
-            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
+            binding.tvDescription.text = complaintItem.description
+            binding.tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(complaintItem.createdAt)
             if(complaintItem.resolved){
-                tvStatus.text = "Status: Resolved"
+                binding.tvStatus.text = "Status: Resolved"
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_complaint_user, parent, false)
-        tvDescription = view.findViewById(R.id.tv_description)
-        tvCreatedAt = view.findViewById(R.id.tv_createdAt)
-        tvStatus = view.findViewById(R.id.tv_status)
-        return ViewHolder(view)
+        val binding = ItemComplaintUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = complaints.size
