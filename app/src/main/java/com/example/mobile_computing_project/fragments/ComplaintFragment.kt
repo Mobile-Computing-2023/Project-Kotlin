@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.FragmentComplaintBinding
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.ktx.auth
@@ -34,9 +32,7 @@ class ComplaintFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var btnSendComplaint: Button
-    private lateinit var btnClear: Button
-    private lateinit var etComplaintDesc: EditText
+    private lateinit var binding: FragmentComplaintBinding
     private var signedInUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +46,14 @@ class ComplaintFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_complaint, container, false)
-        btnSendComplaint = view.findViewById(R.id.btn_send_complaint)
-        btnClear = view.findViewById(R.id.btn_clear_complaint)
-        etComplaintDesc = view.findViewById(R.id.et_complaint_desc)
+        binding = FragmentComplaintBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val db = Firebase.firestore
         val auth = Firebase.auth
@@ -66,15 +64,15 @@ class ComplaintFragment : Fragment() {
             Log.i(TAG, "Failure in fetching current user", error)
         }
 
-        btnSendComplaint.setOnClickListener {
+        binding.btnSendComplaint.setOnClickListener {
             if(signedInUser != null){
                 val complaint = ComplaintItem(cid = UUID.randomUUID().toString(), user = signedInUser, createdAt = System.currentTimeMillis(),
-                    description = etComplaintDesc.text.toString())
+                    description = binding.etComplaintDesc.text.toString())
                 db.collection("Complaints").document(complaint.cid).set(complaint)
                     .addOnSuccessListener {
                         Toast.makeText(context, "Complaint Submitted Successfully", Toast.LENGTH_SHORT).show()
-                        etComplaintDesc.text.clear()
-                        btnSendComplaint.hint = btnSendComplaint.hint
+                        binding.etComplaintDesc.text.clear()
+                        binding.btnSendComplaint.hint = binding.btnSendComplaint.hint
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, "Failed to Submit Complaint", Toast.LENGTH_SHORT).show()
@@ -82,11 +80,9 @@ class ComplaintFragment : Fragment() {
             }
         }
 
-        btnClear.setOnClickListener {
-            etComplaintDesc.text.clear()
+        binding.btnClearComplaint.setOnClickListener {
+            binding.etComplaintDesc.text.clear()
         }
-
-        return view
     }
 
     companion object {
