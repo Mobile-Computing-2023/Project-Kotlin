@@ -1,10 +1,11 @@
-package com.example.mobile_computing_project.adapters
+package com.example.mobile_computing_project.adapters.user
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobile_computing_project.adapters.canteen.CanteenOrderItemsAdapter
 import com.example.mobile_computing_project.databinding.ItemOrderUserBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.OrderItem

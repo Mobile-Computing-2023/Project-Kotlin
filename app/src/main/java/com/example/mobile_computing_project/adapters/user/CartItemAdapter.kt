@@ -1,4 +1,4 @@
-package com.example.mobile_computing_project.adapters
+package com.example.mobile_computing_project.adapters.user
 
 import android.graphics.Color
 import android.view.LayoutInflater
