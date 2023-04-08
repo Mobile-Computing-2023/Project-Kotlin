@@ -46,7 +46,7 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
             binding.tvShowQty.text = cartItem.qty.toString()
             if (cartItem.isVeg){
                 val color = Color.parseColor("#049D4E")
-//                binding.ivVeg.setColorFilter(color)
+                binding.ivVeg.setColorFilter(color)
             }
 
             binding.btnRemoveButton.setOnClickListener {
