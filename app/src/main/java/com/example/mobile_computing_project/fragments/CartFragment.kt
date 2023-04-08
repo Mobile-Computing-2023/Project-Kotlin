@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
-import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.user.CartItemAdapter
+import com.example.mobile_computing_project.databinding.FragmentCartBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
@@ -40,10 +37,7 @@ class CartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var orderTotal: TextView
-    private lateinit var btnPlaceOrder: Button
-    private lateinit var btnClearCart: Button
+    private lateinit var binding: FragmentCartBinding
     private var auth: FirebaseAuth = Firebase.auth
     private var signedInUser: User? = null
 
@@ -58,14 +52,10 @@ class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_cart, container, false)
-        recyclerView = view.findViewById(R.id.rv_cart_items)
-        orderTotal = view.findViewById(R.id.tv_order_total)
-        btnPlaceOrder = view.findViewById(R.id.btn_place_order)
-        btnClearCart = view.findViewById(R.id.btn_clear_cart)
-        return view
+        binding = FragmentCartBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,14 +64,14 @@ class CartFragment : Fragment() {
         val listOfItems = activity.listInMainActivity
 
         val adaptor = CartItemAdapter(listOfItems)
-        recyclerView.adapter = adaptor
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvCartItems.adapter = adaptor
+        binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
 
         var total = 0
         listOfItems.forEach {
             total += (it.price*it.qty)
         }
-        orderTotal.text = "Rs " + total.toString()
+        binding.tvOrderTotal.text = "Rs " + total.toString()
 
         adaptor.setOnBtnClickListener(object: CartItemAdapter.OnBtnClickListener {
             override fun onBtnClick(item: CartItem) {
@@ -92,7 +82,7 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Rs " + total.toString()
+                binding.tvOrderTotal.text = "Rs " + total.toString()
             }
         })
 
@@ -104,7 +94,7 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Rs " + total.toString()
+                binding.tvOrderTotal.text = "Rs " + total.toString()
             }
         })
 
@@ -119,7 +109,7 @@ class CartFragment : Fragment() {
                 listOfItems.forEach {
                     total += (it.price*it.qty)
                 }
-                orderTotal.text = "Rs " + total.toString()
+                binding.tvOrderTotal.text = "Rs " + total.toString()
             }
         })
 
@@ -131,28 +121,28 @@ class CartFragment : Fragment() {
             Log.i(TAG, "Failure in fetching current user", error)
         }
 
-        btnPlaceOrder.setOnClickListener {
+        binding.btnPlaceOrder.setOnClickListener {
             if(signedInUser != null && listOfItems.isNotEmpty()){
                 val order = OrderItem(oid = UUID.randomUUID().toString() ,items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
                 db.collection("Orders").document(order.oid).set(order).addOnSuccessListener {
                     Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
                     listOfItems.clear()
-                    orderTotal.text = null
+                    binding.tvOrderTotal.text = null
                     val newAdapter = CartItemAdapter(listOfItems)
-                    recyclerView.adapter = newAdapter
-                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    binding.rvCartItems.adapter = newAdapter
+                    binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
                 }.addOnFailureListener {
                     Toast.makeText(context, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        btnClearCart.setOnClickListener {
+        binding.btnClearCart.setOnClickListener {
             listOfItems.clear()
-            orderTotal.text = null
+            binding.tvOrderTotal.text = null
             val newAdapter = CartItemAdapter(listOfItems)
-            recyclerView.adapter = newAdapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.rvCartItems.adapter = newAdapter
+            binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
         }
 
     }
