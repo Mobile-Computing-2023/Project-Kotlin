@@ -13,6 +13,7 @@ import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.user.ComplaintItemUserAdapter
 import com.example.mobile_computing_project.adapters.user.OrderItemUserAdapter
+import com.example.mobile_computing_project.databinding.FragmentProfileBinding
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
@@ -38,13 +39,12 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentProfileBinding
     private var auth: FirebaseAuth = Firebase.auth
     private var signedInUser: User? = null
     private val db = Firebase.firestore
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var complaintRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,24 +57,20 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        tvUserName = view.findViewById(R.id.tv_my_name)
-        tvUserEmail = view.findViewById(R.id.tv_email)
-        recyclerView = view.findViewById(R.id.rv_order_history_items)
-        complaintRecyclerView = view.findViewById(R.id.rv_complaint_history_items)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener {
             signedInUser = it.toObject(User::class.java)!!
-            tvUserName.text = signedInUser!!.name
-            tvUserEmail.text = signedInUser!!.email
+            binding.tvName.text = signedInUser!!.name
+            binding.tvEmail.text = signedInUser!!.email
             Log.i(TAG, "Signed In User: $signedInUser")
         }.addOnFailureListener {error ->
             Log.i(TAG, "Failure in fetching current user", error)
         }
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,13 +78,13 @@ class ProfileFragment : Fragment() {
 
         val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
         val orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
-        recyclerView.adapter = orderHistoryItemsAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvOrderHistoryItems.adapter = orderHistoryItemsAdapter
+        binding.rvOrderHistoryItems.layoutManager = LinearLayoutManager(requireContext())
 
         val complaintHistoryItems: MutableList<ComplaintItem> = mutableListOf()
         val complaintHistoryItemsAdapter = ComplaintItemUserAdapter(complaintHistoryItems)
-        complaintRecyclerView.adapter = complaintHistoryItemsAdapter
-        complaintRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvComplaintHistoryItems.adapter = complaintHistoryItemsAdapter
+        binding.rvComplaintHistoryItems.layoutManager = LinearLayoutManager(requireContext())
 
         val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
         orderHistoryRef.addSnapshotListener { snapshot, error ->
