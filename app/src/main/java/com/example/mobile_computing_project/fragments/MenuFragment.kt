@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.user.MenuItemUserAdapter
+import com.example.mobile_computing_project.databinding.FragmentMenuBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.MenuItem
 import com.google.firebase.firestore.ktx.firestore
@@ -30,8 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var splRecyclerView: RecyclerView
+    private lateinit var binding: FragmentMenuBinding
     private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
     private var specialItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
     private lateinit var tvRushText: TextView
@@ -47,26 +47,22 @@ class MenuFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        recyclerView = view.findViewById(R.id.rv_menu_items)
-        splRecyclerView = view.findViewById(R.id.rv_spl_menu_items)
-        tvRushText = view.findViewById(R.id.tv_rush_text)
-        ivRushGraph = view.findViewById(R.id.iv_rush_graph)
-        return view
+        binding = FragmentMenuBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val splMenuItemAdapter = context?.let { MenuItemUserAdapter(context = it, menuItems = specialItems, activity = requireActivity() as MainActivity) }
-        splRecyclerView.adapter = splMenuItemAdapter
-        splRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSplMenuItems.adapter = splMenuItemAdapter
+        binding.rvSplMenuItems.layoutManager = LinearLayoutManager(requireContext())
 
         val menuItemAdapter = context?.let { MenuItemUserAdapter(context = it, menuItems = menuItems, activity = requireActivity() as MainActivity) }
-        recyclerView.adapter = menuItemAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvMenuItems.adapter = menuItemAdapter
+        binding.rvMenuItems.layoutManager = LinearLayoutManager(requireContext())
 
         val activity = requireActivity() as MainActivity
         val cartList = activity.listInMainActivity
@@ -196,15 +192,15 @@ class MenuFragment : Fragment() {
             if (value != null) {
                 val orderList = value.size()
                 if (orderList < 10){
-                    tvRushText.text = "Low"
-                    tvRushText.setTextColor(android.graphics.Color.parseColor("#049D4E"))
+                    binding.tvRushText.text = "Low"
+                    binding.tvRushText.setTextColor(android.graphics.Color.parseColor("#049D4E"))
                     val drawable = context?.let { ContextCompat.getDrawable(it, R.drawable.rush_low) }
-                    ivRushGraph.setImageDrawable(drawable)
+                    binding.ivRushGraph.setImageDrawable(drawable)
                 }
                 else{
-                    tvRushText.text = "High"
+                    binding.tvRushText.text = "High"
                     val drawable = context?.let { ContextCompat.getDrawable(it, R.drawable.rush_high) }
-                    ivRushGraph.setImageDrawable(drawable)
+                    binding.ivRushGraph.setImageDrawable(drawable)
                 }
             }
         }
