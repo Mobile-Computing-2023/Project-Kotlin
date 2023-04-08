@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.user.ComplaintItemAdapter
+import com.example.mobile_computing_project.adapters.canteen.ComplaintItemAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore

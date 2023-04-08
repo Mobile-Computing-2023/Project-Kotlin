@@ -1,4 +1,4 @@
-package com.example.mobile_computing_project.adapters.user
+package com.example.mobile_computing_project.adapters.canteen
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
