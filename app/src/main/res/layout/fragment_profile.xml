@@ -14,10 +14,7 @@
         android:padding="20dp"
         >
 
-        <androidx.cardview.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/my_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

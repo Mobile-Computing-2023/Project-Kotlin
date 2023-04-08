@@ -11,9 +11,10 @@ import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.databinding.ItemMenuUserBinding
 import com.example.mobile_computing_project.models.MenuItem
+import com.squareup.picasso.Picasso
 
 
-class MenuItemUserAdapter(private val context: Context, private val menuItems: List<MenuItem>, private val activity: MainActivity):
+class MenuItemUserAdapter(private val menuItems: List<MenuItem>, private val activity: MainActivity):
     RecyclerView.Adapter<MenuItemUserAdapter.ViewHolder>() {
 
         interface OnBtnClickListener {
@@ -79,9 +80,10 @@ class MenuItemUserAdapter(private val context: Context, private val menuItems: L
                         binding.btnMenuIncDec.visibility = View.GONE
                     }
                 }
-
-                Glide.with(context).load(menuItem.imgSrc).into(binding.ivImgSrc)
-
+                if(!menuItem.imgSrc.isNullOrEmpty()) {
+//                    Glide.with(context).load(menuItem.imgSrc).into(binding.ivImgSrc)
+                    Picasso.get().load(menuItem.imgSrc).into(binding.ivImgSrc)
+                }
             }
         }
 
