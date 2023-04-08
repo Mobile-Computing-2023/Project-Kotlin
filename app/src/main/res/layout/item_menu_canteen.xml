@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
     >
 
     <ImageView
         android:id="@+id/iv_img_src"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/edit_text_boundary"
         android:src="@drawable/chicken_tikka_img"
         android:layout_marginHorizontal="10dp"/>
@@ -16,7 +17,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/iv_img_src"
@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/tv_price"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rs 10"
             android:layout_marginTop="2dp"
@@ -49,7 +49,7 @@
 
         <TextView
             android:id="@+id/tv_qty"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5 pcs"
             android:layout_marginTop="2dp"
