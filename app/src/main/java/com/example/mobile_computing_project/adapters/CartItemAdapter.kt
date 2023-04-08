@@ -2,13 +2,9 @@ package com.example.mobile_computing_project.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ItemCartBinding
 import com.example.mobile_computing_project.models.CartItem
 
 class CartItemAdapter (private val cartItems: List<CartItem>):
@@ -42,49 +38,34 @@ class CartItemAdapter (private val cartItems: List<CartItem>):
         this.listenerDec = listener
     }
 
-    private lateinit var tvName: TextView
-    private lateinit var tvPrice: TextView
-    private lateinit var ivVeg: ImageView
-    private lateinit var tvQty: TextView
-    private lateinit var btnRemoveFromCart: Button
-
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        private val tvIncrement = itemView.findViewById<TextView>(R.id.tv_increment)
-        private val tvDecrement: TextView = itemView.findViewById(R.id.tv_decrement)
-        private val tvShowQty: TextView = itemView.findViewById(R.id.tv_show_qty)
+    inner class ViewHolder(private val binding: ItemCartBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(cartItem: CartItem, listener: OnBtnClickListener?, listenerInc: OnIncBtnClickListener?, listenerDec: OnDecBtnClickListener?){
-            tvName.text = cartItem.name.capitalize()
-            tvPrice.text = "Rs "+ cartItem.price.toString()
-            tvQty.text = "Qty: "+ cartItem.qty.toString()
-            tvShowQty.text = cartItem.qty.toString()
+            binding.tvName.text = cartItem.name.capitalize()
+            binding.tvPrice.text = "Rs "+ cartItem.price.toString()
+            binding.tvQty.text = "Qty: "+ cartItem.qty.toString()
+            binding.tvShowQty.text = cartItem.qty.toString()
             if (cartItem.isVeg){
                 val color = Color.parseColor("#049D4E")
-                ivVeg.setColorFilter(color)
+//                binding.ivVeg.setColorFilter(color)
             }
 
-            btnRemoveFromCart.setOnClickListener {
+            binding.btnRemoveButton.setOnClickListener {
                 listener?.onBtnClick(cartItem)
             }
 
-            tvIncrement.setOnClickListener {
+            binding.tvIncrement.setOnClickListener {
                 listenerInc?.onBtnClick(cartItem)
             }
 
-            tvDecrement.setOnClickListener {
+            binding.tvDecrement.setOnClickListener {
                 listenerDec?.onBtnClick(cartItem)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
-        tvName = view.findViewById(R.id.tv_name)
-        tvPrice = view.findViewById(R.id.tv_price)
-        ivVeg = view.findViewById(R.id.iv_nonveg_symbol)
-        tvQty = view.findViewById(R.id.tv_qty)
-        btnRemoveFromCart = view.findViewById(R.id.btn_removeButton)
-
-        return ViewHolder(view)
+        val binding = ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = cartItems.size

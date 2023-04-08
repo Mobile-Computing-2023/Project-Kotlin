@@ -30,7 +30,7 @@ class CanteenOrderItemsAdapter (private val cartItems: List<CartItem>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_order_item, parent, false)
         tvName = view.findViewById(R.id.tv_name)
-        ivVeg = view.findViewById(R.id.iv_nonveg_symbol)
+        ivVeg = view.findViewById(R.id.iv_veg_symbol)
         tvQty = view.findViewById(R.id.tv_qty)
         return ViewHolder(view)
     }

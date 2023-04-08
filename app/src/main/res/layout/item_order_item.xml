@@ -5,7 +5,7 @@
     android:layout_marginLeft="4dp">
 
     <ImageView
-        android:id="@+id/iv_nonveg_symbol"
+        android:id="@+id/iv_veg_symbol"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:src="@drawable/non_veg_symbol"
