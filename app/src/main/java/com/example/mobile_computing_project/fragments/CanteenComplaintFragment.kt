@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
-import com.example.mobile_computing_project.adapters.canteen.ComplaintItemAdapter
+import com.example.mobile_computing_project.adapters.canteen.ComplaintItemCanteenAdapter
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -55,8 +55,8 @@ class CanteenComplaintFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val complaintItemAdapter = ComplaintItemAdapter(complaintItems)
-        complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemAdapter.OnBtnClickListener{
+        val complaintItemAdapter = ComplaintItemCanteenAdapter(complaintItems)
+        complaintItemAdapter.setOnBtnClickListener(object : ComplaintItemCanteenAdapter.OnBtnClickListener{
             override fun onBtnClick(item: ComplaintItem) {
                 resolveComplaint(item)
             }
