@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ItemOrderCanteenBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.OrderItem
 
@@ -32,31 +33,24 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
     private var canteenOrderItems: MutableList<CartItem> = mutableListOf()
     private lateinit var btnMarkResolved: Button
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(private val binding: ItemOrderCanteenBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(orderItem: OrderItem, listener: OnBtnClickListener?){
-            tvName.text = orderItem.user?.name
-            tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
-            tvStatus.text = "Status: " + orderItem.status
-            tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
+            binding.tvName.text = "${orderItem.user?.name}'s Order #${orderItem.oid.subSequence(0,8)}"
+            binding.tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
+            binding.tvStatus.text = "Status: " + orderItem.status
+            binding.tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
             canteenOrderItems = orderItem.items as MutableList<CartItem>
-            rvItems.adapter = CanteenOrderItemsAdapter(canteenOrderItems)
-
-            btnMarkResolved.setOnClickListener {
+            binding.rvCanteenOrdersItems.adapter = CanteenOrderItemsAdapter(canteenOrderItems)
+            binding.btnMarkComplete.setOnClickListener {
                 listener?.onBtnClick(orderItem)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_order_canteen, parent, false)
-        tvName = view.findViewById(R.id.tv_name)
-        tvAmount = view.findViewById(R.id.tv_amount)
-        tvStatus = view.findViewById(R.id.tv_status)
-        tvCreatedAt = view.findViewById(R.id.tv_createdAt)
-        rvItems = view.findViewById(R.id.rv_canteen_orders_items)
-        rvItems.layoutManager = LinearLayoutManager(parent.context)
-        btnMarkResolved = view.findViewById(R.id.btn_mark_complete)
-        return ViewHolder(view)
+        val binding = ItemOrderCanteenBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.rvCanteenOrdersItems.layoutManager = LinearLayoutManager(parent.context)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = orderItems.size
