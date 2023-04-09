@@ -2,13 +2,9 @@ package com.example.mobile_computing_project.adapters.canteen
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.databinding.ItemOrderCanteenBinding
 import com.example.mobile_computing_project.models.CartItem
 import com.example.mobile_computing_project.models.OrderItem
@@ -19,19 +15,14 @@ class OrderItemCanteenAdapter (private val orderItems: List<OrderItem>):
     interface OnBtnClickListener {
         fun onBtnClick(item: OrderItem)
     }
+
     private var listener: OnBtnClickListener? = null
 
     fun setOnBtnClickListener(listener: OnBtnClickListener) {
         this.listener = listener
     }
 
-    private lateinit var tvName: TextView
-    private lateinit var tvAmount: TextView
-    private lateinit var tvStatus: TextView
-    private lateinit var tvCreatedAt: TextView
-    private lateinit var rvItems: RecyclerView
     private var canteenOrderItems: MutableList<CartItem> = mutableListOf()
-    private lateinit var btnMarkResolved: Button
 
     inner class ViewHolder(private val binding: ItemOrderCanteenBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(orderItem: OrderItem, listener: OnBtnClickListener?){
