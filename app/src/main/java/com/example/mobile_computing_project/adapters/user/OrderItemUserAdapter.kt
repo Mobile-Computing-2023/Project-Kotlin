@@ -15,10 +15,10 @@ class OrderItemUserAdapter(private val orderItems: List<OrderItem>):
 
     inner class ViewHolder(private val binding: ItemOrderUserBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(orderItem: OrderItem){
+            binding.tvOrderId.text = "Order #${orderItem.oid.subSequence(0,8)}"
             binding.tvAmount.text = "Order Total: Rs " + orderItem.amount.toString()
             binding.tvStatus.text = "Status: " + orderItem.status
             binding.tvCreatedAt.text = DateUtils.getRelativeTimeSpanString(orderItem.createdAt)
-            binding.tvOrderId.text = "Order #${orderItem.oid.subSequence(0,5)}"
             binding.rvUserOrdersItems.adapter = CanteenOrderItemsAdapter(orderItem.items as MutableList<CartItem>)
 
         }
