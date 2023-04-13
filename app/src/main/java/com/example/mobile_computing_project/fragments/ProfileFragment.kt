@@ -9,14 +9,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.user.ComplaintItemUserAdapter
 import com.example.mobile_computing_project.adapters.user.OrderItemUserAdapter
+import com.example.mobile_computing_project.adapters.user.TabsAdapter
 import com.example.mobile_computing_project.databinding.FragmentProfileBinding
 import com.example.mobile_computing_project.models.ComplaintItem
 import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -45,6 +49,9 @@ class ProfileFragment : Fragment() {
     private val db = Firebase.firestore
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
+
+    private lateinit var tabsAdapter: TabsAdapter
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +92,20 @@ class ProfileFragment : Fragment() {
         val complaintHistoryItemsAdapter = ComplaintItemUserAdapter(complaintHistoryItems)
         binding.rvComplaintHistoryItems.adapter = complaintHistoryItemsAdapter
         binding.rvComplaintHistoryItems.layoutManager = LinearLayoutManager(requireContext())
+
+        tabsAdapter = TabsAdapter(this)
+        viewPager = view.findViewById(R.id.pager_profile)
+        viewPager.adapter = tabsAdapter
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout_profile)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            if (position == 0) {
+                tab.text = "Orders"
+            }
+            else {
+                tab.text = "Complaints"
+            }
+        }.attach()
 
         val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
         orderHistoryRef.addSnapshotListener { snapshot, error ->
