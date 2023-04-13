@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mobile_computing_project.R
 import com.example.mobile_computing_project.adapters.user.OrderItemUserAdapter
 import com.example.mobile_computing_project.databinding.FragmentProfileOrdersBinding
 import com.example.mobile_computing_project.models.OrderItem
@@ -25,10 +24,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ProfileOrders.newInstance] factory method to
+ * Use the [ProfileOrdersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileOrders : Fragment() {
+class ProfileOrdersFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -89,7 +88,7 @@ class ProfileOrders : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ProfileOrders().apply {
+            ProfileOrdersFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
