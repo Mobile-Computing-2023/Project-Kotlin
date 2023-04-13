@@ -83,11 +83,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val complaintHistoryItems: MutableList<ComplaintItem> = mutableListOf()
-        val complaintHistoryItemsAdapter = ComplaintItemUserAdapter(complaintHistoryItems)
-        binding.rvComplaintHistoryItems.adapter = complaintHistoryItemsAdapter
-        binding.rvComplaintHistoryItems.layoutManager = LinearLayoutManager(requireContext())
-
         tabsAdapter = TabsAdapter(this)
         viewPager = view.findViewById(R.id.pager_profile)
         viewPager.adapter = tabsAdapter
@@ -101,21 +96,6 @@ class ProfileFragment : Fragment() {
                 tab.text = "Complaints"
             }
         }.attach()
-
-
-
-        val complaintHistoryRef = db.collection("Complaints").whereEqualTo("user.uid", auth.currentUser?.uid)
-        complaintHistoryRef.addSnapshotListener { snapshot, error ->
-            if(error != null || snapshot == null){
-                Log.i(TAG, "Error when querying items", error)
-            }
-            if (snapshot != null) {
-                val complaintHistoryList = snapshot.toObjects(ComplaintItem::class.java)
-                complaintHistoryItems.clear()
-                complaintHistoryItems.addAll(complaintHistoryList)
-                complaintHistoryItemsAdapter.notifyDataSetChanged()
-            }
-        }
     }
 
     override fun onResume() {

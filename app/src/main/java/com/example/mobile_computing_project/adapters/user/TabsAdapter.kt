@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.mobile_computing_project.fragments.CartFragment
 import com.example.mobile_computing_project.fragments.MenuFragment
+import com.example.mobile_computing_project.fragments.ProfileComplaintsFragment
 import com.example.mobile_computing_project.fragments.ProfileOrders
 
 class TabsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -16,7 +17,7 @@ class TabsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         return if (position == 0) {
             ProfileOrders()
         } else {
-            CartFragment()
+            ProfileComplaintsFragment()
         }
     }
 }
