@@ -7,92 +7,88 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        >
+
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/my_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp"
+            android:shadowColor="@android:color/holo_blue_bright"
             >
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/my_card_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:shadowColor="@android:color/holo_blue_bright"
+                android:orientation="horizontal"
+                android:padding="16dp"
                 >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     >
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical"
-                        android:layout_gravity="center_vertical"
-                        >
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:paddingBottom="4dp"
+                        android:fontFamily="@font/semi_bold"
+                        android:textColor="@color/black"
+                        tools:ignore="HardcodedText"
+                        />
 
-                        <TextView
-                            android:id="@+id/tv_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="25sp"
-                            android:paddingBottom="4dp"
-                            android:fontFamily="@font/semi_bold"
-                            android:textColor="@color/black"
-                            tools:ignore="HardcodedText"
-                            />
-
-                        <TextView
-                            android:id="@+id/tv_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/medium"
-                            android:textColor="@color/theme"
-                            tools:ignore="HardcodedText"
-                            />
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/iv_profile_pic"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/profile"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"/>
-
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/medium"
+                        android:textColor="@color/theme"
+                        tools:ignore="HardcodedText"
+                        />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/iv_profile_pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/profile"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager_profile"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_profile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </FrameLayout>
