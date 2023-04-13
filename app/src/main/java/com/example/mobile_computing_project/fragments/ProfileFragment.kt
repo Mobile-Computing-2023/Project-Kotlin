@@ -83,11 +83,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
-        val orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
-        binding.rvOrderHistoryItems.adapter = orderHistoryItemsAdapter
-        binding.rvOrderHistoryItems.layoutManager = LinearLayoutManager(requireContext())
-
         val complaintHistoryItems: MutableList<ComplaintItem> = mutableListOf()
         val complaintHistoryItemsAdapter = ComplaintItemUserAdapter(complaintHistoryItems)
         binding.rvComplaintHistoryItems.adapter = complaintHistoryItemsAdapter
@@ -107,18 +102,7 @@ class ProfileFragment : Fragment() {
             }
         }.attach()
 
-        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
-        orderHistoryRef.addSnapshotListener { snapshot, error ->
-            if(error != null || snapshot == null){
-                Log.i(TAG, "Error when querying items", error)
-            }
-            if (snapshot != null) {
-                val orderHistoryList = snapshot.toObjects(OrderItem::class.java)
-                orderHistoryItems.clear()
-                orderHistoryItems.addAll(orderHistoryList)
-                orderHistoryItemsAdapter.notifyDataSetChanged()
-            }
-        }
+
 
         val complaintHistoryRef = db.collection("Complaints").whereEqualTo("user.uid", auth.currentUser?.uid)
         complaintHistoryRef.addSnapshotListener { snapshot, error ->

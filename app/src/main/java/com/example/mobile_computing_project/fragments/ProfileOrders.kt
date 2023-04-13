@@ -1,11 +1,22 @@
 package com.example.mobile_computing_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.adapters.user.OrderItemUserAdapter
+import com.example.mobile_computing_project.databinding.FragmentProfileOrdersBinding
+import com.example.mobile_computing_project.models.OrderItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
+private const val TAG = "ProfileOrdersFragment"
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +33,10 @@ class ProfileOrders : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentProfileOrdersBinding
+    private val db = Firebase.firestore
+    private var auth: FirebaseAuth = Firebase.auth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +50,31 @@ class ProfileOrders : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_orders, container, false)
+        binding = FragmentProfileOrdersBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val orderHistoryItems: MutableList<OrderItem> = mutableListOf()
+        val orderHistoryItemsAdapter = OrderItemUserAdapter(orderHistoryItems)
+        binding.rvOrderHistoryItems.adapter = orderHistoryItemsAdapter
+        binding.rvOrderHistoryItems.layoutManager = LinearLayoutManager(requireContext())
+
+        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
+        orderHistoryRef.addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i(TAG, "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val orderHistoryList = snapshot.toObjects(OrderItem::class.java)
+                orderHistoryItems.clear()
+                orderHistoryItems.addAll(orderHistoryList)
+                orderHistoryItemsAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     companion object {
