@@ -174,6 +174,8 @@ class MenuFragment : Fragment() {
                 specialItems.clear()
                 specialItems.addAll(specialList)
                 splMenuItemAdapter?.notifyDataSetChanged()
+                val mainActivity = requireActivity() as MainActivity
+                mainActivity.sendNotification()
             }
         }
     }
