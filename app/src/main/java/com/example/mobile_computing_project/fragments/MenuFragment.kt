@@ -1,11 +1,18 @@
 package com.example.mobile_computing_project.fragments
 
+import android.Manifest
+import android.app.Notification
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile_computing_project.MainActivity
@@ -28,6 +35,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
+    private var firstCall = true
     private lateinit var binding: FragmentMenuBinding
     private var menuItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
     private var specialItems: MutableList<com.example.mobile_computing_project.models.MenuItem> = mutableListOf()
@@ -48,6 +56,7 @@ class MenuFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -174,9 +183,38 @@ class MenuFragment : Fragment() {
                 specialItems.clear()
                 specialItems.addAll(specialList)
                 splMenuItemAdapter?.notifyDataSetChanged()
-                val mainActivity = requireActivity() as MainActivity
-                mainActivity.sendNotification()
+                if (!firstCall) {
+//                    val mainActivity = MainActivity()
+//                    mainActivity.sendNotification()
+                    sendNotification()
+                }
+                else {
+                    firstCall = false
+                }
             }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sendNotification() {
+        val builder = Notification.Builder(context, "CHANNEL_ID")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Example Title")
+            .setContentText("Example Description")
+            .setPriority(Notification.PRIORITY_HIGH)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            notify(101, builder.build())
         }
     }
 

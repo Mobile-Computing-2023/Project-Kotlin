@@ -32,8 +32,8 @@ import com.google.firebase.ktx.Firebase
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
-    private val CHANNEL_ID = "Notification Channel"
-    private val notificationId = 101
+//    private val CHANNEL_ID = "Notification Channel"
+//    private val notificationId = 101
 
     private lateinit var binding: ActivityMainBinding
     private var signedInUser: User? = null
@@ -137,39 +137,12 @@ class MainActivity : AppCompatActivity() {
             val name = "Notification Title"
             val descriptionText = "Notification Description"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            val channel = NotificationChannel("CHANNEL_ID", name, importance).apply {
                 description = descriptionText
             }
 
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun sendNotification() {
-        val builder = Notification.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Example Title")
-            .setContentText("Example Description")
-            .setPriority(Notification.PRIORITY_HIGH)
-
-        with(NotificationManagerCompat.from(this)) {
-            if (ActivityCompat.checkSelfPermission(
-                    applicationContext,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            notify(notificationId, builder.build())
         }
     }
 }
