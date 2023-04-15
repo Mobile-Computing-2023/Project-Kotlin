@@ -197,7 +197,7 @@ class MenuFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun sendNotification() {
-        val builder = Notification.Builder(activity, "CHANNEL_ID")
+        val builder = Notification.Builder(activity?.applicationContext, "CHANNEL_ID")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("Example Title")
             .setContentText("Example Description")
