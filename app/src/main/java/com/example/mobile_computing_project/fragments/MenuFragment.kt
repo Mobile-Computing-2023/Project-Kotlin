@@ -186,7 +186,9 @@ class MenuFragment : Fragment() {
                 if (!firstCall) {
 //                    val mainActivity = MainActivity()
 //                    mainActivity.sendNotification()
-                    sendNotification()
+                    if(context != null){
+                        sendNotification()
+                    }
                 }
                 else {
                     firstCall = false
