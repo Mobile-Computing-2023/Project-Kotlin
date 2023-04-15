@@ -186,9 +186,9 @@ class MenuFragment : Fragment() {
                 if (!firstCall) {
 //                    val mainActivity = MainActivity()
 //                    mainActivity.sendNotification()
-                    if(context != null){
-                        sendNotification()
-                    }
+//                    if(context != null){
+//                        sendNotification()
+//                    }
                 }
                 else {
                     firstCall = false
@@ -197,28 +197,7 @@ class MenuFragment : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun sendNotification() {
-        val builder = Notification.Builder(requireActivity().applicationContext, "CHANNEL_ID")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Example Title")
-            .setContentText("Example Description")
-            .setPriority(Notification.PRIORITY_HIGH)
 
-        with(NotificationManagerCompat.from(requireContext())) {
-            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            notify(101, builder.build())
-        }
-    }
 
     private fun fetchRush(){
         val db = Firebase.firestore

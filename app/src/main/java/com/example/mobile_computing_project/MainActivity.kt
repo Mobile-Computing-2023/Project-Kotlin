@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
     private var menuItem: MenuItem? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,6 +96,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        db.collection("Menu").whereEqualTo("special", true).addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i("MenuFragment", "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val specialList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
+//                if (!firstCall) {
+////                    val mainActivity = MainActivity()
+////                    mainActivity.sendNotification()
+////                    if(context != null){
+////                        sendNotification()
+////                    }
+//                }
+//                else {
+//                    firstCall = false
+//                }
+                sendNotification()
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -130,6 +151,29 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LandingActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sendNotification() {
+        val builder = Notification.Builder(applicationContext, "CHANNEL_ID")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Example Title")
+            .setContentText("Example Description")
+            .setPriority(Notification.PRIORITY_HIGH)
+
+        with(NotificationManagerCompat.from(applicationContext)) {
+            if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            notify(101, builder.build())
+        }
     }
 
     private fun createNotificationChannel() {
