@@ -13,6 +13,7 @@
         android:theme="@style/Theme.MobileComputingProject"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="tiramisu">
+
         <activity
             android:name=".MainActivity"
             android:exported="false">

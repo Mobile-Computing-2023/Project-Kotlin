@@ -29,9 +29,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.razorpay.PaymentResultListener
 
 private const val TAG = "MainActivity"
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PaymentResultListener {
 //    private val CHANNEL_ID = "Notification Channel"
 //    private val notificationId = 101
 
@@ -188,5 +189,13 @@ class MainActivity : AppCompatActivity() {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+    }
+
+    override fun onPaymentSuccess(p0: String?) {
+        Toast.makeText(this, "Payment Successfully", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?) {
+        Toast.makeText(this, "Payment Successfully", Toast.LENGTH_LONG).show()
     }
 }
