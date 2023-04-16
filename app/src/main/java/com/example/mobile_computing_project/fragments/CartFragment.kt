@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile_computing_project.MainActivity
 import com.example.mobile_computing_project.adapters.user.CartItemAdapter
@@ -18,11 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.util.*
-import org.json.JSONObject
-import kotlin.math.roundToInt
-import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
+import java.util.UUID
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +31,7 @@ private const val TAG = "CartFragment"
  * Use the [CartFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CartFragment : Fragment(), PaymentResultListener {
+class CartFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -45,8 +40,6 @@ class CartFragment : Fragment(), PaymentResultListener {
     private var auth: FirebaseAuth = Firebase.auth
     private var signedInUser: User? = null
     private var total: Int = 0
-    private var activity: MainActivity? = null
-    private var cartList: MutableList<CartItem>? = activity?.listInMainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +70,7 @@ class CartFragment : Fragment(), PaymentResultListener {
         listOfItems.forEach {
             total += (it.price*it.qty)
         }
+
         binding.tvOrderTotal.text = "Rs " + total.toString()
 
         adaptor.setOnBtnClickListener(object: CartItemAdapter.OnBtnClickListener {
@@ -129,18 +123,12 @@ class CartFragment : Fragment(), PaymentResultListener {
 
         binding.btnPlaceOrder.setOnClickListener {
             if(signedInUser != null && listOfItems.isNotEmpty()){
-                savePayments()
-                val order = OrderItem(oid = UUID.randomUUID().toString() ,items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
-                db.collection("Orders").document(order.oid).set(order).addOnSuccessListener {
-                    Toast.makeText(context, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
-                    listOfItems.clear()
-                    binding.tvOrderTotal.text = "Rs 0"
-                    val newAdapter = CartItemAdapter(listOfItems)
-                    binding.rvCartItems.adapter = newAdapter
-                    binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
-                }.addOnFailureListener {
-                    Toast.makeText(context, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
-                }
+                activity.total = total
+                activity.orderItem = OrderItem(oid = UUID.randomUUID().toString() ,items = listOfItems, user = signedInUser, amount = total, createdAt = System.currentTimeMillis())
+                activity.savePayments(total.toFloat())
+                val adaptor = CartItemAdapter(listOfItems)
+                binding.rvCartItems.adapter = adaptor
+                binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
             }
         }
 
@@ -152,39 +140,6 @@ class CartFragment : Fragment(), PaymentResultListener {
             binding.rvCartItems.layoutManager = LinearLayoutManager(requireContext())
         }
 
-    }
-
-    private fun savePayments() {
-        val checkout = Checkout()
-        checkout.setKeyID("rzp_test_9KR02wS5SYpTKE")
-        try {
-            val amountValue = (total.toFloat() * 100).roundToInt()
-
-            val options = JSONObject()
-            options.put("name", "Canteen Hub")
-            options.put("description", "Your one stop shop for delicious campus eats.")
-            options.put("theme.color", "#1004581")
-            options.put("currency", "INR")
-            options.put("amount", amountValue)
-
-            val prefill = JSONObject()
-            prefill.put("email","aryan20499@iiitd.ac.in")
-            prefill.put("contact","9711171503")
-            options.put("prefill",prefill)
-
-            checkout.open(requireActivity(), options)
-        } catch (e: Exception) {
-            Toast.makeText(activity, "SUN BKL: " + e.message, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    override fun onPaymentSuccess(p0: String?) {
-        Toast.makeText(context, "MKC", Toast.LENGTH_LONG).show()
-
-    }
-
-    override fun onPaymentError(p0: Int, p1: String?) {
-        Toast.makeText(context, "Error in payment: ", Toast.LENGTH_LONG).show()
     }
 
     companion object {

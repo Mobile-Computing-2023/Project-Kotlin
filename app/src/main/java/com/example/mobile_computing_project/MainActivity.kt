@@ -24,12 +24,16 @@ import androidx.fragment.app.Fragment
 import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.fragments.*
 import com.example.mobile_computing_project.models.CartItem
+import com.example.mobile_computing_project.models.OrderItem
 import com.example.mobile_computing_project.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import org.json.JSONObject
+import kotlin.math.roundToInt
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(), PaymentResultListener {
@@ -41,6 +45,8 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     private lateinit var auth: FirebaseAuth
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
     private var menuItem: MenuItem? = null
+    var total: Int = 0
+    lateinit var orderItem: OrderItem
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -191,11 +197,44 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
+    fun savePayments(total: Float) {
+        val checkout = Checkout()
+        checkout.setKeyID("rzp_test_9KR02wS5SYpTKE")
+        try {
+            val amountValue = (total * 100).roundToInt()
+
+            val options = JSONObject()
+            options.put("name", "Canteen Hub")
+            options.put("description", "Your one stop shop for delicious campus eats.")
+            options.put("theme.color", "#1004581")
+            options.put("currency", "INR")
+            options.put("amount", amountValue)
+
+            val prefill = JSONObject()
+            prefill.put("email", "aryan20499@iiitd.ac.in")
+            prefill.put("contact", "9711171503")
+            options.put("prefill", prefill)
+
+            checkout.open(this, options)
+        } catch (e: Exception) {
+            Toast.makeText(this, "SUN BKL: " + e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
     override fun onPaymentSuccess(p0: String?) {
-        Toast.makeText(this, "Payment Successfully", Toast.LENGTH_LONG).show()
+        val db = Firebase.firestore
+        db.collection("Orders").document(orderItem.oid).set(orderItem).addOnSuccessListener {
+            listInMainActivity.clear()
+            total = 0
+            orderItem = OrderItem()
+            replaceFragment(MenuFragment())
+            Toast.makeText(this, "Order Placed Successfully!", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(this, "There was some error in placing your order!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onPaymentError(p0: Int, p1: String?) {
-        Toast.makeText(this, "Payment Successfully", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Error in Payment", Toast.LENGTH_LONG).show()
     }
 }
