@@ -12,7 +12,7 @@ class CanteenOrderItemsAdapter (private val cartItems: List<CartItem>):
 
     inner class ViewHolder(private val binding: ItemOrderItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(cartItem: CartItem){
-            binding.tvName.text = cartItem.name.capitalize()
+            binding.tvName.text = cartItem.name
             binding.tvQty.text = cartItem.qty.toString()
             if (cartItem.isVeg){
                 val color = Color.parseColor("#049D4E")
