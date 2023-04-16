@@ -1,8 +1,15 @@
 package com.example.mobile_computing_project
 
+import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +17,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.example.mobile_computing_project.databinding.ActivityMainBinding
 import com.example.mobile_computing_project.fragments.*
@@ -22,14 +32,20 @@ import com.google.firebase.ktx.Firebase
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
+//    private val CHANNEL_ID = "Notification Channel"
+//    private val notificationId = 101
+
     private lateinit var binding: ActivityMainBinding
     private var signedInUser: User? = null
     private lateinit var auth: FirebaseAuth
     var listInMainActivity: MutableList<CartItem> = mutableListOf()
     private var menuItem: MenuItem? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        createNotificationChannel()
 
         val colorDrawable = ColorDrawable(Color.parseColor("#FFFFFF"))
         supportActionBar?.setBackgroundDrawable(colorDrawable)
@@ -80,6 +96,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        db.collection("Menu").whereEqualTo("special", true).addSnapshotListener { snapshot, error ->
+            if(error != null || snapshot == null){
+                Log.i("MenuFragment", "Error when querying items", error)
+            }
+            if (snapshot != null) {
+                val specialList = snapshot.toObjects(com.example.mobile_computing_project.models.MenuItem::class.java)
+//                if (!firstCall) {
+////                    val mainActivity = MainActivity()
+////                    mainActivity.sendNotification()
+////                    if(context != null){
+////                        sendNotification()
+////                    }
+//                }
+//                else {
+//                    firstCall = false
+//                }
+                sendNotification()
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -115,5 +151,42 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LandingActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sendNotification() {
+        val builder = Notification.Builder(applicationContext, "CHANNEL_ID")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Example Title")
+            .setContentText("Example Description")
+            .setPriority(Notification.PRIORITY_HIGH)
+
+        with(NotificationManagerCompat.from(applicationContext)) {
+            if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            notify(101, builder.build())
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("CHANNEL_ID", name, importance).apply {
+                description = descriptionText
+            }
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }
