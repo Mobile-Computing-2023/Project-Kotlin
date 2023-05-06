@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         val builder = Notification.Builder(applicationContext, "CHANNEL_ID")
             .setSmallIcon(R.drawable.logo)
             .setContentTitle("Special Item")
-            .setContentText("Added a new Special Item!!")
+            .setContentText("Canteen added a new Special Item!")
             .setPriority(Notification.PRIORITY_HIGH)
 
         with(NotificationManagerCompat.from(applicationContext)) {
