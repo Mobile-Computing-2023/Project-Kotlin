@@ -62,8 +62,8 @@ class AddMenuItemFragment: DialogFragment() {
 //        etItemPrice = view.findViewById(R.id.et_price)
 //        rbVeg = view.findViewById(R.id.rb_veg)
 //        rbNonVeg = view.findViewById(R.id.rb_non_veg)
-//        isSpl = requireArguments().getBoolean("isSpl", false)
 //        ivImage = view.findViewById(R.id.iv_img_src)
+        isSpl = requireArguments().getBoolean("isSpl", false)
         binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
     }
