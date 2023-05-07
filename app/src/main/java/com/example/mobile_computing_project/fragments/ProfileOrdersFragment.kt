@@ -62,7 +62,7 @@ class ProfileOrdersFragment : Fragment() {
         binding.rvOrderHistoryItems.adapter = orderHistoryItemsAdapter
         binding.rvOrderHistoryItems.layoutManager = LinearLayoutManager(requireContext())
 
-        val orderHistoryRef = db.collection("Orders").whereEqualTo("status", "Completed").whereEqualTo("user.uid", auth.currentUser?.uid)
+        val orderHistoryRef = db.collection("Orders").whereEqualTo("user.uid", auth.currentUser?.uid)
         orderHistoryRef.addSnapshotListener { snapshot, error ->
             if(error != null || snapshot == null){
                 Log.i(TAG, "Error when querying items", error)
