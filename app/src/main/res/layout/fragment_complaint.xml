@@ -68,8 +68,7 @@
         android:layout_height="wrap_content"
         android:text="Send Complaint"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/semi_bold"
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
@@ -82,9 +81,8 @@
         android:text="Clear Complaint"
         android:textColor="@color/theme"
         android:backgroundTint="@color/white"
-        android:textSize="18sp"
+        android:fontFamily="@font/semi_bold"
         android:textAllCaps="false"
-        android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
