@@ -89,7 +89,6 @@ class CanteenMenuFragment : Fragment() {
             args.putBoolean("isSpl", isSpl)
             addItemFragment.arguments = args
             addItemFragment.show(childFragmentManager, "popup")
-            Toast.makeText(context, "Add a new item to menu now", Toast.LENGTH_SHORT).show()
         }
     }
 

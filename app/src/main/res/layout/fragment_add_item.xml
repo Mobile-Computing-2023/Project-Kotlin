@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -88,23 +89,10 @@
 
     </LinearLayout>
 
-<!--    <ToggleButton-->
-<!--        android:id="@+id/tb_veg_nonveg"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textOff="Veg"-->
-<!--        android:background="@color/veg"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textOn="Non Veg"/>-->
-
     <ImageView
         android:id="@+id/iv_img_src"
-        android:maxWidth="250dp"
-        android:maxHeight="250dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
 
     <Button
         android:id="@+id/btn_choose_file"

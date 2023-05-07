@@ -24,14 +24,6 @@ import com.google.firebase.storage.ktx.storage
 import java.util.UUID
 
 class AddMenuItemFragment: DialogFragment() {
-//    private lateinit var btnDismiss: Button
-//    private lateinit var btnConfirmAddItem: Button
-//    private lateinit var etItemName: EditText
-//    private lateinit var etItemPrice: EditText
-//    private lateinit var btnChooseFile: Button
-//    private lateinit var rbVeg: RadioButton
-//    private lateinit var rbNonVeg: RadioButton
-//    private lateinit var ivImage: ImageView
     private lateinit var binding: FragmentAddItemBinding
 
     var isSpl = false
@@ -53,16 +45,7 @@ class AddMenuItemFragment: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_add_item, container, false)
-//        btnDismiss = view.findViewById(R.id.btn_dismiss)
-//        btnConfirmAddItem = view.findViewById(R.id.btn_add_item)
-//        btnChooseFile = view.findViewById(R.id.btn_choose_file)
-//        etItemName = view.findViewById(R.id.et_name)
-//        etItemPrice = view.findViewById(R.id.et_price)
-//        rbVeg = view.findViewById(R.id.rb_veg)
-//        rbNonVeg = view.findViewById(R.id.rb_non_veg)
-//        ivImage = view.findViewById(R.id.iv_img_src)
+    ): View {
         isSpl = requireArguments().getBoolean("isSpl", false)
         binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
