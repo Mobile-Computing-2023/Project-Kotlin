@@ -16,10 +16,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/semi_bold"
             android:textSize="20sp"
-            android:text="Ongoing Orders" />
+            android:textColor="@color/black"
+            android:text="Pending Orders" />
 
         <ScrollView
             android:layout_width="match_parent"
