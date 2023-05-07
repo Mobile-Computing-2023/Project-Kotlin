@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="File a Complaint"
         android:textColor="@color/black"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
@@ -26,7 +26,7 @@
         android:textColor="@color/grey"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="14sp"
         tools:ignore="HardcodedText" />
 
     <androidx.cardview.widget.CardView
