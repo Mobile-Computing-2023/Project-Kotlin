@@ -75,9 +75,8 @@
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/theme"
             android:layout_height="wrap_content"
-            android:text="Place an Order"
+            android:text="Place Order"
             android:textColor="@color/white"
-            android:textSize="18sp"
             android:fontFamily="@font/semi_bold"
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
@@ -90,7 +89,6 @@
             android:text="Clear Cart"
             android:textColor="@color/theme"
             android:backgroundTint="@color/white"
-            android:textSize="18sp"
             android:textAllCaps="false"
             android:fontFamily="@font/semi_bold"
             tools:ignore="HardcodedText" />
