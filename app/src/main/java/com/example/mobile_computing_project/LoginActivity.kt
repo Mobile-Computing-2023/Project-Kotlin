@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Toast
 import com.example.mobile_computing_project.databinding.ActivityLoginBinding
@@ -28,8 +29,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         isCanteen = intent.getBooleanExtra("isCanteen", false)
+
+        Log.i(TAG, isCanteen.toString())
+
         if(isCanteen){
             Toast.makeText(this, "Welcome Canteen Vendor!", Toast.LENGTH_SHORT).show()
+            binding.btnSignup.visibility = View.INVISIBLE
         }
 
         auth = Firebase.auth
