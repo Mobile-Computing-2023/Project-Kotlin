@@ -5,16 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileOrdersFragment">
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_order_history"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:textSize="20sp"-->
-<!--        android:text="Order History"/>-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

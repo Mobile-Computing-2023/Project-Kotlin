@@ -27,8 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add New Item"
+            android:textAllCaps="false"
             android:fontFamily="@font/semi_bold"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:textColor="@color/white"/>
 
     </RelativeLayout>
