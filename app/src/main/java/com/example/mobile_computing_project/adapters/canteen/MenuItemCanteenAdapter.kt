@@ -26,12 +26,6 @@ class MenuItemCanteenAdapter(private val context: Context, private val menuItems
         this.listener = listener
     }
 
-//    private lateinit var tvName: TextView
-//    private lateinit var tvPrice: TextView
-//    private lateinit var ivVeg: ImageView
-//    private lateinit var tvQty: TextView
-//    private lateinit var ivImgSrc: ImageView
-
     inner class ViewHolder(private val binding: ItemMenuCanteenBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
             binding.tvName.text = menuItem.name.capitalize()
@@ -49,12 +43,6 @@ class MenuItemCanteenAdapter(private val context: Context, private val menuItems
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu_canteen, parent, false)
-//        tvName = view.findViewById(R.id.tv_name)
-//        tvPrice = view.findViewById(R.id.tv_price)
-//        ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)
-//        tvQty = view.findViewById(R.id.tv_qty)
-//        ivImgSrc = view.findViewById(R.id.iv_img_src)
         val binding = ItemMenuCanteenBinding.inflate(LayoutInflater.from((parent.context)), parent, false)
         return ViewHolder(binding)
     }
