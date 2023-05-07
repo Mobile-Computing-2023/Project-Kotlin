@@ -73,7 +73,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/theme"
-        android:shadowColor="@android:color/holo_blue_bright"
         android:background="@drawable/border_tv"
         android:layout_marginEnd="5dp"
         android:layout_centerVertical="true"
