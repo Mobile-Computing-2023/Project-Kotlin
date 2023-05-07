@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobile_computing_project.R
+import com.example.mobile_computing_project.databinding.ItemMenuCanteenBinding
 import com.example.mobile_computing_project.models.MenuItem
 
 class MenuItemCanteenAdapter(private val context: Context, private val menuItems: List<MenuItem>):
@@ -25,38 +26,37 @@ class MenuItemCanteenAdapter(private val context: Context, private val menuItems
         this.listener = listener
     }
 
-    private lateinit var tvName: TextView
-    private lateinit var tvPrice: TextView
-    private lateinit var ivVeg: ImageView
-    private lateinit var tvQty: TextView
-    private lateinit var btnRemoveMenuItem: Button
-    private lateinit var ivImgSrc: ImageView
+//    private lateinit var tvName: TextView
+//    private lateinit var tvPrice: TextView
+//    private lateinit var ivVeg: ImageView
+//    private lateinit var tvQty: TextView
+//    private lateinit var ivImgSrc: ImageView
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(private val binding: ItemMenuCanteenBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(menuItem: MenuItem, listener: OnBtnClickListener?){
-            tvName.text = menuItem.name.capitalize()
-            tvPrice.text = "Rs "+ menuItem.price.toString()
-            tvQty.text = "5 pcs"
+            binding.tvName.text = menuItem.name.capitalize()
+            binding.tvPrice.text = "Rs "+ menuItem.price.toString()
+            binding.tvQty.text = "5 pcs"
             if (menuItem.isVeg){
                 val color = Color.parseColor("#049D4E")
-                ivVeg.setColorFilter(color)
+                binding.ivVegNonvegSymbol.setColorFilter(color)
             }
-            Glide.with(context).load(menuItem.imgSrc).into(ivImgSrc)
-            btnRemoveMenuItem.setOnClickListener {
+            Glide.with(context).load(menuItem.imgSrc).into(binding.ivImgSrc)
+            binding.btnRemove.setOnClickListener {
                 listener?.onBtnClick((menuItem))
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu_canteen, parent, false)
-        tvName = view.findViewById(R.id.tv_name)
-        tvPrice = view.findViewById(R.id.tv_price)
-        ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)
-        tvQty = view.findViewById(R.id.tv_qty)
-        ivImgSrc = view.findViewById(R.id.iv_img_src)
-        btnRemoveMenuItem = view.findViewById(R.id.btn_remove)
-        return ViewHolder(view)
+//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu_canteen, parent, false)
+//        tvName = view.findViewById(R.id.tv_name)
+//        tvPrice = view.findViewById(R.id.tv_price)
+//        ivVeg = view.findViewById(R.id.iv_veg_nonveg_symbol)
+//        tvQty = view.findViewById(R.id.tv_qty)
+//        ivImgSrc = view.findViewById(R.id.iv_img_src)
+        val binding = ItemMenuCanteenBinding.inflate(LayoutInflater.from((parent.context)), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = menuItems.size

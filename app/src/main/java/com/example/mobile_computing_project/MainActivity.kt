@@ -34,6 +34,7 @@ import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import kotlin.math.roundToInt
+import kotlin.properties.Delegates
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(), PaymentResultListener {
@@ -47,11 +48,16 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     private var menuItem: MenuItem? = null
     var total: Int = 0
     lateinit var orderItem: OrderItem
+    private var firstTime by Delegates.notNull<Boolean>()
+    private var currSplItems by Delegates.notNull<Int>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val db = Firebase.firestore
+
+        firstTime = true
         createNotificationChannel()
 
         val colorDrawable = ColorDrawable(Color.parseColor("#FFFFFF"))
@@ -62,7 +68,6 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         setContentView(view)
 
         auth = Firebase.auth
-        val db = Firebase.firestore
 
         db.collection("Users").document(auth.currentUser?.uid as String).get().addOnSuccessListener { it ->
             signedInUser = it.toObject(User::class.java)!!
@@ -119,7 +124,16 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 //                else {
 //                    firstCall = false
 //                }
-                sendNotification()
+                val count = snapshot.size()
+                if (firstTime) {
+                    currSplItems = count
+                    firstTime = false
+                }
+                else if (count > currSplItems) {
+                    sendNotification()
+                }
+//                Toast.makeText(applicationContext, "Count = $count CurrSplItems = $currSplItems", Toast.LENGTH_SHORT).show()
+                currSplItems = count
             }
         }
 
@@ -163,9 +177,9 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     @RequiresApi(Build.VERSION_CODES.O)
     fun sendNotification() {
         val builder = Notification.Builder(applicationContext, "CHANNEL_ID")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Example Title")
-            .setContentText("Example Description")
+            .setSmallIcon(R.drawable.logo)
+            .setContentTitle("Special Item")
+            .setContentText("Canteen added a new Special Item!")
             .setPriority(Notification.PRIORITY_HIGH)
 
         with(NotificationManagerCompat.from(applicationContext)) {
@@ -179,6 +193,13 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
+
+//            if (!firstTime) {
+//                notify(101, builder.build())
+//            }
+//            else {
+//                firstTime = false
+//            }
             notify(101, builder.build())
         }
     }
