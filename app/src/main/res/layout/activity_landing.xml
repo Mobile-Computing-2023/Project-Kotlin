@@ -34,7 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:text="Sign Up As a User"
+        android:text="Sign Up as a User"
+        android:textAllCaps="false"
         android:textStyle="bold"
         android:backgroundTint="@color/theme"
         android:textColor="@color/white"
@@ -46,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Sign In As a User"
+        android:text="Sign In as a User"
+        android:textAllCaps="false"
         android:textStyle="bold"
         android:backgroundTint="@color/white"
         android:textColor="@color/theme"
@@ -70,13 +72,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E0E0E0"
-            android:layout_toLeftOf="@id/or_landing_text"
+            android:layout_toStartOf="@id/or_landing_text"
             android:layout_marginTop="11dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_toRightOf="@id/or_landing_text"
+            android:layout_toEndOf="@id/or_landing_text"
             android:layout_marginTop="11dp"
             android:background="#E0E0E0" />
 
@@ -87,7 +89,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Sign In as a Canteen Owner"
+        android:text="Sign In as Canteen Owner"
+        android:textAllCaps="false"
         android:textStyle="bold"
         android:backgroundTint="@color/theme"
         android:textColor="@color/white"
